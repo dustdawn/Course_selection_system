@@ -10,6 +10,6 @@
 <html>
 <body>
 <h2>以后设置为跳转页</h2>
-<a href="<%request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request,response);%>">跳转</a>
+<a href="<%request.getRequestDispatcher("/WEB-INF/pages/student/login.jsp").forward(request,response);%>">跳转</a>
 </body>
 </html>

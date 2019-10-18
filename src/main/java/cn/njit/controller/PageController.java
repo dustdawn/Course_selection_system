@@ -33,7 +33,7 @@ public class PageController {
 
     @RequestMapping("teacher/{pageName}")
     public ModelAndView toTable(@PathVariable("pageName") String pageName){
-        ModelAndView mv = new ModelAndView("admin/" + pageName);
+        ModelAndView mv = new ModelAndView("teacher/" + pageName);
         return mv ;
     }
 
