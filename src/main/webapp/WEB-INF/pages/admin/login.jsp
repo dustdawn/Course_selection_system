@@ -50,11 +50,11 @@
 
     <form action="<%=basePath%>/admin/toLogin" method="post">
       <div class="form-group has-feedback">
-        <input name="admin" value="admin" type="user" class="form-control" placeholder="">
+        <input name="admin" value="" type="user" class="form-control" placeholder="请输入管理员账号">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input name="password" value="123" type="password" class="form-control" placeholder="请输入密码">
+        <input name="password" value="" type="password" class="form-control" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group message">

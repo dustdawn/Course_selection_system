@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -47,11 +48,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<%=basePath%>/pages/admin/admin" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>选课系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -69,17 +70,17 @@
           <!-- 账号注销 -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<%=basePath%>/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">这里显示账号名</span>
+              <img src="<%=basePath%>/image/avg.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">${userSession.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<%=basePath%>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  当前登录账号：
-                  <small>Member since Nov. 2012</small>
+                  当前登录账号：${userSession.no}
+                  <small>${currentTime}</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -101,7 +102,7 @@
               <li class="user-footer">
 
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<%=basePath%>/admin/logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -121,11 +122,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<%=basePath%>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>这里显示账号名</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 在线状态Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> 当前登录：管理员</a>
         </div>
       </div>
       <!-- search form -->
@@ -231,7 +232,7 @@
             </div>
           </div>
           <div class="ajax-content">
-            55
+            正文
           </div>
         </div>
         <!-- /.box-body -->
