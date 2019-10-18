@@ -1,9 +1,8 @@
 package cn.njit.controller;
 
-import cn.njit.entry.Admin;
-import cn.njit.service.AdminService;
+import cn.njit.entry.Teacher;
+import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,59 +16,42 @@ import java.util.Map;
 
 /**
  * @author dustdawn
- * @date 2019/10/16 14:30
+ * @date 2019/10/18 15:04
  */
-@RequestMapping("/admin")
 @Controller
-public class AdminController {
-    //创建一个日志对象，就可以通过日志输出
-    private Logger logger=
-            Logger.getLogger(AdminController.class);
+@RequestMapping("/tea")
+public class TeacherController {
     @Autowired
-    private AdminService adminService;
+    private TeacherService teacherService;
 
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
-
-        String no = request.getParameter("admin");
+        String no = request.getParameter("tno");
         String password = request.getParameter("password");
         String rememberMe = request.getParameter("rememberMe");
         HttpSession session = request.getSession();
         //数据库查询用户
-        Admin admin = adminService.selectByPrimaryKey(no);
-        if (admin != null){
-            if (admin.getPassword().equals(password)) {
-                session.setAttribute("userSession", admin);
+        Teacher teacher = teacherService.selectByPrimaryKey(no);
+        if (teacher != null){
+            if (teacher.getPassword().equals(password)) {
+                session.setAttribute("userSession", teacher);
                 session.setAttribute("currentTime", LoginUtil.getTime());
                 if ("true".equals(rememberMe)) {
-                    Map<String, Cookie> map = LoginUtil.saveCookie(admin.getNo(), admin.getPassword());
+                    Map<String, Cookie> map = LoginUtil.saveCookie(teacher.getTno(), teacher.getPassword());
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }
-                return "redirect:/pages/admin/index";
+                return "redirect:/pages/teacher/index";
             }else {
                 request.setAttribute("errorMsg", "用户密码错误");
                 System.out.println("密码错误");
-                return "admin/login";
+                return "teacher/login";
             }
         }else {
             request.setAttribute("errorMsg", "用户名不存在");
-            return "admin/login";
-        }
-    }
-    @RequestMapping(value = "/check")
-    public String checkedLogin(HttpSession session) {
-        if (session.getAttribute("userSession") == null) {
-            return "redirect:/admin/login";
-        }else {
-            return "admin/index";
+            return "teacher/login";
         }
     }
 
-    @RequestMapping(value = "/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("userSession");
-        session.removeAttribute("currentTime");
-        return "admin/login";
-    }
+
 }

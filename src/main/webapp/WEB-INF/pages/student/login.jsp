@@ -59,7 +59,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">学生 登录 / LOGIN</p>
 
-    <form action="<%=basePath%>/pages/pace" method="post">
+    <form action="<%=basePath%>/stu/toLogin" method="post">
       <div class="form-group has-feedback">
         <input name="sno" value="" type="user" class="form-control" placeholder="请输入用户名">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -75,7 +75,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <%--<input type="checkbox"> 记住--%>
+              <input type="checkbox" value="true" name="rememberMe"> 记住
             </label>
           </div>
         </div>
