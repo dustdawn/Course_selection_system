@@ -125,7 +125,7 @@
         </div>
         <div class="pull-left info">
           <p>这里显示账号名</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 在线状态Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i>登录身份：教师</a>
         </div>
       </div>
       <!-- search form -->
@@ -146,7 +146,7 @@
         <!--功能菜单都用这个模板-->
         <li>
           <a href="../widgets.html"><!--跳转链接-->
-            <i class="fa fa-th"></i> <span>教师管理</span>
+            <i class="fa fa-th"></i> <span>个人信息</span>
 
           </a>
         </li>
@@ -155,14 +155,14 @@
 
         <li>
           <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>学生管理</span>
+            <i class="fa fa-calendar"></i> <span>课程管理</span>
 
           </a>
         </li>
 
         <li>
           <a href="../calendar.html">
-            <i class="fa fa-book"></i> <span>课程管理</span>
+            <i class="fa fa-book"></i> <span>排课查询</span>
 
           </a>
         </li>
