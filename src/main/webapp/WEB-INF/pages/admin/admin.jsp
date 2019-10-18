@@ -126,7 +126,7 @@
         </div>
         <div class="pull-left info">
           <p>这里显示账号名</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 当前登录：管理员</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：管理员</a>
         </div>
       </div>
       <!-- search form -->
