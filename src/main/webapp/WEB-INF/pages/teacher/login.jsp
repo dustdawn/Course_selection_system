@@ -68,11 +68,14 @@
         <input name="tno" value="" type="password" class="form-control" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <div class="form-group message">
+        <label id="my_msg" colspan="2" style="text-align: center;color: red;display: none">${errorMsg}</label>
+      </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> 记住
+              <%--<input type="checkbox"> 记住--%>
             </label>
           </div>
         </div>
@@ -107,6 +110,11 @@
 <!-- iCheck -->
 <script src="<%=basePath%>/plugins/iCheck/icheck.min.js"></script>
 <script>
+  $(function () {
+    if (${errorMsg != null}) {
+      $('#my_msg').show();
+    }
+  })
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
