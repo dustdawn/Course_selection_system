@@ -7,6 +7,8 @@ package cn.njit.service;
 
 import cn.njit.entry.Teacher;
 
+import java.util.List;
+
 /**
  * TeacherService
  */
@@ -22,4 +24,6 @@ public interface TeacherService {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    List<Teacher> findTeacherList();
 }

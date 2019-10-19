@@ -90,4 +90,8 @@
       del_flag = #{delFlag,jdbcType=INTEGER}
     where tno = #{tno,jdbcType=VARCHAR}
   </update>
+
+  <select id="findTeacherList" resultMap="BaseResultMap">
+    select * from teacher
+  </select>
 </mapper>

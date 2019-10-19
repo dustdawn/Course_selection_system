@@ -2,6 +2,8 @@ package cn.njit.dao;
 
 import cn.njit.entry.Teacher;
 
+import java.util.List;
+
 public interface TeacherMapper {
     int deleteByPrimaryKey(String tno);
 
@@ -14,4 +16,6 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    List<Teacher> findTeacherList();
 }
