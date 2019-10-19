@@ -52,7 +52,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -151,8 +151,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
+            <li><a href="<%=basePath%>/pages/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
           </ul>
         </li>
 
@@ -164,8 +164,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+            <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
+            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
           </ul>
         </li>
 
@@ -177,8 +177,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
+            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
           </ul>
         </li>
 
@@ -190,8 +190,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li><a href="<%=basePath%>/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+            <li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
 
@@ -207,8 +207,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        主页
+        <small>通知公告</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
@@ -220,10 +220,16 @@
     <!-- Main content -->
     <section class="content">
 
-      <!-- Default box -->
+      <div class="callout callout-info">
+        <h4>欢迎使用在线选课系统</h4>
+
+        <p>选课过程中出现问题，请联系管理员</p>
+      </div>
+
+      <!-- 内容 -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+          <h3 class="box-title">关于2019-2020学年选课通知</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -233,7 +239,21 @@
           </div>
         </div>
         <div class="box-body">
-          页面在这加载
+          各学院、2019级新同学：<br/>
+
+          2019-2020学年第一学期2019级新生选课工作将于8月21日开始，请学院做好新生选课指导工作，各位同学按照规定时间和选课指南中相关要求选课。<br/><br/>
+
+          选课时间安排如下：<br/><br/>
+
+          第一轮选课：8月21日8:30－8月25日24:00，新生在校外选课。<br/>
+
+          第二轮选课：新生入学教育周内（8月28日－8月30日），学校安排机房分时段由学院（部）指导学生选课。<br/>
+
+          第三轮选课：开学第一周内（9月2日－8日），学生退选和补选。<br/>
+
+          第二轮选课程结束后，教务处将根据选课情况对部分教学班进行调整，请各位同学在选课结束后密切关注各自课表的变化，以开学第二周系统中最终显示个人课表为准。<br/>
+
+          本学期新生教学从2019年9月2日开始。<br/>
           <br/>
           <br/>
           <div class="row">
@@ -242,14 +262,26 @@
             </div>
           </div>
           <div class="ajax-content">
-            正文
+            <table class="table table-bordered text-center">
+              <tr>
+                <th><button type="button" class="btn btn-block btn-primary">Primary</button></th>
+                <th><button type="button" class="btn btn-block btn-success">Success</button></th>
+                <th><button type="button" class="btn btn-block btn-info">Info</button></th>
+                <th><button type="button" class="btn btn-block btn-danger">Danger</button></th>
+                <th><button type="button" class="btn btn-block btn-warning">Warning</button></th>
+              </tr>
+            </table>
           </div>
         </div>
+        <%--正文结束--%>
         <!-- /.box-body -->
-
         <!-- /.box-footer-->
       </div>
       <!-- /.box -->
+
+
+
+
 
     </section>
     <!-- /.content -->

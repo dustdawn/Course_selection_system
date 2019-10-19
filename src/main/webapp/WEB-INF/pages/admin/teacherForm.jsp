@@ -207,8 +207,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        教师管理
+        <small>信息添加</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
@@ -221,7 +221,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">标题</h3>
 
@@ -229,27 +229,128 @@
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
-
           </div>
         </div>
+
         <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
+
+          <form action="<%=basePath%>/test/yy" method="post">
+            <%--表单盒子体--%>
+            <div class="box-body">
+              <div class="col-md-12">
+              <%--工号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherNo">教师工号</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-university"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherNo" name="tno" value="10116020" placeholder="请输入教师工号">
+                    </div>
+                  </div>
+                </div>
+              <%--姓名--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherName">姓名</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherName" name="name" value="教师" placeholder="请输入姓名">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-12">
+              <%--密码--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherPassword">密码</label>
+                    <div class="input-group password">
+                      <div class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                      <input type="password" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
+                    </div>
+                  </div>
+                </div>
+              <%--性别--%>
+              <!-- 可选下拉框 -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherSex">性别</label>
+                    <div class="input-group sex">
+                      <div class="input-group-addon">
+                        <i class="fa fa-male"></i>
+                        <i class="fa fa-female"></i>
+                      </div>
+                      <select class="form-control select2" style="width: 100%;" name="sex" id="teacherSex">
+                        <option value="">---请选择---</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="col-md-12">
+              <%--/可选下拉框--%>
+              <%--手机号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherMobile">手机号码</label>
+                    <div class="input-group phone">
+                      <div class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherMobile" name="mobile" value="18129386754" placeholder="请输入手机号">
+                    </div>
+                  </div>
+                </div>
+              <%--出生日期--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherDate">出生日期</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="teacherDate" name="birthday" value="">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <div class="box-footer" align="center">
+              <button type="button" class="btn btn-warning" id="empty">清空</button>
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </form>
+          <%--表单尾--%>
+
+
           <div class="row">
             <div class="col-xs-12 text-center">
-
+              <strong style="color: red">请确保添加教师信息未重复</strong>
             </div>
           </div>
-          <div class="ajax-content">
-            正文
-          </div>
-        </div>
-        <!-- /.box-body -->
 
-        <!-- /.box-footer-->
+        </div>
+
       </div>
-      <!-- /.box -->
+
 
     </section>
     <!-- /.content -->
@@ -275,18 +376,56 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
+  // 清空事件
+  $(document).ready(function () {
+    $("#empty").bind("click", function () {
+        //alert(55);
+      $("#teacherNo").val("");
+      $("#teacherName").val("");
+      $("#teacherPassword").val("");
+      $("#teacherSex").val("");
+      $("#teacherMobile").val("");
+      $("#teacherDate").val("");
     })
   })
+
+  $(function () {
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        tno: {
+          validators: {
+            notEmpty: {
+              message: '工号不能为空'
+            }
+          }
+        },
+        password: {
+          validators: {
+            notEmpty: {
+              message: '密码不能为空'
+            }
+          }
+        },
+        name: {
+          validators: {
+            notEmpty: {
+              message: '姓名不能为空'
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>

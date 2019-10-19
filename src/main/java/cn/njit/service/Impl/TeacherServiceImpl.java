@@ -26,7 +26,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Override
     public int insertSelective(Teacher record) {
-        return 0;
+        return teacherMapper.insertSelective(record);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package cn.njit.controller;
 
 import cn.njit.entry.Admin;
+import cn.njit.entry.Teacher;
 import cn.njit.service.AdminService;
+import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class AdminController {
             Logger.getLogger(AdminController.class);
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private TeacherService teacherService;
 
     //登录
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
@@ -68,7 +72,12 @@ public class AdminController {
     }
     //教师管理
     @RequestMapping(value = "/teacherForm")
-    public String teacherForm() {
+    public String teacherForm(HttpServletRequest request, Teacher teacher) {
+        if (null != teacher) {
+            teacher.setDelFlag(0);
+            teacherService.insertSelective(teacher);
+        }
+
         return "redirect:/pages/admin/teacherForm";
     }
 
