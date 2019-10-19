@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/index" class="logo">
+    <a href="<%=basePath%>/pages/student/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -79,7 +79,7 @@
                 <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  当前登录账号：${userSession.no}
+                  当前登录账号：${userSession.sno}
                   <small>${currentTime}</small>
                 </p>
               </li>
@@ -137,37 +137,12 @@
         <!--功能菜单都用这个模板-->
 
         <li>
-          <a href="<%=basePath%>/pages/admin/index">
+          <a href="<%=basePath%>/pages/student/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
 
 
-        <%--<li class="treeview">--%>
-          <%--<a href="#">--%>
-            <%--<i class="fa fa-graduation-cap"></i> <span>教师管理</span>--%>
-            <%--<span class="pull-right-container">--%>
-              <%--<i class="fa fa-angle-left pull-right"></i>--%>
-            <%--</span>--%>
-          <%--</a>--%>
-          <%--<ul class="treeview-menu">--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>--%>
-          <%--</ul>--%>
-        <%--</li>--%>
-
-        <%--<li class="treeview">--%>
-          <%--<a href="#">--%>
-            <%--<i class="fa fa-group"></i> <span>学生管理</span>--%>
-            <%--<span class="pull-right-container">--%>
-              <%--<i class="fa fa-angle-left pull-right"></i>--%>
-            <%--</span>--%>
-          <%--</a>--%>
-          <%--<ul class="treeview-menu">--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>--%>
-          <%--</ul>--%>
-        <%--</li>--%>
 
         <li class="active treeview">
           <a href="#">
@@ -182,18 +157,18 @@
           </ul>
         </li>
 
-        <%--<li class="treeview">--%>
-          <%--<a href="#">--%>
-            <%--<i class="fa fa-info"></i> <span>个人信息及密码</span>--%>
-            <%--<span class="pull-right-container">--%>
-              <%--<i class="fa fa-angle-left pull-right"></i>--%>
-            <%--</span>--%>
-          <%--</a>--%>
-          <%--<ul class="treeview-menu">--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>--%>
-          <%--</ul>--%>
-        <%--</li>--%>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/student/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/pages/student/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+          </ul>
+        </li>
 
       </ul>
     </section>

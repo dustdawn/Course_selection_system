@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/index" class="logo">
+    <a href="<%=basePath%>/pages/student/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -79,7 +79,7 @@
                 <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  当前登录账号：${userSession.no}
+                  当前登录账号：${userSession.sno}
                   <small>${currentTime}</small>
                 </p>
               </li>
@@ -145,40 +145,14 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
+            <i class="fa fa-book"></i> <span>课程选修</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-group"></i> <span>学生管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-book"></i> <span>课程管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/pages/student/courseForm"><i class="fa fa-circle-o"></i> 公选课录入</a></li>
+            <li><a href="<%=basePath%>/pages/student/courseList"><i class="fa fa-circle-o"></i> 选修课录入</a></li>
           </ul>
         </li>
 
@@ -190,8 +164,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li class="active"><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+            <li><a href="<%=basePath%>/pages/student/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/student/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
 

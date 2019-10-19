@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/index" class="logo">
+    <a href="<%=basePath%>/pages/student/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -79,7 +79,7 @@
                 <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  当前登录账号：${userSession.no}
+                  当前登录账号：${userSession.sno}
                   <small>${currentTime}</small>
                 </p>
               </li>
@@ -156,18 +156,18 @@
           </ul>
         </li>
 
-        <%--<li class="treeview">--%>
-          <%--<a href="#">--%>
-            <%--<i class="fa fa-info"></i> <span>个人信息及密码</span>--%>
-            <%--<span class="pull-right-container">--%>
-              <%--<i class="fa fa-angle-left pull-right"></i>--%>
-            <%--</span>--%>
-          <%--</a>--%>
-          <%--<ul class="treeview-menu">--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>--%>
-            <%--<li><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>--%>
-          <%--</ul>--%>
-        <%--</li>--%>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/student/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/pages/student/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+          </ul>
+        </li>
 
       </ul>
     </section>

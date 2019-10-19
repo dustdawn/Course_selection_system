@@ -129,33 +129,22 @@
           <a href="#"><i class="fa fa-circle text-success"></i>登录身份：学生</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
+
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">导航菜单</li>
 
         <!--功能菜单都用这个模板-->
 
-        <li class="treeview active">
-          <a href="#">
+        <li class="active">
+          <a href="<%=basePath%>/pages/student/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
 
 
-        <li>
-          <a href="<%=basePath%>/stu/courseList">
-            <i class="fa fa-calendar"></i> <span>课程选修</span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>课程选修</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -172,14 +161,14 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>个人信息及密码</span>
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/student/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li><a href="<%=basePath%>/page/student/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+            <li><a href="<%=basePath%>/pages/student/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
 
