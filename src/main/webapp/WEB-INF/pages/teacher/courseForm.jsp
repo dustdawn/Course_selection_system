@@ -143,57 +143,19 @@
         </li>
 
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-group"></i> <span>学生管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
-          </ul>
-        </li>
-
         <li class="active treeview">
           <a href="#">
-            <i class="fa fa-book"></i> <span>课程管理</span>
+            <i class="fa fa-graduation-cap"></i> <span>课程管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/teacher/courseForm"><i class="fa fa-circle-o"></i> 公选课</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/courseList"><i class="fa fa-circle-o"></i> 选修课</a></li>
           </ul>
         </li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-info"></i> <span>个人信息及密码</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
-          </ul>
-        </li>
 
       </ul>
     </section>

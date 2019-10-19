@@ -146,7 +146,7 @@
 
         <!--功能菜单都用这个模板-->
 
-        <li class="treeview active">
+        <li class="active">
           <a href="#">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
@@ -155,9 +155,16 @@
 
 
         <li>
-          <a href="<%=basePath%>/stu/selectList">
+          <a href="#">
             <i class="fa fa-book"></i> <span>课程管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/teacher/courseForm"><i class="fa fa-circle-o"></i> 公选课</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/courseList"><i class="fa fa-circle-o"></i> 选修课</a></li>
+          </ul>
         </li>
 
 
@@ -169,8 +176,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/tea/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li><a href="<%=basePath%>/tea/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
 
