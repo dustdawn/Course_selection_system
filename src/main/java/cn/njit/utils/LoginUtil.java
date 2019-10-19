@@ -21,8 +21,8 @@ public class LoginUtil {
         Cookie cookie_password = new Cookie("password", password);
         cookie_password.setMaxAge(10*60);
         Map<String, Cookie> map = new HashMap<>();
-        map.put("cookie_no", cookie_no);
-        map.put("cookie_password", cookie_password);
+        map.put("no", cookie_no);
+        map.put("password", cookie_password);
         return map;
 
     }

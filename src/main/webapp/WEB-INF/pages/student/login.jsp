@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+%>
+<%
+  String no = "";
+  String password = "";
+  //获取当前站点的所有Cookie
+  Cookie[] cookies = request.getCookies();
+  for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
+    if ("no".equals(cookies[i].getName())) {
+      no = cookies[i].getValue();
+    } else if ("password".equals(cookies[i].getName())) {
+      password = cookies[i].getValue();
+    }
+  }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,21 +75,22 @@
 
     <form action="<%=basePath%>/stu/toLogin" method="post">
       <div class="form-group has-feedback">
-        <input name="sno" value="" type="user" class="form-control" placeholder="请输入用户名">
+        <input name="sno" value="<%=no%>" type="user" class="form-control" placeholder="请输入学生学号">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input name="password" value="" type="password" class="form-control" placeholder="请输入密码">
+        <input name="password" value="<%=password%>" type="password" class="form-control" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group message">
         <label id="my_msg" colspan="2" style="text-align: center;color: red;display: none">${errorMsg}</label>
       </div>
+
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox" value="true" name="rememberMe"> 记住
+              <input value="true" type="checkbox" name="rememberMe"> 记住
             </label>
           </div>
         </div>

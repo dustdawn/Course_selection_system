@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -47,17 +48,17 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<%=basePath%>/pages/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>选课系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">导航菜单</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -69,21 +70,21 @@
           <!-- 账号注销 -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<%=basePath%>/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">这里显示账号名</span>
+              <img src="<%=basePath%>/image/avg.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">${userSession.name}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<%=basePath%>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  当前登录账号：
-                  <small>Member since Nov. 2012</small>
+                  登录账号：${userSession.tno}
+                  <small>日期：${currentTime}</small>
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+              <%--<li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">user菜单体修改</a>
@@ -96,12 +97,12 @@
                   </div>
                 </div>
                 <!-- /.row -->
-              </li>
+              </li>--%>
               <!-- Menu Footer-->
               <li class="user-footer">
 
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<%=basePath%>/tea/logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -121,10 +122,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<%=basePath%>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>这里显示账号名</p>
+          <p>${userSession.name}</p>
           <a href="#"><i class="fa fa-circle text-success"></i>登录身份：教师</a>
         </div>
       </div>
@@ -144,43 +145,33 @@
         <li class="header">导航菜单</li>
 
         <!--功能菜单都用这个模板-->
-        <li>
-          <a href="../widgets.html"><!--跳转链接-->
-            <i class="fa fa-th"></i> <span>个人信息</span>
-
-          </a>
-        </li>
-
-
-
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>课程管理</span>
-
-          </a>
-        </li>
-
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-book"></i> <span>排课查询</span>
-
-          </a>
-        </li>
-
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>个人信息</span>
-
-          </a>
-        </li>
-
-
-
 
         <li class="treeview active">
           <a href="#">
-            <i class="fa fa-folder"></i> <span>这边</span>
+            <i class="fa fa-folder"></i> <span>主页</span>
           </a>
+        </li>
+
+
+
+        <li>
+          <a href="<%=basePath%>/stu/selectList">
+            <i class="fa fa-book"></i> <span>课程管理</span>
+          </a>
+        </li>
+
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>个人信息及密码</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/tea/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/tea/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+          </ul>
         </li>
 
       </ul>

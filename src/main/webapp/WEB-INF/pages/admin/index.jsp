@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/admin" class="logo">
+    <a href="<%=basePath%>/pages/admin/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -58,7 +58,7 @@
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">导航菜单</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -84,7 +84,7 @@
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+              <%--<li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">user菜单体修改</a>
@@ -97,7 +97,7 @@
                   </div>
                 </div>
                 <!-- /.row -->
-              </li>
+              </li>--%>
               <!-- Menu Footer-->
               <li class="user-footer">
 
@@ -125,63 +125,74 @@
           <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>这里显示账号名</p>
+          <p>${userSession.name}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：管理员</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">导航菜单</li>
 
         <!--功能菜单都用这个模板-->
-        <li>
-          <a href="../widgets.html"><!--跳转链接-->
-            <i class="fa fa-th"></i> <span>教师管理</span>
 
+        <li class="active">
+          <a href="<%=basePath%>/pages/admin/index">
+            <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
 
 
-
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>学生管理</span>
-
-          </a>
-        </li>
-
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-book"></i> <span>课程管理</span>
-
-          </a>
-        </li>
-
-        <li>
-          <a href="../calendar.html">
-            <i class="fa fa-calendar"></i> <span>个人信息</span>
-
-          </a>
-        </li>
-
-
-
-
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#">
-            <i class="fa fa-folder"></i> <span>这边</span>
+            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
+            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-group"></i> <span>学生管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>课程管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
+            <li><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+          </ul>
         </li>
 
       </ul>
@@ -200,9 +211,9 @@
         <small>加载范例</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Pace page</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
+        <li><a href="<%=basePath%>/pages/admin/index">主页</a></li>
+        <li class="active">index</li>
       </ol>
     </section>
 
@@ -218,8 +229,7 @@
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+
           </div>
         </div>
         <div class="box-body">

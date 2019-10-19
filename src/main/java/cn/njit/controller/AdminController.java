@@ -28,6 +28,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    //登录
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
 
@@ -57,19 +58,55 @@ public class AdminController {
             return "admin/login";
         }
     }
-    @RequestMapping(value = "/check")
-    public String checkedLogin(HttpSession session) {
-        if (session.getAttribute("userSession") == null) {
-            return "redirect:/admin/login";
-        }else {
-            return "admin/index";
-        }
-    }
 
+    //注销
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("userSession");
         session.removeAttribute("currentTime");
         return "admin/login";
+    }
+    //教师管理
+    @RequestMapping(value = "/teacherForm")
+    public String teacherForm() {
+        return "redirect:/pages/admin/teacherForm";
+    }
+
+    @RequestMapping(value = "/teacherList")
+    public String teacherList() {
+        return "redirect:/pages/admin/teacherList";
+    }
+
+    //学生管理
+    @RequestMapping(value = "/studentForm")
+    public String studentForm() {
+        return "redirect:/pages/admin/studentForm";
+    }
+
+    @RequestMapping(value = "/studentList")
+    public String studentList() {
+        return "redirect:/pages/admin/studentList";
+    }
+
+    //课程管理
+    @RequestMapping(value = "/courseForm")
+    public String courseForm() {
+        return "redirect:/pages/admin/courseForm";
+    }
+
+    @RequestMapping(value = "/courseList")
+    public String courseList() {
+        return "redirect:/pages/admin/courseList";
+    }
+
+    //个人信息管理
+    @RequestMapping(value = "/info")
+    public String info() {
+        return "redirect:/pages/admin/info";
+    }
+    //修改密码
+    @RequestMapping(value = "/pswChange")
+    public String pswChange() {
+        return "redirect:/pages/admin/pswChange";
     }
 }

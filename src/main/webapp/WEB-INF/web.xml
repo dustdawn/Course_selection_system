@@ -15,7 +15,7 @@
   <!--以下配置的加载顺序:先 ServletContext >> context-param >> listener >> filter >> servlet >>  spring-->
 
   <!--  -过滤器配置 -->
-  <!--例:编码过滤器-->
+  <!--编码过滤器-->
   <filter>      <!-- 用来声明filter的相关设定,过滤器可以截取和修改一个Servlet或JSP页面的请求或从一个Servlet或JSP页面发出的响应-->
     <filter-name>encodingFilter</filter-name>     <!--指定filter的名字-->
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> <!--定义filter的类的名称-->
@@ -30,8 +30,18 @@
     <url-pattern>/*</url-pattern>       <!--指定filter所对应的URL-->
   </filter-mapping>
 
+  <!--登录过滤器-->
+  <!--<filter>      &lt;!&ndash; 用来声明filter的相关设定,过滤器可以截取和修改一个Servlet或JSP页面的请求或从一个Servlet或JSP页面发出的响应&ndash;&gt;
+    <filter-name>userLoginFilter</filter-name>     &lt;!&ndash;指定filter的名字&ndash;&gt;
+    <filter-class>cn.njit.filter.UserLoginFilter</filter-class> &lt;!&ndash;定义filter的类的名称&ndash;&gt;
+  </filter>
+  <filter-mapping>&lt;!&ndash;用来定义filter所对应的URL&ndash;&gt;
+    <filter-name>userLoginFilter</filter-name>     &lt;!&ndash;指定对应filter的名字&ndash;&gt;
+    <url-pattern>/*</url-pattern>       &lt;!&ndash;指定filter所对应的URL&ndash;&gt;
+  </filter-mapping>-->
+
   <!-- -监听器配置 -->
-  <!--例:spring监听器-->
+  <!--spring监听器-->
   <listener>        <!--用来设定Listener接口-->
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class><!--定义Listener的类名称-->
   </listener>

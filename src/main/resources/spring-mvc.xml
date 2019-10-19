@@ -74,5 +74,23 @@
     <mvc:resources location="/" mapping="/**/*.mp3"/>
     <mvc:resources location="/" mapping="/**/*.mp4"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!-- 与登录相关的请求 -->
+            <mvc:exclude-mapping path="/**/toLogin" />
+            <mvc:exclude-mapping path="/pages/**/login" />
+            <!-- 以下是静态资源 -->
+            <mvc:exclude-mapping path="/bower_components/**" />
+            <mvc:exclude-mapping path="/build/**" />
+            <mvc:exclude-mapping path="/dist/**" />
+            <mvc:exclude-mapping path="/image/**" />
+            <mvc:exclude-mapping path="/js/**" />
+            <mvc:exclude-mapping path="/plugins/**" />
+
+            <bean id="userLoginInterceptor" class="cn.njit.interceptor.UserLoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
 </beans>

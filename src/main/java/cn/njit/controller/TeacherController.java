@@ -33,6 +33,7 @@ public class TeacherController {
         //数据库查询用户
         Teacher teacher = teacherService.selectByPrimaryKey(no);
         if (teacher != null){
+            System.out.println(teacher.getPassword());
             if (teacher.getPassword().equals(password)) {
                 session.setAttribute("userSession", teacher);
                 session.setAttribute("currentTime", LoginUtil.getTime());
@@ -51,6 +52,13 @@ public class TeacherController {
             request.setAttribute("errorMsg", "用户名不存在");
             return "teacher/login";
         }
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("userSession");
+        session.removeAttribute("currentTime");
+        return "teacher/login";
     }
 
 

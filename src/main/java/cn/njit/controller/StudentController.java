@@ -54,6 +54,13 @@ public class StudentController {
         }
     }
 
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("userSession");
+        session.removeAttribute("currentTime");
+        return "student/login";
+    }
+
 
 
 

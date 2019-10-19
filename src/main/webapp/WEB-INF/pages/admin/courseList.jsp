@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@page isELIgnored="false" %>
+<%@ page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/student/index" class="logo">
+    <a href="<%=basePath%>/pages/admin/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -63,7 +63,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-<!--这边是左上角工具栏-->
+      <!--这边是左上角工具栏-->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 
@@ -79,8 +79,8 @@
                 <img src="<%=basePath%>/image/avg.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  登录账号：${userSession.sno}
-                  <small>日期：${currentTime}</small>
+                  当前登录账号：${userSession.no}
+                  <small>${currentTime}</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -102,7 +102,7 @@
               <li class="user-footer">
 
                 <div class="pull-right">
-                  <a href="<%=basePath%>/stu/logout" class="btn btn-default btn-flat">退出登录</a>
+                  <a href="<%=basePath%>/admin/logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -114,7 +114,7 @@
   </header>
 
   <!-- =============================================== -->
-<!--这边是左边列表菜单-->
+  <!--这边是左边列表菜单-->
   <!-- Left side column. contains the sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -126,59 +126,72 @@
         </div>
         <div class="pull-left info">
           <p>${userSession.name}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i>登录身份：学生</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：管理员</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">导航菜单</li>
 
         <!--功能菜单都用这个模板-->
 
-        <li class="treeview active">
-          <a href="#">
+        <li>
+          <a href="<%=basePath%>/pages/admin/index">
             <i class="fa fa-folder"></i> <span>主页</span>
-          </a>
-        </li>
-
-
-        <li>
-          <a href="<%=basePath%>/stu/courseList">
-            <i class="fa fa-calendar"></i> <span>课程选修</span>
-
-          </a>
-        </li>
-
-
-        <li>
-          <a href="<%=basePath%>/stu/selectList">
-            <i class="fa fa-book"></i> <span>已选课程管理</span>
-
           </a>
         </li>
 
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>个人信息及密码</span>
+            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/stu/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li><a href="<%=basePath%>/stu/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+            <li><a href="<%=basePath%>/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
+            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-group"></i> <span>学生管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+          </ul>
+        </li>
+
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>课程管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
+            <li class="active"><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
 
@@ -198,9 +211,9 @@
         <small>加载范例</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Pace page</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
+        <li><a href="#">课程管理</a></li>
+        <li class="active">课程列表</li>
       </ol>
     </section>
 
@@ -216,8 +229,7 @@
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+
           </div>
         </div>
         <div class="box-body">
@@ -230,7 +242,7 @@
             </div>
           </div>
           <div class="ajax-content">
-            55
+            正文
           </div>
         </div>
         <!-- /.box-body -->
@@ -275,7 +287,6 @@
       }
     })
   })
-
 </script>
 </body>
 </html>
