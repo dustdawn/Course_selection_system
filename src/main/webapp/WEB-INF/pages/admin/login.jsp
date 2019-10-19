@@ -12,11 +12,13 @@
   //获取当前站点的所有Cookie
   Cookie[] cookies = request.getCookies();
   for (int i = 0; i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
-       if ("no".equals(cookies[i].getName())) {
-          no = cookies[i].getValue();
-       } else if ("password".equals(cookies[i].getName())) {
-          password = cookies[i].getValue();
-  }
+    if (null != cookies[i] ) {
+      if ("no".equals(cookies[i].getName())) {
+        no = cookies[i].getValue();
+      } else if ("password".equals(cookies[i].getName())) {
+        password = cookies[i].getValue();
+      }
+    }
 }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
