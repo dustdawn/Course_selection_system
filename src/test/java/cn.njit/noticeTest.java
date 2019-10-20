@@ -44,5 +44,12 @@ public class noticeTest {
         teacherService.updateByPrimaryKeySelective(teacher);
     }
 
+    @Test
+    public void test3() {
+        Teacher teacher = new Teacher();
+        teacher.setTno("101160201");
+        teacherService.selectByPrimaryKey("101160201").getBirthday();
+    }
+
 
 }

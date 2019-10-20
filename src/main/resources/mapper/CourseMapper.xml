@@ -68,16 +68,9 @@
     t.birthday as "teacher.birthday",
     t.del_flag as "teacher.delFlag",
 
-    c.cno as "course.cno",
-    c.name as "course.name",
-    c.tno as "course.tno",
-    c.dno as "course.dno",
-    c.date as "course.date",
-    c.place as "course.place",
-    c.credit as "course.credit",
-    c.total as "course.total",
-    c.type as "course.type",
-    c.del_flag as "course.delFlag",
+    d.dno as "dept.dno",
+    d.name as "dept.name",
+    d.del_flag as "dept.delFlag",
 
     s.sno as "student.sno",
     s.name as "student.name",
@@ -95,8 +88,15 @@
     select
     <include refid="courseColumns" />
     from course c,student s,cs cs,dept d, teacher t
-    where c.cno = cs.cno and s.sno = cs.sno and c.dno = d.dno
-    and c.cno = #{cno,jdbcType=VARCHAR} and c.del_flag = 0
+    where c.cno = cs.cno
+      and s.sno = cs.sno
+      and c.dno = d.dno
+      and s.del_flag = 0
+      and d.del_flag = 0
+      and c.del_flag = 0
+
+      and c.cno = #{cno,jdbcType=VARCHAR}
+
   </select>
 
   <!--查询所有course-->
@@ -104,8 +104,13 @@
     select
     <include refid="courseColumns" />
     from course c,student s,cs cs,dept d, teacher t
-    where c.cno = cs.cno and s.sno = cs.sno and c.dno = d.dno
-    and c.del_flag = 0
+    where c.cno = cs.cno
+      and s.sno = cs.sno
+      and c.dno = d.dno
+      and s.del_flag = 0
+      and d.del_flag = 0
+      and c.del_flag = 0
+      and c.del_flag = 0
   </select>
 
   <!--根据cno删除课程-->

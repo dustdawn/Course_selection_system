@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ import java.util.Map;
 @Controller
 public class AdminController {
     //创建一个日志对象，就可以通过日志输出
-    private Logger logger=
+    private static final Logger LOGGER =
             Logger.getLogger(AdminController.class);
     @Autowired
     private AdminService adminService;
@@ -81,13 +82,18 @@ public class AdminController {
         return "admin/login";
     }
     //教师管理
-    @RequestMapping(value = "/teacherForm")
-    public String teacherForm(HttpServletRequest request, Teacher teacher) {
+    @RequestMapping(value = "/teacherForm", method = RequestMethod.POST)
+    public String teacherForm(Teacher teacher) {
+
         if (null != teacher) {
             teacher.setDelFlag(0);
-            teacherService.insertSelective(teacher);
+            int flag = teacherService.insertSelective(teacher);
+            if (1 == flag) {
+                LOGGER.info(">>>添加成功<<<");
+            }else {
+                LOGGER.info(">>>添加失败<<<");
+            }
         }
-
         return "redirect:/pages/admin/teacherForm";
     }
 
@@ -113,7 +119,7 @@ public class AdminController {
         System.out.println(request.getParameter("name"));
 
         List<Student> studentList = studentService.findList();
-        request.setAttribute("teacherList", studentList);
+        request.setAttribute("studentList", studentList);
         return "admin/studentList";
     }
 
@@ -129,7 +135,8 @@ public class AdminController {
         System.out.println(request.getParameter("name"));
 
         List<Course> courseList = courseService.findList();
-        request.setAttribute("teacherList", courseList);
+        request.setAttribute("courseList", courseList);
+        System.out.println();
         return "admin/courseList";
     }
 
@@ -143,5 +150,23 @@ public class AdminController {
     @RequestMapping(value = "/pswChange")
     public String pswChange() {
         return "redirect:/pages/admin/pswChange";
+    }
+
+    @RequestMapping(value = "checkTeacher")
+    @ResponseBody
+    public String checkTeacher(String tno) {
+
+        String result = "{\"valid\":false}";
+        if (null != tno) {
+            Teacher teacher = teacherService.selectByPrimaryKey(tno);
+            if (null == teacher) {
+                //用户不存在
+                result = "{\"valid\":true}";
+            }else {
+                //用户已经存在
+                result = "{\"valid\":false}";
+            }
+        }
+        return result;
     }
 }

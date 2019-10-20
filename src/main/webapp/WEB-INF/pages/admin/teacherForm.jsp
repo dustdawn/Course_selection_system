@@ -165,7 +165,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
           </ul>
         </li>
 
@@ -178,7 +178,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
           </ul>
         </li>
 
@@ -274,7 +274,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-lock"></i>
                       </div>
-                      <input type="password" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
+                      <input type="text" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
                     </div>
                   </div>
                 </div>
@@ -323,7 +323,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="teacherDate" name="birthday" value="">
+                      <input type="text" class="form-control pull-right" id="teacherDate" name="birthday" value="" placeholder="yyyy-mm-dd">
                     </div>
                   </div>
                 </div>
@@ -405,7 +405,19 @@
         tno: {
           validators: {
             notEmpty: {
-              message: '工号不能为空'
+              message: '教师工号不能为空'
+            },
+            threshold: 2,//有2字符以上才发送ajax请求
+            remote: {//ajax验证
+              url: "<%=basePath%>/admin/checkTeacher",
+              message: '用户名已存在,请重新输入',
+              delay: 1000,//ajax请求间隔
+              type: 'POST',
+              data: function(validator) {
+                return {
+                  tno : $("input[name=tno]").val()
+                };
+              }
             }
           }
         },
@@ -420,6 +432,22 @@
           validators: {
             notEmpty: {
               message: '姓名不能为空'
+            }
+          }
+        },
+        mobile: {
+          validators: {
+            regexp: {
+              regexp: /^1(3|4|5|6|7|8|9)\d{9}$/,
+              message: '请输入正确的号码格式'
+            }
+          }
+        },
+        birthday: {
+          validators: {
+            regexp: {
+              regexp: /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/,
+              message: '请输入正确的日期格式'
             }
           }
         }

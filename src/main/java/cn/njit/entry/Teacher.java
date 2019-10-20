@@ -1,5 +1,8 @@
 package cn.njit.entry;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Teacher {
@@ -13,7 +16,10 @@ public class Teacher {
 
     private String mobile;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+
+
 
     private Integer delFlag;
 
@@ -56,7 +62,6 @@ public class Teacher {
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
     }
-
     public Date getBirthday() {
         return birthday;
     }

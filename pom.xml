@@ -163,6 +163,8 @@
       <version>1.0.12</version>
     </dependency>
 
+    <!--JsonFormat-->
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
@@ -171,9 +173,10 @@
 
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
-      <artifactId>jackson-jaxrs-xml-provider</artifactId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
       <version>2.4.1</version>
     </dependency>
+
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
@@ -189,6 +192,7 @@
       <artifactId>jackson-annotations</artifactId>
       <version>2.8.5</version>
     </dependency>
+
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
@@ -229,6 +233,13 @@
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
       <version>4.0.0</version>
+    </dependency>
+
+    <!--实体类时间转换-->
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.3</version>
     </dependency>
 
   </dependencies>

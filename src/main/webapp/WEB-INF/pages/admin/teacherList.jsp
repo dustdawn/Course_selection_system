@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -153,7 +154,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li class="active"><a href="<%=basePath%>/pages/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+            <li class="active"><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
           </ul>
         </li>
 
@@ -166,7 +167,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
           </ul>
         </li>
 
@@ -179,7 +180,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
           </ul>
         </li>
 
@@ -272,7 +273,7 @@
                     <td>${item.password}</td>
                     <td>${item.sex}</td>
                     <td>${item.mobile}</td>
-                    <td>${item.birthday}</td>
+                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
                     <td><a href="<%=basePath%>/admin/editStudent?item.tno=${item.tno}">编辑</a></td>
                   </tr>
                 </c:forEach>
@@ -327,9 +328,9 @@
 <!-- page script -->
 <script type="text/javascript">
   $(document).ready(function () {
-    getList();
+    //getList();
   })
-  function getList() {
+  /*function getList() {
     var list = {
       tno : $("#searchByNo").val(),
       name : $("#searchByName").val()
@@ -340,7 +341,7 @@
       //请求的媒体类型
       contentType: "application/x-www-form-urlencoded;charset=UTF-8",
       //请求地址
-      url : "<%=basePath%>/admin/teacherList",
+      url : "<=basePath/admin/teacherList",
       //数据，json字符串
       data : list,
       //返回类型
@@ -359,7 +360,7 @@
     });
     $("#searchByNo").val("");
     $("#searchByName").val("");
-  }
+  }*/
 
   $(function () {
     $('#teacherList').DataTable({

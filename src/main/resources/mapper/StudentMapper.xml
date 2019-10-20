@@ -71,7 +71,14 @@
     select 
     <include refid="studentColumns" />
     from student s, cs cs, course c,dept d
-    where s.sno = #{sno,jdbcType=VARCHAR} and s.del_flag = 0
+    where s.sno = cs.sno
+      and cs.cno = c.cno
+      and s.dno = d.dno
+      and d.del_flag = 0
+      and c.del_flag = 0
+      and s.del_flag = 0
+
+      and s.sno = #{sno,jdbcType=VARCHAR}
   </select>
 
   <!--查询所有student-->
@@ -79,8 +86,12 @@
     select
     <include refid="studentColumns" />
     from student s, cs cs, course c,dept d
-    where s.sno = cs.sno and cs.cno = c.cno and s.dno = d.dno
-    and s.del_flag = 0
+    where s.sno = cs.sno
+      and cs.cno = c.cno
+      and s.dno = d.dno
+      and d.del_flag = 0
+      and c.del_flag = 0
+      and s.del_flag = 0
   </select>
 
   <!--根据sno删除student-->
