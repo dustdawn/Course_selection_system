@@ -223,13 +223,8 @@
       <!-- Default box -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+          <h3 class="box-title">添加</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-          </div>
         </div>
 
         <div class="box-body">
@@ -247,6 +242,7 @@
                         <i class="fa fa-university"></i>
                       </div>
                       <input type="text" class="form-control" id="teacherNo" name="tno" value="10116020" placeholder="请输入教师工号">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
@@ -259,6 +255,7 @@
                         <i class="fa fa-user"></i>
                       </div>
                       <input type="text" class="form-control" id="teacherName" name="name" value="教师" placeholder="请输入姓名">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
@@ -275,6 +272,7 @@
                         <i class="fa fa-lock"></i>
                       </div>
                       <input type="text" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>

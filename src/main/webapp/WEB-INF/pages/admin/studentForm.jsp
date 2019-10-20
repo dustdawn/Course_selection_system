@@ -223,7 +223,7 @@
       <!-- Default box -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+          <h3 class="box-title">添加</h3>
 
         </div>
         <div class="box-body">
@@ -239,7 +239,8 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentNo" name="sno" value="202160219" placeholder="请输入学号">
+                      <input type="text" class="form-control" id="studentNo" name="sno" value="20216020" placeholder="请输入学号">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
@@ -252,6 +253,7 @@
                         <i class="fa fa-user"></i>
                       </div>
                       <input type="text" class="form-control" id="studentName" name="name" value="学生" placeholder="请输入姓名">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
@@ -267,7 +269,8 @@
                       <div class="input-group-addon">
                         <i class="fa fa-lock"></i>
                       </div>
-                      <input type="password" class="form-control" id="studentPassword" name="password" value="123" placeholder="请输入密码">
+                      <input type="text" class="form-control" id="studentPassword" name="password" value="123" placeholder="请输入密码">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
@@ -313,7 +316,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="studentDate" name="birthday" value="">
+                      <input type="text" class="form-control pull-right" id="studentDate" name="birthday" value="" placeholder="yyyy-mm-dd">
                     </div>
                   </div>
                 </div>
@@ -324,17 +327,15 @@
                 <%--所属学院--%>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="studentDno">所属学院</label>
+                    <label for="studentDept">所属院系</label>
                     <div class="input-group sex">
                       <div class="input-group-addon">
-                        <i class="fa fa-male"></i>
-                        <i class="fa fa-female"></i>
+                        <i class="fa fa-building-o"></i>
                       </div>
-                      <select class="form-control select2" style="width: 100%;" name="sex" id="studentDno">
+                      <select class="form-control select2" style="width: 100%;" name="dno" id="studentDept">
                         <option value="">---请选择---</option>
-                        <option value="男">计算机工程学院</option>
-                        <option value="女">其他学院</option>
                       </select>
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
 
                   </div>
@@ -400,15 +401,53 @@
   // 清空事件
   $(document).ready(function () {
     $("#empty").bind("click", function () {
-      //alert(55);
       $("#studentNo").val("");
       $("#studentName").val("");
       $("#studentPassword").val("");
       $("#studentSex").val("");
       $("#studentMobile").val("");
       $("#studentDate").val("");
-    })
+      $("#studentDept").val("");
+
+    });
+
+
+    $.ajax({
+      //请求方式
+      type: "POST",
+      //请求的媒体类型
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      //请求地址
+      url: "<%=basePath%>/dept/getNameList",
+      data: {},
+      //返回类型
+      // dataType:"json",
+      //请求成功
+      success: function (result) {
+        console.log("成功", result);
+
+        if (null != result && "" != result){
+
+          for (let i = 0; i < result.length; i++) {
+            $("#studentDept").append("<option value='" + result[i].dno +  "' + >" + result[i].name + "</option>");
+          }
+
+        }
+
+
+      },
+      //请求失败，包含具体的错误信息
+      error: function (e) {
+        console.log("失败");
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    });
+
   })
+
+
+
 
 
   $(function () {
@@ -424,6 +463,18 @@
           validators: {
             notEmpty: {
               message: '学号不能为空'
+            },
+            threshold: 2,//有2字符以上才发送ajax请求
+            remote: {//ajax验证
+              url: "<%=basePath%>/admin/checkStudent",
+              message: '用户名已存在,请重新输入',
+              delay: 1000,//ajax请求间隔
+              type: 'POST',
+              data: function(validator) {
+                return {
+                  sno : $("input[name=sno]").val()
+                };
+              }
             }
           }
         },
@@ -441,6 +492,29 @@
             }
           }
         },
+        dno: {
+          validators: {
+            notEmpty: {
+              message: '院系不能为空'
+            }
+          }
+        },
+        mobile: {
+          validators: {
+            regexp: {
+              regexp: /^1(3|4|5|6|7|8|9)\d{9}$/,
+              message: '请输入正确的号码格式'
+            }
+          }
+        },
+        birthday: {
+          validators: {
+            regexp: {
+              regexp: /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/,
+              message: '请输入正确的日期格式'
+            }
+          }
+        }
       }
     });
   });

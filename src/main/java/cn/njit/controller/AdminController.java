@@ -108,8 +108,17 @@ public class AdminController {
 
     //学生管理
     @RequestMapping(value = "/studentForm")
-    public String studentForm(HttpServletRequest request) {
+    public String studentForm(Student student) {
 
+        if (null != student) {
+            student.setDelFlag(0);
+            int flag = studentService.insertSelective(student);
+            if (1 == flag) {
+                LOGGER.info(">>>添加成功<<<");
+            }else {
+                LOGGER.info(">>>添加失败<<<");
+            }
+        }
         return "redirect:/pages/admin/studentForm";
     }
 
@@ -125,7 +134,16 @@ public class AdminController {
 
     //课程管理
     @RequestMapping(value = "/courseForm")
-    public String courseForm() {
+    public String courseForm(Course course) {
+        if (null != course) {
+            course.setDelFlag(0);
+            int flag = courseService.insertSelective(course);
+            if (1 == flag) {
+                LOGGER.info(">>>添加成功<<<");
+            }else {
+                LOGGER.info(">>>添加失败<<<");
+            }
+        }
         return "redirect:/pages/admin/courseForm";
     }
 
@@ -160,6 +178,42 @@ public class AdminController {
         if (null != tno) {
             Teacher teacher = teacherService.selectByPrimaryKey(tno);
             if (null == teacher) {
+                //用户不存在
+                result = "{\"valid\":true}";
+            }else {
+                //用户已经存在
+                result = "{\"valid\":false}";
+            }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "checkStudent")
+    @ResponseBody
+    public String checkStudent(String sno) {
+
+        String result = "{\"valid\":false}";
+        if (null != sno) {
+            Student student = studentService.selectByPrimaryKey(sno);
+            if (null == student) {
+                //用户不存在
+                result = "{\"valid\":true}";
+            }else {
+                //用户已经存在
+                result = "{\"valid\":false}";
+            }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "checkCourse")
+    @ResponseBody
+    public String checkCourse(String cno) {
+
+        String result = "{\"valid\":false}";
+        if (null != cno) {
+            Course course = courseService.selectByPrimaryKey(cno);
+            if (null == course) {
                 //用户不存在
                 result = "{\"valid\":true}";
             }else {

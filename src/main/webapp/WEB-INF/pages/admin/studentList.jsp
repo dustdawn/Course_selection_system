@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -274,7 +275,7 @@
                     <td>${item.sex}</td>
                     <td>${item.dept.name}</td>
                     <td>${item.mobile}</td>
-                    <td>${item.birthday}</td>
+                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
                     <td><a href="<%=basePath%>/admin/editStudent?item.tno=${item.sno}">编辑</a></td>
                   </tr>
                 </c:forEach>

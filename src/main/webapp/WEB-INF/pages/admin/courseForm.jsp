@@ -220,28 +220,187 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+          <h3 class="box-title">添加</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-
-          </div>
         </div>
         <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
+          <form action="<%=basePath%>/admin/courseForm" method="post">
+            <%--表单盒子体--%>
+            <div class="box-body">
+              <div class="col-md-12">
+                <%--课程类型--%>
+                <!-- 可选下拉框 -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseType">课程类型</label>
+                    <div class="input-group type">
+                      <div class="input-group-addon">
+                        <i class="fa fa-male"></i>
+                      </div>
+                      <select class="form-control select2" style="width: 100%;" name="type" id="courseType">
+                        <option value="">---请选择---</option>
+                        <option value="公选课">公选课</option>
+                        <option value="选修课">选修课</option>
+                      </select>
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+                <%--课程号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseNo">课程号</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </div>
+                      <input type="text" class="form-control" id="courseNo" name="cno" value="001" placeholder="请输入课程号">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-12">
+                <%--课程名--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseName">课程名</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </div>
+                      <input type="text" class="form-control" id="courseName" name="name" value="操作系统" placeholder="请输入课程名">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+                  <%--授课教师--%>
+                  <!-- 可选下拉框 -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="courseTeacher">授课教师</label>
+                      <div class="input-group courseTeacher">
+                        <div class="input-group-addon">
+                          <i class="fa fa-male"></i>
+                        </div>
+                        <select class="form-control select2" style="width: 100%;" name="tno" id="courseTeacher">
+                          <option value="">---请选择---</option>
+                        </select>
+                        <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+              <div class="col-md-12">
+                <%--所属学院--%>
+                <!-- 可选下拉框 -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseDept">所属院系</label>
+                    <div class="input-group courseDept">
+                      <div class="input-group-addon">
+                        <i class="fa fa-male"></i>
+                        <i class="fa fa-female"></i>
+                      </div>
+                      <select class="form-control select2" style="width: 100%;" name="dno" id="courseDept">
+                        <option value="">---请选择---</option>
+                      </select>
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+                <%--/可选下拉框--%>
+                <%--课程周期--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseDate">课程周期</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                      </div>
+                      <input type="text" class="form-control" id="courseDate" name="date" value="12周-14周" placeholder="请输入课程周期">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-12">
+                <%--授课地点--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="coursePlace">授课地点</label>
+                    <div class="input-group place">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="coursePlace" name="place" value="东A101" placeholder="请输入授课地点">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+                <%--学分--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseCredit">学分</label>
+                    <div class="input-group credit">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="courseCredit" name="credit" value="2" placeholder="请输入学分">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="col-md-12">
+                <%--剩余名额--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="courseTotal">剩余名额</label>
+                    <div class="input-group total">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="courseTotal" name="total" value="40" placeholder="请输入剩余名额">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <div class="box-footer" align="center">
+              <button type="button" class="btn btn-warning" id="empty">清空</button>
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </form>
+          <%--/form--%>
           <div class="row">
             <div class="col-xs-12 text-center">
 
             </div>
           </div>
           <div class="ajax-content">
-            正文
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <strong style="color: red">请确保添加学生信息未重复</strong>
+              </div>
+            </div>
+
           </div>
         </div>
         <!-- /.box-body -->
@@ -273,19 +432,196 @@
 <script src="<%=basePath%>/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
+
+  // 清空事件
+  $(document).ready(function () {
+    $("#empty").bind("click", function () {
+      //alert(55);
+      $("#courseType").val("");
+      $("#courseNo").val("");
+      $("#courseName").val("");
+      $("#courseTeacher").val("");
+      $("#courseDept").val("");
+      $("#courseDate").val("");
+      $("#coursePlace").val("");
+      $("#courseCredit").val("");
+      $("#courseTotal").val("");
     })
+
+    $.ajax({
+      //请求方式
+      type: "POST",
+      //请求的媒体类型
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      //请求地址
+      url: "<%=basePath%>/dept/getNameList",
+      data: {},
+      //返回类型
+      // dataType:"json",
+      //请求成功
+      success: function (result) {
+        console.log("成功", result);
+
+        if (null != result && "" != result){
+
+          for (let i = 0; i < result.length; i++) {
+            $("#courseDept").append("<option value='" + result[i].dno +  "' + >" + result[i].name + "</option>");
+          }
+
+        }
+      },
+      //请求失败，包含具体的错误信息
+      error: function (e) {
+        console.log("失败");
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    });
+
+    $.ajax({
+      //请求方式
+      type: "POST",
+      //请求的媒体类型
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      //请求地址
+      url: "<%=basePath%>/tea/getNameList",
+      data: {},
+      //返回类型
+      // dataType:"json",
+      //请求成功
+      success: function (result) {
+        console.log("成功", result);
+
+        if (null != result && "" != result){
+
+          for (let i = 0; i < result.length; i++) {
+            $("#courseTeacher").append("<option value='" + result[i].tno +  "' + >" + result[i].name + "</option>");
+          }
+
+        }
+
+
+      },
+      //请求失败，包含具体的错误信息
+      error: function (e) {
+        console.log("失败");
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    });
   })
+
+  $(function () {
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        sno: {
+          validators: {
+            notEmpty: {
+              message: '课程号不能为空'
+            },
+            threshold: 2,//有2字符以上才发送ajax请求
+            remote: {//ajax验证
+              url: "<%=basePath%>/admin/checkStudent",
+              message: '用户名已存在,请重新输入',
+              delay: 1000,//ajax请求间隔
+              type: 'POST',
+              data: function(validator) {
+                return {
+                  tno : $("input[name=sno]").val()
+                };
+              }
+            }
+          }
+        },
+        type: {
+          validators: {
+            notEmpty: {
+              message: '课程类型不能为空'
+            }
+          }
+        },
+        cno: {
+          validators: {
+            notEmpty: {
+              message: '课程号不能为空'
+            },
+            threshold: 2,//有2字符以上才发送ajax请求
+            remote: {//ajax验证
+              url: "<%=basePath%>/admin/checkCourse",
+              message: '课程号已存在,请重新输入',
+              delay: 1000,//ajax请求间隔
+              type: 'POST',
+              data: function(validator) {
+                return {
+                  cno : $("input[name=cno]").val()
+                };
+              }
+            }
+          }
+        },
+        name: {
+          validators: {
+            notEmpty: {
+              message: '课程名不能为空'
+            }
+          }
+        },
+        tno: {
+          validators: {
+            notEmpty: {
+              message: '授课教师不能为空'
+            }
+          }
+        },
+        dno: {
+          validators: {
+            notEmpty: {
+              message: '院系不能为空'
+            }
+          }
+        },
+        date: {
+          validators: {
+            notEmpty: {
+              message: '课程周期不能为空'
+            }
+          }
+        },
+        place: {
+          validators: {
+            notEmpty: {
+              message: '授课地点不能为空'
+            }
+          }
+        },
+        credit: {
+          validators: {
+            notEmpty: {
+              message: '学分不能为空'
+            }
+          }
+        },
+        total: {
+          validators: {
+            notEmpty: {
+              message: '剩余名额不能为空'
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>
