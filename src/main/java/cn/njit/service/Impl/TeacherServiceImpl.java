@@ -5,6 +5,7 @@ import cn.njit.entry.Teacher;
 import cn.njit.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,18 +13,19 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/18 15:03
  */
+@Transactional
 @Service
 public class TeacherServiceImpl implements TeacherService{
     @Autowired
     private TeacherMapper teacherMapper;
     @Override
-    public int deleteByPrimaryKey(String sno) {
-        return 0;
+    public int deleteByPrimaryKey(String tno) {
+        return teacherMapper.deleteByPrimaryKey(tno);
     }
 
     @Override
     public int insert(Teacher record) {
-        return 0;
+        return teacherMapper.insert(record);
     }
 
     @Override
@@ -38,16 +40,16 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Override
     public int updateByPrimaryKeySelective(Teacher record) {
-        return 0;
+        return teacherMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Teacher record) {
-        return 0;
+        return teacherMapper.updateByPrimaryKey(record);
     }
 
     @Override
-    public List<Teacher> findTeacherList() {
-        return teacherMapper.findTeacherList();
+    public List<Teacher> findList() {
+        return teacherMapper.findList();
     }
 }

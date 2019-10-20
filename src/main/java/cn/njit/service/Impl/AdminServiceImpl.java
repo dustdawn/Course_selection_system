@@ -5,29 +5,31 @@ import cn.njit.entry.Admin;
 import cn.njit.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author dustdawn
  * @date 2019/10/18 9:58
  */
+@Transactional
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
     @Override
-    public int deleteByPrimaryKey(String sno) {
-        return 0;
+    public int deleteByPrimaryKey(String no) {
+        return adminMapper.deleteByPrimaryKey(no);
     }
 
     @Override
     public int insert(Admin record) {
-        return 0;
+        return adminMapper.insert(record);
     }
 
     @Override
     public int insertSelective(Admin record) {
-        return 0;
+        return adminMapper.insertSelective(record);
     }
 
     @Override
@@ -37,11 +39,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int updateByPrimaryKeySelective(Admin record) {
-        return 0;
+        return adminMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Admin record) {
-        return 0;
+        return adminMapper.updateByPrimaryKey(record);
     }
 }

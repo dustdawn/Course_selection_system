@@ -13,7 +13,7 @@ import java.util.List;
  * TeacherService
  */
 public interface TeacherService {
-    int deleteByPrimaryKey(String sno);
+    int deleteByPrimaryKey(String tno);
 
     int insert(Teacher record);
 
@@ -25,5 +25,5 @@ public interface TeacherService {
 
     int updateByPrimaryKey(Teacher record);
 
-    List<Teacher> findTeacherList();
+    List<Teacher> findList();
 }

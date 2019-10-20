@@ -1,5 +1,8 @@
 package cn.njit.entry;
 
+import java.util.Date;
+import java.util.List;
+
 public class Student {
     private String sno;
 
@@ -11,7 +14,48 @@ public class Student {
 
     private String dno;
 
+    private Date birthday;
+
+    private String mobile;
+
     private Integer delFlag;
+
+    //专业对象
+    private Dept dept;
+    //课程集合对象
+    private List<Course> courseList;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "sno='" + sno + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", dno='" + dno + '\'' +
+                ", birthday=" + birthday +
+                ", mobile='" + mobile + '\'' +
+                ", delFlag=" + delFlag +
+                ", dept=" + dept +
+                ", courseList=" + courseList +
+                '}';
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
 
     public String getSno() {
         return sno;
@@ -51,6 +95,22 @@ public class Student {
 
     public void setDno(String dno) {
         this.dno = dno == null ? null : dno.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public Integer getDelFlag() {

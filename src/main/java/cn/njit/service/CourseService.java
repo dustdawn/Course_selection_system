@@ -1,11 +1,14 @@
-package cn.njit.dao;
+package cn.njit.service;
 
 import cn.njit.entry.Course;
 
 import java.util.List;
 
-public interface CourseMapper {
-    int deleteByPrimaryKey(String cno);
+/**
+ * courseService
+ */
+public interface CourseService {
+    int deleteByPrimaryKey(String sno);
 
     int insert(Course record);
 
@@ -19,5 +22,4 @@ public interface CourseMapper {
 
     //查询所有Course
     List<Course> findList();
-
 }

@@ -17,5 +17,6 @@ public interface TeacherMapper {
 
     int updateByPrimaryKey(Teacher record);
 
-    List<Teacher> findTeacherList();
+    //查询所有teacher
+    List<Teacher> findList();
 }

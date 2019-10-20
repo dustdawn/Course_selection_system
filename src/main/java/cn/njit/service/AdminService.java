@@ -12,7 +12,7 @@ import cn.njit.entry.Admin;
  */
 public interface AdminService {
 
-    int deleteByPrimaryKey(String sno);
+    int deleteByPrimaryKey(String no);
 
     int insert(Admin record);
 

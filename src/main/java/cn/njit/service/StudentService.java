@@ -7,12 +7,14 @@ package cn.njit.service;
 
 import cn.njit.entry.Student;
 
+import java.util.List;
+
 /**
  * StudentService
  */
 public interface StudentService{
 
-    int deleteByPrimaryKey(String sno);
+    int deleteByPrimaryKey(String cno);
 
     int insert(Student record);
 
@@ -23,5 +25,8 @@ public interface StudentService{
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    //查询所有student
+    List<Student> findList();
 
 }

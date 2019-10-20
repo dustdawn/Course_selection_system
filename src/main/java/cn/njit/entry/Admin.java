@@ -9,6 +9,8 @@ public class Admin {
 
     private String sex;
 
+    private String mobile;
+
     public String getNo() {
         return no;
     }
@@ -39,5 +41,13 @@ public class Admin {
 
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 }

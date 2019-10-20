@@ -1,5 +1,7 @@
 package cn.njit.entry;
 
+import java.util.Date;
+
 public class Teacher {
     private String tno;
 
@@ -8,6 +10,10 @@ public class Teacher {
     private String password;
 
     private String sex;
+
+    private String mobile;
+
+    private Date birthday;
 
     private Integer delFlag;
 
@@ -41,6 +47,22 @@ public class Teacher {
 
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public Integer getDelFlag() {

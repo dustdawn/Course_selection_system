@@ -2,6 +2,8 @@ package cn.njit.dao;
 
 import cn.njit.entry.Dept;
 
+import java.util.List;
+
 public interface DeptMapper {
     int deleteByPrimaryKey(String dno);
 
@@ -14,4 +16,6 @@ public interface DeptMapper {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+
+    List<Dept> findList();
 }

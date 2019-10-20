@@ -15,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -86,8 +85,8 @@ public class AdminController {
     public String teacherList(HttpServletRequest request) {
         System.out.println(request.getParameter("tno"));
         System.out.println(request.getParameter("name"));
-        List<Teacher> teacherList = teacherService.findTeacherList();
-        request.setAttribute("teacherList", teacherList);
+//        List<Teacher> teacherList = teacherService.findTeacherList();
+//        request.setAttribute("teacherList", teacherList);
         return "admin/teacherList";
     }
 

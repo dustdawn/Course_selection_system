@@ -5,11 +5,15 @@ import cn.njit.entry.Student;
 import cn.njit.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author dustdawn
  * @date 2019/9/30 13:27
  */
+@Transactional
 @Service
 public class StudentServiceImpl implements StudentService {
 
@@ -18,17 +22,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int deleteByPrimaryKey(String sno) {
-        return 0;
+        return studentMapper.deleteByPrimaryKey(sno);
     }
 
     @Override
     public int insert(Student record) {
-        return 0;
+        return studentMapper.insert(record);
     }
 
     @Override
     public int insertSelective(Student record) {
-        return 0;
+        return studentMapper.insertSelective(record);
     }
 
     @Override
@@ -38,11 +42,16 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int updateByPrimaryKeySelective(Student record) {
-        return 0;
+        return studentMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Student record) {
-        return 0;
+        return studentMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Student> findList() {
+        return studentMapper.findList();
     }
 }

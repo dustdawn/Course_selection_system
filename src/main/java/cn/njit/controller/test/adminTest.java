@@ -1,10 +1,19 @@
 package cn.njit.controller.test;
 
+import cn.njit.entry.Course;
+import cn.njit.entry.Student;
 import cn.njit.entry.Teacher;
+import cn.njit.service.CourseService;
+import cn.njit.service.StudentService;
+import cn.njit.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * @author dustdawn
@@ -13,6 +22,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/test")
 public class adminTest {
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private CourseService courseService;
     @RequestMapping(value = "/method", method = RequestMethod.POST)
     public ModelAndView method(Teacher teacher) {
         System.out.println(teacher);
@@ -25,4 +40,20 @@ public class adminTest {
         System.out.println();
         return "success";
     }
+
+    @RequestMapping(value = "list")
+    @ResponseBody
+    public String list() {
+        Student student = studentService.selectByPrimaryKey("202160201");
+        List<Student> students = studentService.findList();
+        System.out.println();
+        Teacher teacher = teacherService.selectByPrimaryKey("101160201");
+        List<Teacher> teacherList = teacherService.findList();
+        System.out.println();
+        Course course = courseService.selectByPrimaryKey("001");
+        List<Course> courseList = courseService.findList();
+        System.out.println();
+        return "success";
+    }
+
 }

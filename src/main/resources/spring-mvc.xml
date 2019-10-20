@@ -80,6 +80,8 @@
             <!-- 与登录相关的请求 -->
             <mvc:exclude-mapping path="/**/toLogin" />
             <mvc:exclude-mapping path="/pages/**/login" />
+            <!--测试接口-->
+            <mvc:exclude-mapping path="/test/**" />
             <!-- 以下是静态资源 -->
             <mvc:exclude-mapping path="/bower_components/**" />
             <mvc:exclude-mapping path="/build/**" />
