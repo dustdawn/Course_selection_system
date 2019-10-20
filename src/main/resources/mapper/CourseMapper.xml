@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.njit.dao.CourseMapper" >
+
+  <!--property为实体类中属性，column为数据库查询结果名-->
+  <!--course对象-->
+  <resultMap id="BaseResultMap" type="cn.njit.entry.Course" >
+    <id column="course.cno" property="cno" jdbcType="VARCHAR" />
+    <result column="course.name" property="name" jdbcType="VARCHAR" />
+    <result column="course.tno" property="tno" jdbcType="VARCHAR" />
+    <result column="course.dno" property="dno" jdbcType="VARCHAR" />
+    <result column="course.date" property="date" jdbcType="VARCHAR" />
+    <result column="course.place" property="place" jdbcType="VARCHAR" />
+    <result column="course.credit" property="credit" jdbcType="VARCHAR" />
+    <result column="course.total" property="total" jdbcType="INTEGER" />
+    <result column="course.type" property="type" jdbcType="VARCHAR" />
+    <result column="course.del_flag" property="delFlag" jdbcType="INTEGER" />
+
+    <!--teacher对象：多对一-->
+    <association property="teacher" javaType="cn.njit.entry.Teacher">
+      <id property="tno" column="teacher.tno"/>
+      <result property="name" column="teacher.name"/>
+      <result property="password" column="teacher.password"/>
+      <result property="sex" column="teacher.sex"/>
+      <result property="mobile" column="teacher.mobile"/>
+      <result property="birthday" column="teacher.birthday"/>
+      <result property="delFlag" column="teacher.delFlag"/>
+    </association>
+
+    <!--dept对象：多对一-->
+    <association property="dept" javaType="cn.njit.entry.Dept">
+      <id property="dno" column="dept.dno"/>
+      <result property="name" column="dept.name"/>
+      <result property="delFlag" column="dept.delFlag"/>
+    </association>
+
+    <!--studentList对象：一对多-->
+    <collection property="studentList" ofType="cn.njit.entry.Student" javaType="java.util.ArrayList">
+      <id property="sno" column="student.sno"/>
+      <result property="name" column="student.name"/>
+      <result property="password" column="student.password"/>
+      <result property="sex" column="student.sex"/>
+      <result property="dno" column="student.dno"/>
+      <result property="birthday" column="student.birthday"/>
+      <result property="mobile" column="student.mobile"/>
+      <result property="delFlag" column="student.delFlag"/>
+
+    </collection>
+  </resultMap>
+
+  <sql id="courseColumns" >
+    c.cno as "course.cno",
+    c.name as "course.name",
+    c.tno as "course.tno",
+    c.dno as "course.dno",
+    c.date as "course.date",
+    c.place as "course.place",
+    c.credit as "course.credit",
+    c.total as "course.total",
+    c.type as "course.type",
+    c.del_flag as "course.delFlag",
+
+    t.tno as "teacher.tno",
+    t.name as "teacher.name",
+    t.password as "teacher.password",
+    t.sex as "teacher.sex",
+    t.mobile as "teacher.mobile",
+    t.birthday as "teacher.birthday",
+    t.del_flag as "teacher.delFlag",
+
+    c.cno as "course.cno",
+    c.name as "course.name",
+    c.tno as "course.tno",
+    c.dno as "course.dno",
+    c.date as "course.date",
+    c.place as "course.place",
+    c.credit as "course.credit",
+    c.total as "course.total",
+    c.type as "course.type",
+    c.del_flag as "course.delFlag",
+
+    s.sno as "student.sno",
+    s.name as "student.name",
+    s.password as "student.password",
+    s.sex as "student.sex",
+    s.dno as "student.dno",
+    s.birthday as "student.birthday",
+    s.mobile as "student.mobile",
+    s.del_flag as "student.delFlag"
+  </sql>
+
+
+  <!--根据cno查询course对象-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="courseColumns" />
+    from course c,student s,cs cs,dept d, teacher t
+    where c.cno = cs.cno and s.sno = cs.sno and c.dno = d.dno
+    and c.cno = #{cno,jdbcType=VARCHAR} and c.del_flag = 0
+  </select>
+
+  <!--查询所有course-->
+  <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="courseColumns" />
+    from course c,student s,cs cs,dept d, teacher t
+    where c.cno = cs.cno and s.sno = cs.sno and c.dno = d.dno
+    and c.del_flag = 0
+  </select>
+
+  <!--根据cno删除课程-->
+  <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    update course
+    set del_flag = 1
+    where cno = #{cno,jdbcType=VARCHAR}
+  </update>
+
+  <!--全部条件添加-->
+  <insert id="insert" parameterType="cn.njit.entry.Course" >
+    insert into course (cno, name, tno, 
+      dno, date, place, credit, 
+      total, type, del_flag
+      )
+    values (#{cno,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{tno,jdbcType=VARCHAR}, 
+      #{dno,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{credit,jdbcType=VARCHAR}, 
+      #{total,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <!--添加课程-->
+  <insert id="insertSelective" parameterType="cn.njit.entry.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cno != null" >
+        cno,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tno != null" >
+        tno,
+      </if>
+      <if test="dno != null" >
+        dno,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="place != null" >
+        place,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cno != null" >
+        #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null" >
+        #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="dno != null" >
+        #{dno,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--根据cno修改course属性-->
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entry.Course" >
+    update course
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null" >
+        tno = #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="dno != null" >
+        dno = #{dno,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cno = #{cno,jdbcType=VARCHAR}
+  </update>
+
+  <!--全属性修改-->
+  <update id="updateByPrimaryKey" parameterType="cn.njit.entry.Course" >
+    update course
+    set name = #{name,jdbcType=VARCHAR},
+      tno = #{tno,jdbcType=VARCHAR},
+      dno = #{dno,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where cno = #{cno,jdbcType=VARCHAR}
+  </update>
+</mapper>

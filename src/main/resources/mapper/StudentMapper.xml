@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.njit.dao.StudentMapper" >
+  <!--property为实体类中属性，column为数据库查询结果名-->
+  <!--student对象-->
+  <resultMap id="BaseResultMap" type="cn.njit.entry.Student" >
+    <id column="student.sno" property="sno" jdbcType="VARCHAR" />
+    <result column="student.name" property="name" jdbcType="VARCHAR" />
+    <result column="student.password" property="password" jdbcType="VARCHAR" />
+    <result column="student.sex" property="sex" jdbcType="VARCHAR" />
+    <result column="student.dno" property="dno" jdbcType="VARCHAR" />
+    <result column="student.birthday" property="birthday" jdbcType="DATE" />
+    <result column="student.mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="student.delFlag" property="delFlag" jdbcType="INTEGER" />
+
+    <!--dept对象：多对一-->
+    <association property="dept" javaType="cn.njit.entry.Dept">
+      <id property="dno" column="dept.dno"/>
+      <result property="name" column="dept.name"/>
+      <result property="delFlag" column="dept.delFlag"/>
+    </association>
+
+
+    <!--courseList对象：一对多-->
+    <collection property="courseList" ofType="cn.njit.entry.Course" javaType="java.util.ArrayList">
+      <id property="cno" column="course.cno"/>
+      <result property="name" column="course.name"/>
+      <result property="tno" column="course.tno"/>
+      <result property="dno" column="course.dno"/>
+      <result property="date" column="course.date"/>
+      <result property="place" column="course.place"/>
+      <result property="credit" column="course.credit"/>
+      <result property="total" column="course.total"/>
+      <result property="type" column="course.type"/>
+      <result property="delFlag" column="course.delFlag"/>
+    </collection>
+
+  </resultMap>
+
+
+
+  <sql id="studentColumns" >
+    s.sno as "student.sno",
+    s.name as "student.name",
+    s.password as "student.password",
+    s.sex as "student.sex",
+    s.dno as "student.dno",
+    s.birthday as "student.birthday",
+    s.mobile as "student.mobile",
+    s.del_flag as "student.delFlag",
+
+    d.dno as "dept.dno",
+    d.name as "dept.name",
+    d.del_flag as "dept.delFlag",
+
+	c.cno as "course.cno",
+    c.name as "course.name",
+    c.tno as "course.tno",
+    c.dno as "course.dno",
+    c.date as "course.date",
+    c.place as "course.place",
+    c.credit as "course.credit",
+    c.total as "course.total",
+    c.type as "course.type",
+    c.del_flag as "course.delFlag"
+
+  </sql>
+
+  <!--根据sno查询student-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="studentColumns" />
+    from student s, cs cs, course c,dept d
+    where s.sno = #{sno,jdbcType=VARCHAR} and s.del_flag = 0
+  </select>
+
+  <!--查询所有student-->
+  <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="studentColumns" />
+    from student s, cs cs, course c,dept d
+    where s.sno = cs.sno and cs.cno = c.cno and s.dno = d.dno
+    and s.del_flag = 0
+  </select>
+
+  <!--根据sno删除student-->
+  <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    update student
+    set del_flag = 1
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+
+  <!--全属性添加-->
+  <insert id="insert" parameterType="cn.njit.entry.Student" >
+    insert into student (sno, name, password, 
+      sex, dno, birthday, mobile, 
+      del_flag)
+    values (#{sno,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{dno,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{mobile,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=INTEGER})
+  </insert>
+
+  <!--添加student-->
+  <insert id="insertSelective" parameterType="cn.njit.entry.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="dno != null" >
+        dno,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="dno != null" >
+        #{dno,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--根据sno修改属性-->
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entry.Student" >
+    update student
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="dno != null" >
+        dno = #{dno,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+
+  <!--全属性修改-->
+  <update id="updateByPrimaryKey" parameterType="cn.njit.entry.Student" >
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      dno = #{dno,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+</mapper>
