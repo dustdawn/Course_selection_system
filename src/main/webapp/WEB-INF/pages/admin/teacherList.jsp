@@ -271,8 +271,8 @@
                     <td>${item.name}</td>
                     <td>${item.password}</td>
                     <td>${item.sex}</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td>${item.mobile}</td>
+                    <td>${item.birthday}</td>
                     <td><a href="<%=basePath%>/admin/editStudent?item.tno=${item.tno}">编辑</a></td>
                   </tr>
                 </c:forEach>
@@ -348,6 +348,7 @@
       //请求成功
       success : function(result) {
         console.log("成功", result);
+
       },
       //请求失败，包含具体的错误信息
       error : function(e){

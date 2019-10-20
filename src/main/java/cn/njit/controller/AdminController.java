@@ -1,8 +1,12 @@
 package cn.njit.controller;
 
 import cn.njit.entry.Admin;
+import cn.njit.entry.Course;
+import cn.njit.entry.Student;
 import cn.njit.entry.Teacher;
 import cn.njit.service.AdminService;
+import cn.njit.service.CourseService;
+import cn.njit.service.StudentService;
 import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
 import org.apache.log4j.Logger;
@@ -15,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +36,12 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private CourseService courseService;
+
+    private Admin admin;
 
     //登录
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
@@ -41,7 +52,7 @@ public class AdminController {
         String rememberMe = request.getParameter("rememberMe");
         HttpSession session = request.getSession();
         //数据库查询用户
-        Admin admin = adminService.selectByPrimaryKey(no);
+        admin = adminService.selectByPrimaryKey(no);
         if (admin != null){
             if (admin.getPassword().equals(password)) {
                 session.setAttribute("userSession", admin);
@@ -66,8 +77,7 @@ public class AdminController {
     //注销
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("userSession");
-        session.removeAttribute("currentTime");
+        session.invalidate();
         return "admin/login";
     }
     //教师管理
@@ -85,20 +95,26 @@ public class AdminController {
     public String teacherList(HttpServletRequest request) {
         System.out.println(request.getParameter("tno"));
         System.out.println(request.getParameter("name"));
-//        List<Teacher> teacherList = teacherService.findTeacherList();
-//        request.setAttribute("teacherList", teacherList);
+        List<Teacher> teacherList = teacherService.findList();
+        request.setAttribute("teacherList", teacherList);
         return "admin/teacherList";
     }
 
     //学生管理
     @RequestMapping(value = "/studentForm")
-    public String studentForm() {
+    public String studentForm(HttpServletRequest request) {
+
         return "redirect:/pages/admin/studentForm";
     }
 
     @RequestMapping(value = "/studentList")
-    public String studentList() {
-        return "redirect:/pages/admin/studentList";
+    public String studentList(HttpServletRequest request) {
+        System.out.println(request.getParameter("sno"));
+        System.out.println(request.getParameter("name"));
+
+        List<Student> studentList = studentService.findList();
+        request.setAttribute("teacherList", studentList);
+        return "admin/studentList";
     }
 
     //课程管理
@@ -108,13 +124,19 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/courseList")
-    public String courseList() {
-        return "redirect:/pages/admin/courseList";
+    public String courseList(HttpServletRequest request) {
+        System.out.println(request.getParameter("cno"));
+        System.out.println(request.getParameter("name"));
+
+        List<Course> courseList = courseService.findList();
+        request.setAttribute("teacherList", courseList);
+        return "admin/courseList";
     }
 
     //个人信息管理
     @RequestMapping(value = "/info")
-    public String info() {
+    public String info(HttpServletRequest request) {
+        request.setAttribute("user", admin);
         return "redirect:/pages/admin/info";
     }
     //修改密码
