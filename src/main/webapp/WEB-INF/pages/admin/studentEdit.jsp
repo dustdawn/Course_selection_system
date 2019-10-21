@@ -246,7 +246,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentNo" name="sno" value="${student.sno}" placeholder="请输入学号">
+                      <input type="text" readonly class="form-control" id="studentNo" name="sno" value="${student.sno}" placeholder="请输入学号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -439,7 +439,7 @@
             if (result[i].dno == <%=student.getDno()%>) {
               isSelected = "selected";
             }
-            $("#studentDept").append("<option value='" + result[i].dno +  "' + " + isSelected + ">" + result[i].name + "</option>");
+            $("#studentDept").append("<option value='" + result[i].dno +  "'" + isSelected + ">" + result[i].name + "</option>");
           }
 
         }

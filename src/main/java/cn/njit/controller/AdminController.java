@@ -235,7 +235,7 @@ public class AdminController {
                 LOGGER.info(">>>修改失败<<<");
             }
         }
-        return "redirect:/pages/admin/courseList";
+        return "redirect:/admin/courseList";
     }
 
     //个人信息管理

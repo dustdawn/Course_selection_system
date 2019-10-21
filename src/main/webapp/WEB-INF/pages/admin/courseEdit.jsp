@@ -229,7 +229,7 @@
 
         </div>
         <div class="box-body">
-          <form action="<%=basePath%>/admin/courseForm" method="post">
+          <form action="<%=basePath%>/admin/courseUpdate" method="post">
             <%--表单盒子体--%>
             <div class="box-body">
               <div class="col-md-12">
@@ -259,7 +259,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-user"></i>
                       </div>
-                      <input type="text" class="form-control" id="courseNo" name="cno" value="${course.cno}" placeholder="请输入课程号">
+                      <input type="text" readonly class="form-control" id="courseNo" name="cno" value="${course.cno}" placeholder="请输入课程号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -471,9 +471,12 @@
         console.log("成功", result);
 
         if (null != result && "" != result){
-
-          for (let i = 0; i < result.length; i++) {
-            $("#courseDept").append("<option value='" + result[i].dno +  "' + >" + result[i].name + "</option>");
+          let isSelected = "";
+          for (let i = 0; i < result.length; i++,isSelected="") {
+            if (result[i].dno == <%=course.getDno()%>) {
+              isSelected = "selected";
+            }
+            $("#courseDept").append("<option value='" + result[i].dno +  "'" + isSelected + ">" + result[i].name + "</option>");
           }
 
         }
@@ -501,9 +504,12 @@
         console.log("成功", result);
 
         if (null != result && "" != result){
-
-          for (let i = 0; i < result.length; i++) {
-            $("#courseTeacher").append("<option value='" + result[i].tno +  "' + >" + result[i].name + "</option>");
+          let isSelected = "";
+          for (let i = 0; i < result.length; i++,isSelected="") {
+            if (result[i].tno == <%=course.getTno()%>) {
+              isSelected = "selected";
+            }
+            $("#courseTeacher").append("<option value='" + result[i].tno + "'" + isSelected + ">" + result[i].name + "</option>");
           }
 
         }
@@ -528,25 +534,6 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        sno: {
-          validators: {
-            notEmpty: {
-              message: '课程号不能为空'
-            },
-            threshold: 2,//有2字符以上才发送ajax请求
-            remote: {//ajax验证
-              url: "<%=basePath%>/admin/checkStudent",
-              message: '用户名已存在,请重新输入',
-              delay: 1000,//ajax请求间隔
-              type: 'POST',
-              data: function(validator) {
-                return {
-                  tno : $("input[name=sno]").val()
-                };
-              }
-            }
-          }
-        },
         type: {
           validators: {
             notEmpty: {
@@ -559,18 +546,6 @@
             notEmpty: {
               message: '课程号不能为空'
             },
-            threshold: 2,//有2字符以上才发送ajax请求
-            remote: {//ajax验证
-              url: "<%=basePath%>/admin/checkCourse",
-              message: '课程号已存在,请重新输入',
-              delay: 1000,//ajax请求间隔
-              type: 'POST',
-              data: function(validator) {
-                return {
-                  cno : $("input[name=cno]").val()
-                };
-              }
-            }
           }
         },
         name: {

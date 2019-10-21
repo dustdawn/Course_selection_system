@@ -248,7 +248,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherNo" name="tno" value="${teacher.tno}" placeholder="请输入教师工号">
+                      <input type="text" readonly class="form-control" id="teacherNo" name="tno" value="${teacher.tno}" placeholder="请输入教师工号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
