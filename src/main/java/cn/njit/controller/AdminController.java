@@ -184,7 +184,7 @@ public class AdminController {
                 LOGGER.info(">>>修改失败<<<");
             }
         }
-        return "redirect:/pages/admin/studentList";
+        return "redirect:/admin/studentList";
     }
 
     //课程管理

@@ -234,7 +234,7 @@
 
         </div>
         <div class="box-body">
-          <form action="<%=basePath%>/admin/studentForm" method="post">
+          <form action="<%=basePath%>/admin/studentUpdate" method="post">
             <%--表单盒子体--%>
             <div class="box-body">
               <div class="col-md-12">
@@ -434,9 +434,12 @@
         console.log("成功", result);
 
         if (null != result && "" != result){
-
-          for (let i = 0; i < result.length; i++) {
-            $("#studentDept").append("<option value='" + result[i].dno +  "' + >" + result[i].name + "</option>");
+          let isSelected = "";
+          for (let i = 0; i < result.length; i++,isSelected="") {
+            if (result[i].dno == <%=student.getDno()%>) {
+              isSelected = "selected";
+            }
+            $("#studentDept").append("<option value='" + result[i].dno +  "' + " + isSelected + ">" + result[i].name + "</option>");
           }
 
         }
@@ -471,18 +474,6 @@
             notEmpty: {
               message: '学号不能为空'
             },
-            threshold: 2,//有2字符以上才发送ajax请求
-            remote: {//ajax验证
-              url: "<%=basePath%>/admin/checkStudent",
-              message: '用户名已存在,请重新输入',
-              delay: 1000,//ajax请求间隔
-              type: 'POST',
-              data: function(validator) {
-                return {
-                  sno : $("input[name=sno]").val()
-                };
-              }
-            }
           }
         },
         password: {
