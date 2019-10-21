@@ -7,15 +7,15 @@
           + path + "/";
 %>
 <%
-  String no = "";
-  String password = "";
+  String tno = "";
+  String tpassword = "";
   //获取当前站点的所有Cookie
   Cookie[] cookies = request.getCookies();
-  for (int i = 0;cookies!=null && i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
-    if ("no".equals(cookies[i].getName())) {
-      no = cookies[i].getValue();
-    } else if ("password".equals(cookies[i].getName())) {
-      password = cookies[i].getValue();
+  for (int i = 0;cookies != null && i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
+    if ("tno".equals(cookies[i].getName())) {
+      tno = cookies[i].getValue();
+    } else if ("tpassword".equals(cookies[i].getName())) {
+      tpassword = cookies[i].getValue();
     }
 
   }
@@ -76,11 +76,11 @@
 
     <form action="<%=basePath%>/tea/toLogin" method="post">
       <div class="form-group has-feedback">
-        <input name="tno" value="<%=no%>" type="user" class="form-control" placeholder="请输入教师工号">
+        <input name="tno" value="<%=tno%>" type="user" class="form-control" placeholder="请输入教师工号">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input name="password" value="<%=password%>" type="password" class="form-control" placeholder="请输入密码">
+        <input name="password" value="<%=tpassword%>" type="password" class="form-control" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group message">

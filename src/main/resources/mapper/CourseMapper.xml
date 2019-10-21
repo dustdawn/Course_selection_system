@@ -90,35 +90,6 @@
 
 
 
-  <sql id="complexColumns">
-    select
-      *
-    from
-    (select
-      c.cno as "course.cno",
-      c.name as "course.name",
-      c.tno as "course.tno",
-      c.dno as "course.dno",
-      c.date as "course.date",
-      c.place as "course.place",
-      c.credit as "course.credit",
-      c.total as "course.total",
-      c.type as "course.type",
-      c.del_flag as "course.delFlag"
-      from course c) a left join
-
-    (select
-      <include refid="courseColumns" />
-      from course c,student s,cs cs,dept d, teacher t
-      where c.cno = cs.cno
-      and s.sno = cs.sno
-      and c.dno = d.dno
-      and s.del_flag = 0
-      and d.del_flag = 0
-      and c.del_flag = 0) b on a.`course.cno`=b.`course.cno`
-  </sql>
-
-
   <!--根据cno查询course对象-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select *
@@ -142,6 +113,7 @@
       where
             c.cno = cs.cno
         and s.sno = cs.sno
+        and s.del_flag = 0
     ) b on a.`course.cno` = b.`course.cno`
 
     where a.`course.cno` = #{cno,jdbcType=VARCHAR}
@@ -171,6 +143,7 @@
       where
             c.cno = cs.cno
         and s.sno = cs.sno
+        and s.del_flag = 0
     ) b on a.`course.cno` = b.`course.cno`
 
 

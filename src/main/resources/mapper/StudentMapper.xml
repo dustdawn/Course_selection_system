@@ -47,12 +47,16 @@
     s.dno as "student.dno",
     s.birthday as "student.birthday",
     s.mobile as "student.mobile",
-    s.del_flag as "student.delFlag",
+    s.del_flag as "student.delFlag"
+  </sql>
 
+  <sql id="deptColumns">
     d.dno as "dept.dno",
     d.name as "dept.name",
-    d.del_flag as "dept.delFlag",
+    d.del_flag as "dept.delFlag"
+  </sql>
 
+  <sql id="courseColumns">
 	c.cno as "course.cno",
     c.name as "course.name",
     c.tno as "course.tno",
@@ -63,35 +67,61 @@
     c.total as "course.total",
     c.type as "course.type",
     c.del_flag as "course.delFlag"
-
   </sql>
 
   <!--根据sno查询student-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="studentColumns" />
-    from student s, cs cs, course c,dept d
-    where s.sno = cs.sno
-      and cs.cno = c.cno
-      and s.dno = d.dno
+    select *
+    from (
+      select
+        <include refid="studentColumns" />,
+        <include refid="deptColumns" />
+    from student s,dept d
+    where
+          s.dno = d.dno
+      and s.del_flag = 0
       and d.del_flag = 0
+    ) a left join (
+      select
+        <include refid="studentColumns" />,
+        <include refid="courseColumns" />
+      from cs cs, course c, student s
+      where
+          s.sno = cs.sno
+      and cs.cno = c.cno
       and c.del_flag = 0
       and s.del_flag = 0
+    ) b on a.`student.sno` = b.`student.sno`
 
-      and s.sno = #{sno,jdbcType=VARCHAR}
+
+
+      where a.`student.sno` = #{sno,jdbcType=VARCHAR}
   </select>
 
   <!--查询所有student-->
   <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="studentColumns" />
-    from student s, cs cs, course c,dept d
-    where s.sno = cs.sno
-      and cs.cno = c.cno
-      and s.dno = d.dno
-      and d.del_flag = 0
-      and c.del_flag = 0
+    select *
+    from (
+      select
+        <include refid="studentColumns" />,
+        <include refid="deptColumns" />
+      from student s,dept d
+      where
+          s.dno = d.dno
       and s.del_flag = 0
+      and d.del_flag = 0
+      ) a left join (
+      select
+        <include refid="studentColumns" />,
+        <include refid="courseColumns" />
+      from cs cs, course c, student s
+      where
+            s.sno = cs.sno
+        and cs.cno = c.cno
+        and c.del_flag = 0
+        and s.del_flag = 0
+    ) b on a.`student.sno` = b.`student.sno`
+
   </select>
 
   <!--根据sno删除student-->

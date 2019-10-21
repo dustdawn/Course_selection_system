@@ -38,7 +38,7 @@ public class StudentController {
                 session.setAttribute("userSession", student);
                 session.setAttribute("currentTime", LoginUtil.getTime());
                 if ("true".equals(rememberMe)) {
-                    Map<String, Cookie> map = LoginUtil.saveCookie(student.getSno(), student.getPassword());
+                    Map<String, Cookie> map = LoginUtil.saveCookie("student", student.getSno(), student.getPassword());
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }

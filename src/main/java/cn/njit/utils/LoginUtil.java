@@ -12,15 +12,32 @@ import java.util.Map;
  * @date 2019/10/18 14:44
  */
 public class LoginUtil {
-    public static Map<String, Cookie> saveCookie(String no, String password) {
-        //要自动登录
-        //创建存储用户名的cookie
-        Cookie cookie_no = new Cookie("no", no);
-        cookie_no.setMaxAge(10*60);
-        //创建存储密码的cookie
-        Cookie cookie_password = new Cookie("password", password);
-        cookie_password.setMaxAge(10*60);
+    public static Map<String, Cookie> saveCookie(String user, String no, String password) {
+        //自动登录
+
+
         Map<String, Cookie> map = new HashMap<>();
+        //创建存储用户名的cookie
+        Cookie cookie_no = null;
+        //创建存储密码的cookie
+        Cookie cookie_password = null;
+
+        if (null != user && "admin".equals(user)) {
+            cookie_no = new Cookie("no", no);
+            cookie_password = new Cookie("password", password);
+        }else if (null != user && "student".equals(user)) {
+            cookie_no = new Cookie("sno", no);
+            cookie_password = new Cookie("spassword", password);
+        }else if (null != user && "teacher".equals(user)) {
+            cookie_no = new Cookie("tno", no);
+            cookie_password = new Cookie("tpassword", password);
+        }
+
+        if (null != cookie_no && null != cookie_password) {
+            cookie_no.setMaxAge(10*60);
+            cookie_password.setMaxAge(10*60);
+        }
+
         map.put("no", cookie_no);
         map.put("password", cookie_password);
         return map;

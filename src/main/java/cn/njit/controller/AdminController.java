@@ -59,7 +59,7 @@ public class AdminController {
                 session.setAttribute("userSession", admin);
                 session.setAttribute("currentTime", LoginUtil.getTime());
                 if ("true".equals(rememberMe)) {
-                    Map<String, Cookie> map = LoginUtil.saveCookie(admin.getNo(), admin.getPassword());
+                    Map<String, Cookie> map = LoginUtil.saveCookie("admin", admin.getNo(), admin.getPassword());
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }
