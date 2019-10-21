@@ -276,7 +276,7 @@
                     <td>${item.dept.name}</td>
                     <td>${item.mobile}</td>
                     <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="<%=basePath%>/admin/editStudent?item.tno=${item.sno}">编辑</a></td>
+                    <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
                   </tr>
                 </c:forEach>
 

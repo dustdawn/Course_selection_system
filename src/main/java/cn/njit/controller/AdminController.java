@@ -106,6 +106,35 @@ public class AdminController {
         return "admin/teacherList";
     }
 
+    @RequestMapping(value = "/teacherEdit")
+    public String teacherEdit(HttpServletRequest request, String tno) {
+
+        if (null != tno) {
+            Teacher teacher = teacherService.selectByPrimaryKey(tno);
+            if (null != teacher) {
+                request.setAttribute("teacher", teacher);
+            }
+
+        }
+        return "admin/teacherEdit";
+    }
+
+    @RequestMapping(value = "/teacherUpdate")
+    public String teacherUpdate(Teacher teacher) {
+
+        if (null != teacher) {
+            teacher.setDelFlag(0);
+            int flag = teacherService.updateByPrimaryKeySelective(teacher);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/admin/teacherList";
+    }
+
+
     //学生管理
     @RequestMapping(value = "/studentForm")
     public String studentForm(Student student) {
@@ -130,6 +159,32 @@ public class AdminController {
         List<Student> studentList = studentService.findList();
         request.setAttribute("studentList", studentList);
         return "admin/studentList";
+    }
+
+    @RequestMapping(value = "/studentEdit")
+    public String studentEdit(HttpServletRequest request, String sno) {
+        if (null != sno) {
+            Student student = studentService.selectByPrimaryKey(sno);
+            if (null != student) {
+                request.setAttribute("student", student);
+            }
+        }
+        return "admin/studentEdit";
+    }
+
+    @RequestMapping(value = "/studentUpdate")
+    public String studentUpdate(Student student) {
+
+        if (null != student) {
+            student.setDelFlag(0);
+            int flag = studentService.updateByPrimaryKeySelective(student);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/pages/admin/studentList";
     }
 
     //课程管理
@@ -158,6 +213,31 @@ public class AdminController {
         return "admin/courseList";
     }
 
+    @RequestMapping(value = "/courseEdit")
+    public String courseEdit(HttpServletRequest request, String cno) {
+        if (null != cno) {
+            Course course = courseService.selectByPrimaryKey(cno);
+            if (null != course) {
+                request.setAttribute("course", course);
+            }
+        }
+        return "admin/courseEdit";
+    }
+
+    @RequestMapping(value = "/courseUpdate")
+    public String courseUpdate(Course course) {
+        if (null != course) {
+            course.setDelFlag(0);
+            int flag = courseService.updateByPrimaryKeySelective(course);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/pages/admin/courseList";
+    }
+
     //个人信息管理
     @RequestMapping(value = "/info")
     public String info(HttpServletRequest request) {
@@ -170,6 +250,9 @@ public class AdminController {
         return "redirect:/pages/admin/pswChange";
     }
 
+    /**
+     * Ajax校验部分
+     */
     @RequestMapping(value = "checkTeacher")
     @ResponseBody
     public String checkTeacher(String tno) {

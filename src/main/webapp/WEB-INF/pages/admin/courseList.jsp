@@ -279,7 +279,7 @@
                     <td>${item.place}</td>
                     <td>${item.credit}</td>
                     <td>${item.total}</td>
-                    <td><a href="<%=basePath%>/admin/editStudent?item.tno=${item.tno}">编辑</a></td>
+                    <td><a href="<%=basePath%>/admin/courseEdit?cno=${item.cno}">编辑</a></td>
                   </tr>
                 </c:forEach>
 

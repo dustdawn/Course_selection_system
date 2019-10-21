@@ -1,12 +1,17 @@
+<%@ page import="cn.njit.entry.Teacher" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+  Teacher teacher = (Teacher) request.getAttribute("teacher");
+  String birthday = "";
+  if (null != teacher) {
+    birthday = new SimpleDateFormat("yyyy-MM-dd").format(teacher.getBirthday());
+  }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -209,94 +214,147 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        教师列表
-        <small>信息显示</small>
+        教师管理
+        <small>信息修改</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
         <li><a href="#">教师管理</a></li>
-        <li class="active">教师列表</li>
+        <li class="active">教师修改</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <div class="row">
-        <div class="col-xs-12">
+      <!-- Default box -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">修改</h3>
 
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <div class="col">
+        </div>
 
+        <div class="box-body">
 
-                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>工号查询：
-                  <input type="text" class="form-control" id="searchByNo" value=""/>
-                </label>
-                <span style="padding-right: 40px">
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
+          <form action="<%=basePath%>/admin/teacherUpdate" method="post">
+            <%--表单盒子体--%>
+            <div class="box-body">
+              <div class="col-md-12">
+              <%--工号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherNo">教师工号</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-university"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherNo" name="tno" value="${teacher.tno}" placeholder="请输入教师工号">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              <%--姓名--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherName">姓名</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherName" name="name" value="${teacher.name}" placeholder="请输入姓名">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
 
+              </div>
 
+              <div class="col-md-12">
+              <%--密码--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherPassword">密码</label>
+                    <div class="input-group password">
+                      <div class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherPassword" name="password" value="${teacher.password}" placeholder="请输入密码">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              <%--性别--%>
+              <!-- 可选下拉框 -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherSex">性别</label>
+                    <div class="input-group sex">
+                      <div class="input-group-addon">
+                        <i class="fa fa-male"></i>
+                        <i class="fa fa-female"></i>
+                      </div>
+                      <select class="form-control select2" style="width: 100%;" name="sex" id="teacherSex">
+                        <option value="">---请选择---</option>
+                        <option value="男" <%if(teacher.getSex().equals("男")){%>selected<%}%> >男</option>
+                        <option value="女" <%if(teacher.getSex().equals("女")){%>selected<%}%> >女</option>
+                      </select>
+                    </div>
 
-                <label class="form-inline" for="searchByName" style="padding-left: 40px"/>姓名查询：
-                  <input type="text" class="form-control" id="searchByName" value=""/>
-                </label>
-                <span>
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
+                  </div>
+                </div>
 
               </div>
 
 
-            </div>
-            <%--/box-head--%>
-            <div class="box-body">
-              <table id="teacherList" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>工号</th>
-                  <th>姓名</th>
-                  <th>密码</th>
-                  <th>性别</th>
-                  <th>手机</th>
-                  <th>生日</th>
-                  <th>修改</th>
-                </tr>
-                </thead>
-                <tbody>
+              <div class="col-md-12">
+              <%--/可选下拉框--%>
+              <%--手机号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherMobile">手机号码</label>
+                    <div class="input-group phone">
+                      <div class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherMobile" name="mobile" value="${teacher.mobile}" placeholder="请输入手机号">
+                    </div>
+                  </div>
+                </div>
+              <%--出生日期--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherDate">出生日期</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="teacherDate" name="birthday" value="<%=birthday%>"  placeholder="yyyy-mm-dd">
+                    </div>
+                  </div>
+                </div>
 
-                <c:forEach var="item" items="${teacherList}" varStatus="staturs">
-                  <tr>
-                    <td>${item.tno}</td>
-                    <td>${item.name}</td>
-                    <td>${item.password}</td>
-                    <td>${item.sex}</td>
-                    <td>${item.mobile}</td>
-                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="<%=basePath%>/admin/teacherEdit?tno=${item.tno}">编辑</a></td>
-                  </tr>
-                </c:forEach>
-
-                </tbody>
-                <%--<tfoot>
-                <tr>
-                  <th>工号</th>
-                  <th>姓名</th>
-                  <th>密码</th>
-                  <th>性别</th>
-                  <th>手机</th>
-                </tr>
-                </tfoot>--%>
-              </table>
+              </div>
             </div>
-            <%--/box-body--%>
+
+
+
+            <div class="box-footer" align="center">
+              <button type="button" class="btn btn-warning" id="empty">清空</button>
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </form>
+          <%--表单尾--%>
+
+
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <strong style="color: red">请确保添加教师信息未重复</strong>
+            </div>
           </div>
-          <%--/box--%>
+
         </div>
-        <%--/col-xs-12--%>
+
       </div>
-      <%--/row--%>
 
 
     </section>
@@ -309,12 +367,9 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script type="text/javascript" src="<%=basePath%>/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<%=basePath%>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="<%=basePath%>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<%=basePath%>/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- PACE -->
 <script src="<%=basePath%>/bower_components/PACE/pace.min.js"></script>
 <!-- SlimScroll -->
@@ -326,52 +381,72 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
+  // 清空事件
   $(document).ready(function () {
-    //getList();
-  })
-  /*function getList() {
-    var list = {
-      tno : $("#searchByNo").val(),
-      name : $("#searchByName").val()
-    }
-    $.ajax({
-      //请求方式
-      type : "POST",
-      //请求的媒体类型
-      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-      //请求地址
-      url : "<=basePath/admin/teacherList",
-      //数据，json字符串
-      data : list,
-      //返回类型
-      // dataType:"json",
-      //请求成功
-      success : function(result) {
-        console.log("成功", result);
-
-      },
-      //请求失败，包含具体的错误信息
-      error : function(e){
-        console.log("失败");
-        console.log(e.status);
-        console.log(e.responseText);
-      }
-    });
-    $("#searchByNo").val("");
-    $("#searchByName").val("");
-  }*/
-
-  $(function () {
-    $('#teacherList').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
+    $("#empty").bind("click", function () {
+        //alert(55);
+      $("#teacherNo").val("");
+      $("#teacherName").val("");
+      $("#teacherPassword").val("");
+      $("#teacherSex").val("");
+      $("#teacherMobile").val("");
+      $("#teacherDate").val("");
     })
   })
+
+  $(function () {
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        tno: {
+          validators: {
+            notEmpty: {
+              message: '教师工号不能为空'
+            }
+          }
+        },
+        password: {
+          validators: {
+            notEmpty: {
+              message: '密码不能为空'
+            }
+          }
+        },
+        name: {
+          validators: {
+            notEmpty: {
+              message: '姓名不能为空'
+            }
+          }
+        },
+        mobile: {
+          validators: {
+            regexp: {
+              regexp: /^1(3|4|5|6|7|8|9)\d{9}$/,
+              message: '请输入正确的号码格式'
+            }
+          }
+        },
+        birthday: {
+          validators: {
+            regexp: {
+              regexp: /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/,
+              message: '请输入正确的日期格式'
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>
