@@ -144,6 +144,19 @@
           </a>
         </li>
 
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-building-o"></i> <span>院系管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
+          </ul>
+        </li>
+
 
         <li class="treeview">
           <a href="#">

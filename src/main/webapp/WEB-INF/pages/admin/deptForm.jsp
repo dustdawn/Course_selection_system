@@ -1,4 +1,3 @@
-<%@ page import="cn.njit.entry.Course" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
@@ -6,8 +5,6 @@
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
-  Course course = (Course) request.getAttribute("course");
-  boolean isPublic = course.getType().equals("公选课");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -145,7 +142,7 @@
           </a>
         </li>
 
-        <li class="treeview">
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-building-o"></i> <span>院系管理</span>
             <span class="pull-right-container">
@@ -153,7 +150,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
             <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
           </ul>
         </li>
@@ -161,14 +158,14 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
+            <i class="fa fa-graduation-cap"></i> <span>院系管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
           </ul>
         </li>
 
@@ -185,7 +182,7 @@
           </ul>
         </li>
 
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-book"></i> <span>课程管理</span>
             <span class="pull-right-container">
@@ -194,7 +191,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li class="active"><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
           </ul>
         </li>
 
@@ -223,12 +220,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <small>课程管理</small>
+        教师管理
+        <small>信息添加</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">课程管理</a></li>
-        <li class="active">课程修改</li>
+        <li><a href="#">教师管理</a></li>
+        <li class="active">教师录入</li>
       </ol>
     </section>
 
@@ -238,157 +236,105 @@
       <!-- Default box -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">修改</h3>
+          <h3 class="box-title">添加</h3>
 
         </div>
+
         <div class="box-body">
-          <form action="<%=basePath%>/admin/courseUpdate" method="post">
+
+          <form action="<%=basePath%>/admin/teacherForm" method="post">
             <%--表单盒子体--%>
             <div class="box-body">
               <div class="col-md-12">
-                <%--课程类型--%>
-                <!-- 可选下拉框 -->
+              <%--工号--%>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="courseType">课程类型</label>
-                    <div class="input-group type">
-                      <div class="input-group-addon">
-                        <i class="fa fa-language"></i>
-                      </div>
-                      <select class="form-control select2" style="width: 100%;" name="type" id="courseType">
-                        <option value="">---请选择---</option>
-                        <option value="公选课" <%if(isPublic){%>selected<%}%> >公选课</option>
-                        <option value="选修课" <%if(!isPublic){%>selected<%}%> >选修课</option>
-                      </select>
-                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <%--课程号--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="courseNo">课程号</label>
+                    <label for="teacherNo">教师工号</label>
                     <div class="input-group name">
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" readonly class="form-control" id="courseNo" name="cno" value="${course.cno}" placeholder="请输入课程号">
+                      <input type="text" class="form-control" id="teacherNo" name="tno" value="10116020" placeholder="请输入教师工号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
-
-              </div>
-
-              <div class="col-md-12">
-                <%--课程名--%>
+              <%--姓名--%>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="courseName">课程名</label>
+                    <label for="teacherName">姓名</label>
                     <div class="input-group name">
                       <div class="input-group-addon">
-                        <i class="fa fa-navicon "></i>
+                        <i class="fa fa-user"></i>
                       </div>
-                      <input type="text" class="form-control" id="courseName" name="name" value="${course.name}" placeholder="请输入课程名">
+                      <input type="text" class="form-control" id="teacherName" name="name" value="教师" placeholder="请输入姓名">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
-
-                  <%--授课教师--%>
-                  <!-- 可选下拉框 -->
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="courseTeacher">授课教师</label>
-                      <div class="input-group courseTeacher">
-                        <div class="input-group-addon">
-                          <i class="fa fa-mortar-board"></i>
-                        </div>
-                        <select class="form-control select2" style="width: 100%;" name="tno" id="courseTeacher">
-                          <option value="">---请选择---</option>
-                        </select>
-                        <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
-                      </div>
-                    </div>
-                  </div>
 
               </div>
+
               <div class="col-md-12">
-                <%--所属学院--%>
-                <!-- 可选下拉框 -->
+              <%--密码--%>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="courseDept">所属院系</label>
-                    <div class="input-group courseDept">
+                    <label for="teacherPassword">密码</label>
+                    <div class="input-group password">
                       <div class="input-group-addon">
-                        <i class="fa fa-building-o"></i>
+                        <i class="fa fa-lock"></i>
                       </div>
-                      <select class="form-control select2" style="width: 100%;" name="dno" id="courseDept">
-                        <option value="">---请选择---</option>
-                      </select>
+                      <input type="text" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
-
-                <%--/可选下拉框--%>
-                <%--课程周期--%>
+              <%--性别--%>
+              <!-- 可选下拉框 -->
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="courseDate">课程周期</label>
+                    <label for="teacherSex">性别</label>
+                    <div class="input-group sex">
+                      <div class="input-group-addon">
+                        <i class="fa fa-male"></i>
+                        <i class="fa fa-female"></i>
+                      </div>
+                      <select class="form-control select2" style="width: 100%;" name="sex" id="teacherSex">
+                        <option value="">---请选择---</option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="col-md-12">
+              <%--/可选下拉框--%>
+              <%--手机号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherMobile">手机号码</label>
+                    <div class="input-group phone">
+                      <div class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                      </div>
+                      <input type="text" class="form-control" id="teacherMobile" name="mobile" value="18129386754" placeholder="请输入手机号">
+                    </div>
+                  </div>
+                </div>
+              <%--出生日期--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherDate">出生日期</label>
                     <div class="input-group date">
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control" id="courseDate" name="date" value="${course.date}" placeholder="请输入课程周期">
-                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-12">
-                <%--授课地点--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="coursePlace">授课地点</label>
-                    <div class="input-group place">
-                      <div class="input-group-addon">
-                        <i class="fa fa-play-circle"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="coursePlace" name="place" value="${course.place}" placeholder="请输入授课地点">
-                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <%--学分--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="courseCredit">学分</label>
-                    <div class="input-group credit">
-                      <div class="input-group-addon">
-                        <i class="fa fa-credit-card"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="courseCredit" name="credit" value="${course.credit}" placeholder="请输入学分">
-                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-
-              <div class="col-md-12">
-                <%--剩余名额--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="courseTotal">剩余名额</label>
-                    <div class="input-group total">
-                      <div class="input-group-addon">
-                        <i class="fa fa-users"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="courseTotal" name="total" value="${course.total}" placeholder="请输入剩余名额">
-                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                      <input type="text" class="form-control pull-right" id="teacherDate" name="birthday" value="" placeholder="yyyy-mm-dd">
                     </div>
                   </div>
                 </div>
@@ -403,26 +349,19 @@
               <button type="submit" class="btn btn-primary">保存</button>
             </div>
           </form>
-          <%--/form--%>
+          <%--表单尾--%>
+
+
           <div class="row">
             <div class="col-xs-12 text-center">
-
+              <strong style="color: red">请确保添加教师信息未重复</strong>
             </div>
           </div>
-          <div class="ajax-content">
-            <div class="row">
-              <div class="col-xs-12 text-center">
-                <strong style="color: red">请确保添加学生信息未重复</strong>
-              </div>
-            </div>
 
-          </div>
         </div>
-        <!-- /.box-body -->
 
-        <!-- /.box-footer-->
       </div>
-      <!-- /.box -->
+
 
     </section>
     <!-- /.content -->
@@ -447,94 +386,22 @@
 <script src="<%=basePath%>/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
+<!-- page script -->
 <%--bootstrapValidator的cdn--%>
 <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
-<!-- page script -->
 <script type="text/javascript">
-
   // 清空事件
   $(document).ready(function () {
     $("#empty").bind("click", function () {
-      //alert(55);
-      $("#courseType").val("");
-      $("#courseNo").val("");
-      $("#courseName").val("");
-      $("#courseTeacher").val("");
-      $("#courseDept").val("");
-      $("#courseDate").val("");
-      $("#coursePlace").val("");
-      $("#courseCredit").val("");
-      $("#courseTotal").val("");
+        //alert(55);
+      $("#teacherNo").val("");
+      $("#teacherName").val("");
+      $("#teacherPassword").val("");
+      $("#teacherSex").val("");
+      $("#teacherMobile").val("");
+      $("#teacherDate").val("");
     })
-
-    $.ajax({
-      //请求方式
-      type: "POST",
-      //请求的媒体类型
-      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-      //请求地址
-      url: "<%=basePath%>/dept/getNameList",
-      data: {},
-      //返回类型
-      // dataType:"json",
-      //请求成功
-      success: function (result) {
-        console.log("成功", result);
-
-        if (null != result && "" != result){
-          let isSelected = "";
-          for (let i = 0; i < result.length; i++,isSelected="") {
-            if (result[i].dno == <%=course.getDno()%>) {
-              isSelected = "selected";
-            }
-            $("#courseDept").append("<option value='" + result[i].dno +  "'" + isSelected + ">" + result[i].name + "</option>");
-          }
-
-        }
-      },
-      //请求失败，包含具体的错误信息
-      error: function (e) {
-        console.log("失败");
-        console.log(e.status);
-        console.log(e.responseText);
-      }
-    });
-
-    $.ajax({
-      //请求方式
-      type: "POST",
-      //请求的媒体类型
-      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-      //请求地址
-      url: "<%=basePath%>/tea/getNameList",
-      data: {},
-      //返回类型
-      // dataType:"json",
-      //请求成功
-      success: function (result) {
-        console.log("成功", result);
-
-        if (null != result && "" != result){
-          let isSelected = "";
-          for (let i = 0; i < result.length; i++,isSelected="") {
-            if (result[i].tno == <%=course.getTno()%>) {
-              isSelected = "selected";
-            }
-            $("#courseTeacher").append("<option value='" + result[i].tno + "'" + isSelected + ">" + result[i].name + "</option>");
-          }
-
-        }
-
-
-      },
-      //请求失败，包含具体的错误信息
-      error: function (e) {
-        console.log("失败");
-        console.log(e.status);
-        console.log(e.responseText);
-      }
-    });
   })
 
   $(function () {
@@ -546,66 +413,52 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        type: {
+        tno: {
           validators: {
             notEmpty: {
-              message: '课程类型不能为空'
+              message: '教师工号不能为空'
+            },
+            threshold: 2,//有2字符以上才发送ajax请求
+            remote: {//ajax验证
+              url: "<%=basePath%>/admin/checkTeacher",
+              message: '用户名已存在,请重新输入',
+              delay: 1000,//ajax请求间隔
+              type: 'POST',
+              data: function(validator) {
+                return {
+                  tno : $("input[name=tno]").val()
+                };
+              }
             }
           }
         },
-        cno: {
+        password: {
           validators: {
             notEmpty: {
-              message: '课程号不能为空'
-            },
+              message: '密码不能为空'
+            }
           }
         },
         name: {
           validators: {
             notEmpty: {
-              message: '课程名不能为空'
+              message: '姓名不能为空'
             }
           }
         },
-        tno: {
+        mobile: {
           validators: {
-            notEmpty: {
-              message: '授课教师不能为空'
+            regexp: {
+              regexp: /^1(3|4|5|6|7|8|9)\d{9}$/,
+              message: '请输入正确的号码格式'
             }
           }
         },
-        dno: {
+        birthday: {
           validators: {
-            notEmpty: {
-              message: '院系不能为空'
-            }
-          }
-        },
-        date: {
-          validators: {
-            notEmpty: {
-              message: '课程周期不能为空'
-            }
-          }
-        },
-        place: {
-          validators: {
-            notEmpty: {
-              message: '授课地点不能为空'
-            }
-          }
-        },
-        credit: {
-          validators: {
-            notEmpty: {
-              message: '学分不能为空'
-            }
-          }
-        },
-        total: {
-          validators: {
-            notEmpty: {
-              message: '剩余名额不能为空'
+            regexp: {
+              regexp: /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/,
+              message: '请输入正确的日期格式'
             }
           }
         }

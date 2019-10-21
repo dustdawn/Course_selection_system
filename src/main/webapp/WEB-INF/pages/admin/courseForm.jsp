@@ -142,6 +142,19 @@
           </a>
         </li>
 
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-building-o"></i> <span>院系管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
+          </ul>
+        </li>
+
 
         <li class="treeview">
           <a href="#">
@@ -237,7 +250,7 @@
                     <label for="courseType">课程类型</label>
                     <div class="input-group type">
                       <div class="input-group-addon">
-                        <i class="fa fa-male"></i>
+                        <i class="fa fa-language"></i>
                       </div>
                       <select class="form-control select2" style="width: 100%;" name="type" id="courseType">
                         <option value="">---请选择---</option>
@@ -254,7 +267,7 @@
                     <label for="courseNo">课程号</label>
                     <div class="input-group name">
                       <div class="input-group-addon">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-university"></i>
                       </div>
                       <input type="text" class="form-control" id="courseNo" name="cno" value="001" placeholder="请输入课程号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
@@ -271,7 +284,7 @@
                     <label for="courseName">课程名</label>
                     <div class="input-group name">
                       <div class="input-group-addon">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-navicon "></i>
                       </div>
                       <input type="text" class="form-control" id="courseName" name="name" value="操作系统" placeholder="请输入课程名">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
@@ -286,7 +299,7 @@
                       <label for="courseTeacher">授课教师</label>
                       <div class="input-group courseTeacher">
                         <div class="input-group-addon">
-                          <i class="fa fa-male"></i>
+                          <i class="fa fa-mortar-board"></i>
                         </div>
                         <select class="form-control select2" style="width: 100%;" name="tno" id="courseTeacher">
                           <option value="">---请选择---</option>
@@ -305,8 +318,7 @@
                     <label for="courseDept">所属院系</label>
                     <div class="input-group courseDept">
                       <div class="input-group-addon">
-                        <i class="fa fa-male"></i>
-                        <i class="fa fa-female"></i>
+                        <i class="fa fa-building-o"></i>
                       </div>
                       <select class="form-control select2" style="width: 100%;" name="dno" id="courseDept">
                         <option value="">---请选择---</option>
@@ -323,7 +335,7 @@
                     <label for="courseDate">课程周期</label>
                     <div class="input-group date">
                       <div class="input-group-addon">
-                        <i class="fa fa-phone"></i>
+                        <i class="fa fa-calendar"></i>
                       </div>
                       <input type="text" class="form-control" id="courseDate" name="date" value="12周-14周" placeholder="请输入课程周期">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
@@ -339,7 +351,7 @@
                     <label for="coursePlace">授课地点</label>
                     <div class="input-group place">
                       <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-play-circle"></i>
                       </div>
                       <input type="text" class="form-control pull-right" id="coursePlace" name="place" value="东A101" placeholder="请输入授课地点">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
@@ -352,7 +364,7 @@
                     <label for="courseCredit">学分</label>
                     <div class="input-group credit">
                       <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-credit-card"></i>
                       </div>
                       <input type="text" class="form-control pull-right" id="courseCredit" name="credit" value="2" placeholder="请输入学分">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
@@ -370,7 +382,7 @@
                     <label for="courseTotal">剩余名额</label>
                     <div class="input-group total">
                       <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-users"></i>
                       </div>
                       <input type="text" class="form-control pull-right" id="courseTotal" name="total" value="40" placeholder="请输入剩余名额">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
