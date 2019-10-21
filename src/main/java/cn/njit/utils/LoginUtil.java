@@ -35,7 +35,10 @@ public class LoginUtil {
 
         if (null != cookie_no && null != cookie_password) {
             cookie_no.setMaxAge(10*60);
+            cookie_no.setPath("/");
             cookie_password.setMaxAge(10*60);
+            cookie_password.setPath("/");
+
         }
 
         map.put("no", cookie_no);
