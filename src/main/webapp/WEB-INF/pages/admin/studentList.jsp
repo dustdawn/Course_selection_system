@@ -263,6 +263,7 @@
                   <th>手机</th>
                   <th>生日</th>
                   <th>修改</th>
+                  <th>删除</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -277,6 +278,7 @@
                     <td>${item.mobile}</td>
                     <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
                     <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
+                    <td><a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}">删除</a></td>
                   </tr>
                 </c:forEach>
 

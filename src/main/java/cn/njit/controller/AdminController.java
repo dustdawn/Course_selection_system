@@ -109,7 +109,7 @@ public class AdminController {
     @RequestMapping(value = "/teacherEdit")
     public String teacherEdit(HttpServletRequest request, String tno) {
 
-        if (null != tno) {
+        if (null != tno && !tno.equals("")) {
             Teacher teacher = teacherService.selectByPrimaryKey(tno);
             if (null != teacher) {
                 request.setAttribute("teacher", teacher);
@@ -129,6 +129,20 @@ public class AdminController {
                 LOGGER.info(">>>修改成功<<<");
             }else {
                 LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/admin/teacherList";
+    }
+
+    @RequestMapping(value = "/teacherDelete")
+    public String teacherDelete(String tno) {
+
+        if (null != tno && !tno.equals("")) {
+            int flag = teacherService.deleteByPrimaryKey(tno);
+            if (1 == flag) {
+                LOGGER.info(">>>删除成功<<<");
+            }else {
+                LOGGER.info(">>>删除失败<<<");
             }
         }
         return "redirect:/admin/teacherList";
@@ -163,7 +177,7 @@ public class AdminController {
 
     @RequestMapping(value = "/studentEdit")
     public String studentEdit(HttpServletRequest request, String sno) {
-        if (null != sno) {
+        if (null != sno && !sno.equals("")) {
             Student student = studentService.selectByPrimaryKey(sno);
             if (null != student) {
                 request.setAttribute("student", student);
@@ -182,6 +196,20 @@ public class AdminController {
                 LOGGER.info(">>>修改成功<<<");
             }else {
                 LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/admin/studentList";
+    }
+
+    @RequestMapping(value = "/studentDelete")
+    public String studentDelete(String sno) {
+
+        if (null != sno && !sno.equals("")) {
+            int flag = studentService.deleteByPrimaryKey(sno);
+            if (1 == flag) {
+                LOGGER.info(">>>删除成功<<<");
+            }else {
+                LOGGER.info(">>>删除失败<<<");
             }
         }
         return "redirect:/admin/studentList";
@@ -215,7 +243,7 @@ public class AdminController {
 
     @RequestMapping(value = "/courseEdit")
     public String courseEdit(HttpServletRequest request, String cno) {
-        if (null != cno) {
+        if (null != cno && !cno.equals("")) {
             Course course = courseService.selectByPrimaryKey(cno);
             if (null != course) {
                 request.setAttribute("course", course);
@@ -233,6 +261,19 @@ public class AdminController {
                 LOGGER.info(">>>修改成功<<<");
             }else {
                 LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/admin/courseList";
+    }
+
+    @RequestMapping(value = "/courseDelete")
+    public String courseDelete(String cno) {
+        if (null != cno && !cno.equals("")) {
+            int flag = courseService.deleteByPrimaryKey(cno);
+            if (1 == flag) {
+                LOGGER.info(">>>删除成功<<<");
+            }else {
+                LOGGER.info(">>>删除失败<<<");
             }
         }
         return "redirect:/admin/courseList";

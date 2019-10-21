@@ -264,6 +264,7 @@
                   <th>学分</th>
                   <th>剩余名额</th>
                   <th>修改</th>
+                  <th>删除</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -280,6 +281,7 @@
                     <td>${item.credit}</td>
                     <td>${item.total}</td>
                     <td><a href="<%=basePath%>/admin/courseEdit?cno=${item.cno}">编辑</a></td>
+                    <td><a href="<%=basePath%>/admin/courseDelete?cno=${item.cno}">删除</a></td>
                   </tr>
                 </c:forEach>
 
