@@ -1,13 +1,7 @@
 package cn.njit.controller;
 
-import cn.njit.entry.Admin;
-import cn.njit.entry.Course;
-import cn.njit.entry.Student;
-import cn.njit.entry.Teacher;
-import cn.njit.service.AdminService;
-import cn.njit.service.CourseService;
-import cn.njit.service.StudentService;
-import cn.njit.service.TeacherService;
+import cn.njit.entry.*;
+import cn.njit.service.*;
 import cn.njit.utils.LoginUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +35,8 @@ public class AdminController {
     private StudentService studentService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private DeptService deptService;
 
     private Admin admin;
 
@@ -279,6 +275,72 @@ public class AdminController {
         return "redirect:/admin/courseList";
     }
 
+
+
+    //院系管理
+    @RequestMapping(value = "/deptForm")
+    public String deptForm(Dept dept) {
+        if (null != dept) {
+            dept.setDelFlag(0);
+            int flag = deptService.insertSelective(dept);
+            if (1 == flag) {
+                LOGGER.info(">>>添加成功<<<");
+            }else {
+                LOGGER.info(">>>添加失败<<<");
+            }
+        }
+        return "redirect:/pages/admin/deptForm";
+    }
+
+    @RequestMapping(value = "/deptList")
+    public String deptList(HttpServletRequest request) {
+        System.out.println(request.getParameter("dno"));
+        System.out.println(request.getParameter("name"));
+
+        List<Dept> deptList = deptService.findList();
+        request.setAttribute("deptList", deptList);
+        System.out.println();
+        return "admin/deptList";
+    }
+
+    @RequestMapping(value = "/deptEdit")
+    public String deptEdit(HttpServletRequest request, String dno) {
+        if (null != dno && !dno.equals("")) {
+            Dept dept = deptService.selectByPrimaryKey(dno);
+            if (null != dept) {
+                request.setAttribute("dept", dept);
+            }
+        }
+        return "admin/deptEdit";
+    }
+
+    @RequestMapping(value = "/deptUpdate")
+    public String deptUpdate(Dept dept) {
+        if (null != dept) {
+            dept.setDelFlag(0);
+            int flag = deptService.updateByPrimaryKeySelective(dept);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/admin/deptList";
+    }
+
+    @RequestMapping(value = "/deptDelete")
+    public String deptDelete(String dno) {
+        if (null != dno && !dno.equals("")) {
+            int flag = deptService.deleteByPrimaryKey(dno);
+            if (1 == flag) {
+                LOGGER.info(">>>删除成功<<<");
+            }else {
+                LOGGER.info(">>>删除失败<<<");
+            }
+        }
+        return "redirect:/admin/deptList";
+    }
+
     //个人信息管理
     @RequestMapping(value = "/info")
     public String info(HttpServletRequest request) {
@@ -317,7 +379,7 @@ public class AdminController {
     public String checkStudent(String sno) {
 
         String result = "{\"valid\":false}";
-        if (null != sno) {
+        if (null != sno && sno.equals("")) {
             Student student = studentService.selectByPrimaryKey(sno);
             if (null == student) {
                 //用户不存在
@@ -335,9 +397,27 @@ public class AdminController {
     public String checkCourse(String cno) {
 
         String result = "{\"valid\":false}";
-        if (null != cno) {
+        if (null != cno && !cno.equals("")) {
             Course course = courseService.selectByPrimaryKey(cno);
             if (null == course) {
+                //用户不存在
+                result = "{\"valid\":true}";
+            }else {
+                //用户已经存在
+                result = "{\"valid\":false}";
+            }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "checkDept")
+    @ResponseBody
+    public String checkDept(String dno) {
+
+        String result = "{\"valid\":false}";
+        if (null != dno && !dno.equals("")) {
+            Dept dept = deptService.selectByPrimaryKey(dno);
+            if (null == dept) {
                 //用户不存在
                 result = "{\"valid\":true}";
             }else {

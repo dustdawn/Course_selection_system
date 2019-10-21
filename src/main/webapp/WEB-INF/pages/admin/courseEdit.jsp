@@ -553,13 +553,6 @@
             }
           }
         },
-        cno: {
-          validators: {
-            notEmpty: {
-              message: '课程号不能为空'
-            },
-          }
-        },
         name: {
           validators: {
             notEmpty: {
