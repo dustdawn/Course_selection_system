@@ -52,7 +52,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -126,7 +126,7 @@
         </div>
         <div class="pull-left info">
           <p>${userSession.name}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：管理员</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：学生</a>
         </div>
       </div>
 
@@ -144,7 +144,7 @@
 
 
 
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-book"></i> <span>课程选修</span>
             <span class="pull-right-container">
@@ -152,11 +152,22 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=basePath%>/pages/student/courseForm"><i class="fa fa-circle-o"></i> 公选课录入</a></li>
-            <li><a href="<%=basePath%>/pages/student/courseList"><i class="fa fa-circle-o"></i> 选修课录入</a></li>
+            <li><a href="<%=basePath%>/pages/student/selectPublic"><i class="fa fa-circle-o"></i> 公选课选修</a></li>
+            <li><a href="<%=basePath%>/pages/student/selectElective"><i class="fa fa-circle-o"></i> 选修课选修</a></li>
           </ul>
         </li>
-
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>已选课程管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/student/managePublic"><i class="fa fa-circle-o"></i> 公选课管理</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/student/manageElective"><i class="fa fa-circle-o"></i> 选修课管理</a></li>
+          </ul>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-info"></i> <span>个人信息及密码</span>
