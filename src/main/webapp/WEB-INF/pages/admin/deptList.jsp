@@ -7,6 +7,8 @@
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+
+  String flag = request.getParameter("flag");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -54,7 +56,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -296,6 +298,31 @@
                 </tr>
                 </tfoot>--%>
               </table>
+
+              <%--修改成功窗口--%>
+
+              <div class="modal modal-info fade" id="ifSuccess">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">修改成功</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <%--/修改成功窗口--%>
+
+
             </div>
             <%--/box-body--%>
           </div>
@@ -335,7 +362,12 @@
 <!-- page script -->
 <script type="text/javascript">
   $(document).ready(function () {
-    //getList();
+
+    let flag = <%=flag%>;
+    console.log(flag);
+    if (flag != null && flag=='success') {
+      $("#ifSuccess").modal('show')
+    }
   })
   /*function getList() {
     var list = {

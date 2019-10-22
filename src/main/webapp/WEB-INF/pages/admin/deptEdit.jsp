@@ -52,7 +52,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -279,8 +279,11 @@
 
             <div class="box-footer" align="center">
               <button type="button" class="btn btn-warning" id="empty">清空</button>
-              <button type="submit" class="btn btn-primary">保存</button>
+              <button type="submit" class="btn btn-primary" >保存</button>
             </div>
+
+
+
           </form>
           <%--表单尾--%>
 
@@ -327,7 +330,6 @@
   // 清空事件
   $(document).ready(function () {
     $("#empty").bind("click", function () {
-        //alert(55);
       $("#deptName").val("");
     })
   })

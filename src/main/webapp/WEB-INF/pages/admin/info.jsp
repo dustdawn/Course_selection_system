@@ -52,7 +52,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -251,6 +251,39 @@
           <br/>
           <div class="row">
             <div class="col-xs-12 text-center">
+              <div class="box-footer" align="center">
+                <button type="button" class="btn btn-warning" id="empty">清空</button>
+                <button type="submit" class="btn btn-primary" id="sava">保存</button>
+                <button type="button" class="btn btn-primary" id="tableName"  data-toggle="tooltip" data-placement="top">点击</button>
+                <div class="alert alert-success">成功！很好地完成了提交。</div>
+                <a href="#" data-toggle="popover" title="Example popover">
+                  请悬停在我的上面
+                </a>
+              </div>
+              <%--保存成功窗口--%>
+
+              <div class="modal modal-primary fade" id="modal-primary">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Primary Modal</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-outline">Save changes</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <%--/保存成功窗口--%>
+
 
             </div>
           </div>
@@ -289,15 +322,15 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
+  $(function () {
+    //$("#modal-primary").modal('show')
+    //$('#modal-primary').modal('hide');
+
+
+
+    $('#modal-primary').modal('toogle');//反转
+    $("#modal-primary").on('hidden',function () {
+      alert(22)
     })
   })
 </script>

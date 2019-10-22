@@ -289,7 +289,7 @@ public class AdminController {
                 LOGGER.info(">>>添加失败<<<");
             }
         }
-        return "redirect:/pages/admin/deptForm";
+        return "redirect:/pages/admin/deptForm?flag='success'";
     }
 
     @RequestMapping(value = "/deptList")
@@ -325,7 +325,7 @@ public class AdminController {
                 LOGGER.info(">>>修改失败<<<");
             }
         }
-        return "redirect:/admin/deptList";
+        return "redirect:/admin/deptList?flag='success'";
     }
 
     @RequestMapping(value = "/deptDelete")
