@@ -1,6 +1,6 @@
 package cn.njit.controller;
 
-import cn.njit.entry.*;
+import cn.njit.entity.*;
 import cn.njit.service.*;
 import cn.njit.utils.LoginUtil;
 import org.apache.log4j.Logger;

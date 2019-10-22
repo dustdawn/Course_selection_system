@@ -1,7 +1,7 @@
 package cn.njit.service.Impl;
 
 import cn.njit.dao.StudentMapper;
-import cn.njit.entry.Student;
+import cn.njit.entity.Student;
 import cn.njit.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

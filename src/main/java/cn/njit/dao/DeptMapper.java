@@ -1,6 +1,6 @@
 package cn.njit.dao;
 
-import cn.njit.entry.Dept;
+import cn.njit.entity.Dept;
 
 import java.util.List;
 

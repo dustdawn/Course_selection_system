@@ -1,6 +1,6 @@
 package cn.njit.controller;
 
-import cn.njit.entry.Teacher;
+import cn.njit.entity.Teacher;
 import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package cn.njit.dao;
 
-import cn.njit.entry.Course;
+import cn.njit.entity.Course;
 
 import java.util.List;
 

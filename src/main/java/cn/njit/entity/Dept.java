@@ -1,4 +1,4 @@
-package cn.njit.entry;
+package cn.njit.entity;
 
 public class Dept {
     private String dno;

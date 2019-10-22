@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.njit.dao.AdminMapper" >
-  <resultMap id="BaseResultMap" type="cn.njit.entry.Admin" >
+  <resultMap id="BaseResultMap" type="cn.njit.entity.Admin" >
     <id column="no" property="no" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
   </delete>
 
 
-  <insert id="insert" parameterType="cn.njit.entry.Admin" >
+  <insert id="insert" parameterType="cn.njit.entity.Admin" >
     insert into admin (no, name, password, 
       sex, mobile)
     values (#{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
@@ -35,7 +35,7 @@
   </insert>
 
 
-  <insert id="insertSelective" parameterType="cn.njit.entry.Admin" >
+  <insert id="insertSelective" parameterType="cn.njit.entity.Admin" >
     insert into admin
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="no != null" >
@@ -72,7 +72,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entry.Admin" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entity.Admin" >
     update admin
     <set >
       <if test="name != null" >
@@ -90,7 +90,7 @@
     </set>
     where no = #{no,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.njit.entry.Admin" >
+  <update id="updateByPrimaryKey" parameterType="cn.njit.entity.Admin" >
     update admin
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

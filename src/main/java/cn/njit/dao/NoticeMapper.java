@@ -1,6 +1,6 @@
 package cn.njit.dao;
 
-import cn.njit.entry.Notice;
+import cn.njit.entity.Notice;
 
 import java.util.List;
 

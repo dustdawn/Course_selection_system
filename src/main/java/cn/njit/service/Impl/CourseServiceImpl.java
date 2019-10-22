@@ -1,7 +1,7 @@
 package cn.njit.service.Impl;
 
 import cn.njit.dao.CourseMapper;
-import cn.njit.entry.Course;
+import cn.njit.entity.Course;
 import cn.njit.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

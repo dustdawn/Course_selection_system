@@ -1,4 +1,4 @@
-<%@ page import="cn.njit.entry.Student" %>
+<%@ page import="cn.njit.entity.Student" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>

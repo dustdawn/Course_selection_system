@@ -4,7 +4,7 @@
 
   <!--property为实体类中属性，column为数据库查询结果名-->
   <!--course对象-->
-  <resultMap id="BaseResultMap" type="cn.njit.entry.Course" >
+  <resultMap id="BaseResultMap" type="cn.njit.entity.Course" >
     <id column="course.cno" property="cno" jdbcType="VARCHAR" />
     <result column="course.name" property="name" jdbcType="VARCHAR" />
     <result column="course.tno" property="tno" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
     <result column="course.delFlag" property="delFlag" jdbcType="INTEGER" />
 
     <!--teacher对象：多对一-->
-    <association property="teacher" javaType="cn.njit.entry.Teacher">
+    <association property="teacher" javaType="cn.njit.entity.Teacher">
       <id property="tno" column="teacher.tno"/>
       <result property="name" column="teacher.name"/>
       <result property="password" column="teacher.password"/>
@@ -28,14 +28,14 @@
     </association>
 
     <!--dept对象：多对一-->
-    <association property="dept" javaType="cn.njit.entry.Dept">
+    <association property="dept" javaType="cn.njit.entity.Dept">
       <id property="dno" column="dept.dno"/>
       <result property="name" column="dept.name"/>
       <result property="delFlag" column="dept.delFlag"/>
     </association>
 
     <!--studentList对象：一对多-->
-    <collection property="studentList" ofType="cn.njit.entry.Student" javaType="java.util.ArrayList">
+    <collection property="studentList" ofType="cn.njit.entity.Student" javaType="java.util.ArrayList">
       <id property="sno" column="student.sno"/>
       <result property="name" column="student.name"/>
       <result property="password" column="student.password"/>
@@ -157,7 +157,7 @@
   </update>
 
   <!--全部条件添加-->
-  <insert id="insert" parameterType="cn.njit.entry.Course" >
+  <insert id="insert" parameterType="cn.njit.entity.Course" >
     insert into course (cno, name, tno, 
       dno, date, place, credit, 
       total, type, del_flag
@@ -169,7 +169,7 @@
   </insert>
 
   <!--添加课程-->
-  <insert id="insertSelective" parameterType="cn.njit.entry.Course" >
+  <insert id="insertSelective" parameterType="cn.njit.entity.Course" >
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="cno != null" >
@@ -238,7 +238,7 @@
   </insert>
 
   <!--根据cno修改course属性-->
-  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entry.Course" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entity.Course" >
     update course
     <set >
       <if test="name != null" >
@@ -273,7 +273,7 @@
   </update>
 
   <!--全属性修改-->
-  <update id="updateByPrimaryKey" parameterType="cn.njit.entry.Course" >
+  <update id="updateByPrimaryKey" parameterType="cn.njit.entity.Course" >
     update course
     set name = #{name,jdbcType=VARCHAR},
       tno = #{tno,jdbcType=VARCHAR},

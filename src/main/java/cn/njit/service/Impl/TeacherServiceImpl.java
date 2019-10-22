@@ -1,7 +1,7 @@
 package cn.njit.service.Impl;
 
 import cn.njit.dao.TeacherMapper;
-import cn.njit.entry.Teacher;
+import cn.njit.entity.Teacher;
 import cn.njit.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

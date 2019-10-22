@@ -1,6 +1,6 @@
 package cn.njit.controller;
 
-import cn.njit.entry.Student;
+import cn.njit.entity.Student;
 import cn.njit.service.StudentService;
 import cn.njit.utils.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;

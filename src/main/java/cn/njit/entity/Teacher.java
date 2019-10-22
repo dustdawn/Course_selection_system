@@ -1,4 +1,4 @@
-package cn.njit.entry;
+package cn.njit.entity;
 
 
 import org.springframework.format.annotation.DateTimeFormat;

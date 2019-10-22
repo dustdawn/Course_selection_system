@@ -1,6 +1,6 @@
 package cn.njit.dao;
 
-import cn.njit.entry.Student;
+import cn.njit.entity.Student;
 
 import java.util.List;
 
