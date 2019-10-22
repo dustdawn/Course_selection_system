@@ -55,7 +55,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -551,13 +551,6 @@
             notEmpty: {
               message: '课程类型不能为空'
             }
-          }
-        },
-        cno: {
-          validators: {
-            notEmpty: {
-              message: '课程号不能为空'
-            },
           }
         },
         name: {

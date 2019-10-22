@@ -5,6 +5,7 @@
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+  String flag = request.getParameter("flag");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -52,7 +53,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -220,13 +221,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        教师管理
+        院系管理
         <small>信息添加</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">教师管理</a></li>
-        <li class="active">教师录入</li>
+        <li><a href="#">院系管理</a></li>
+        <li class="active">院系录入</li>
       </ol>
     </section>
 
@@ -242,32 +243,32 @@
 
         <div class="box-body">
 
-          <form action="<%=basePath%>/admin/teacherForm" method="post">
+          <form action="<%=basePath%>/admin/deptForm" method="post">
             <%--表单盒子体--%>
             <div class="box-body">
               <div class="col-md-12">
-              <%--工号--%>
+              <%--院系号--%>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="teacherNo">教师工号</label>
+                    <label for="deptNo">院系号</label>
                     <div class="input-group name">
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherNo" name="tno" value="10116020" placeholder="请输入教师工号">
+                      <input type="text" class="form-control" id="deptNo" name="dno" value="" placeholder="请输入院系号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
                 </div>
-              <%--姓名--%>
+              <%--院系名--%>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="teacherName">姓名</label>
+                    <label for="deptName">院系名</label>
                     <div class="input-group name">
                       <div class="input-group-addon">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-map"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherName" name="name" value="教师" placeholder="请输入姓名">
+                      <input type="text" class="form-control" id="deptName" name="name" value="" placeholder="请输入院系名">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -275,86 +276,47 @@
 
               </div>
 
-              <div class="col-md-12">
-              <%--密码--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="teacherPassword">密码</label>
-                    <div class="input-group password">
-                      <div class="input-group-addon">
-                        <i class="fa fa-lock"></i>
-                      </div>
-                      <input type="text" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
-                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
-                    </div>
-                  </div>
-                </div>
-              <%--性别--%>
-              <!-- 可选下拉框 -->
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="teacherSex">性别</label>
-                    <div class="input-group sex">
-                      <div class="input-group-addon">
-                        <i class="fa fa-male"></i>
-                        <i class="fa fa-female"></i>
-                      </div>
-                      <select class="form-control select2" style="width: 100%;" name="sex" id="teacherSex">
-                        <option value="">---请选择---</option>
-                        <option value="男">男</option>
-                        <option value="女">女</option>
-                      </select>
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
-
-
-              <div class="col-md-12">
-              <%--/可选下拉框--%>
-              <%--手机号--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="teacherMobile">手机号码</label>
-                    <div class="input-group phone">
-                      <div class="input-group-addon">
-                        <i class="fa fa-phone"></i>
-                      </div>
-                      <input type="text" class="form-control" id="teacherMobile" name="mobile" value="18129386754" placeholder="请输入手机号">
-                    </div>
-                  </div>
-                </div>
-              <%--出生日期--%>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="teacherDate">出生日期</label>
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="teacherDate" name="birthday" value="" placeholder="yyyy-mm-dd">
-                    </div>
-                  </div>
-                </div>
-
-              </div>
             </div>
+
+
 
 
 
             <div class="box-footer" align="center">
               <button type="button" class="btn btn-warning" id="empty">清空</button>
-              <button type="submit" class="btn btn-primary">保存</button>
+              <button type="submit" class="btn btn-primary" id="save">保存</button>
             </div>
+
+              <%--保存成功窗口--%>
+
+              <div class="modal modal-info fade" id="ifSuccess">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">保存成功</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <%--/保存成功窗口--%>
+
           </form>
           <%--表单尾--%>
 
 
           <div class="row">
             <div class="col-xs-12 text-center">
-              <strong style="color: red">请确保添加教师信息未重复</strong>
+              <strong style="color: red">请确保修改院系信息未重复</strong>
             </div>
           </div>
 
@@ -395,13 +357,15 @@
   $(document).ready(function () {
     $("#empty").bind("click", function () {
         //alert(55);
-      $("#teacherNo").val("");
-      $("#teacherName").val("");
-      $("#teacherPassword").val("");
-      $("#teacherSex").val("");
-      $("#teacherMobile").val("");
-      $("#teacherDate").val("");
+      $("#deptNo").val("");
+      $("#deptName").val("");
     })
+
+    let flag = <%=flag%>;
+    console.log(flag);
+    if (flag != null && flag=='success') {
+      $("#ifSuccess").modal('show')
+    }
   })
 
   $(function () {
@@ -413,52 +377,29 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        tno: {
+        dno: {
           validators: {
             notEmpty: {
-              message: '教师工号不能为空'
+              message: '院系号不能为空'
             },
-            threshold: 2,//有2字符以上才发送ajax请求
+            // threshold: 2,//有2字符以上才发送ajax请求
             remote: {//ajax验证
-              url: "<%=basePath%>/admin/checkTeacher",
+              url: "<%=basePath%>/admin/checkDept",
               message: '用户名已存在,请重新输入',
-              delay: 1000,//ajax请求间隔
+              //delay: 500,//ajax请求间隔
               type: 'POST',
               data: function(validator) {
                 return {
-                  tno : $("input[name=tno]").val()
+                  tno : $("input[name=dno]").val()
                 };
               }
-            }
-          }
-        },
-        password: {
-          validators: {
-            notEmpty: {
-              message: '密码不能为空'
             }
           }
         },
         name: {
           validators: {
             notEmpty: {
-              message: '姓名不能为空'
-            }
-          }
-        },
-        mobile: {
-          validators: {
-            regexp: {
-              regexp: /^1(3|4|5|6|7|8|9)\d{9}$/,
-              message: '请输入正确的号码格式'
-            }
-          }
-        },
-        birthday: {
-          validators: {
-            regexp: {
-              regexp: /^([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))$/,
-              message: '请输入正确的日期格式'
+              message: '院系名不能为空'
             }
           }
         }

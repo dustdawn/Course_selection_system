@@ -52,7 +52,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -252,6 +252,9 @@
           <div class="row">
             <div class="col-xs-12 text-center">
 
+              <a href="http://www.baidu.com" id="yes">444</a>
+              <button type="button" class="btn btn-primary" id="b"></button>
+
             </div>
           </div>
           <div class="ajax-content">
@@ -289,17 +292,21 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
+  $(function () {
+
+    $("#b").bind("click", function () {
+      alert(33)
+
+      let h = $('#yes').attr('href');
+      alert(h)
+      window.location.href = h
     })
+
   })
+
+
+
+
 </script>
 </body>
 </html>

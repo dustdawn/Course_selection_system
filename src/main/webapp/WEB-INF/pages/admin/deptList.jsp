@@ -7,6 +7,8 @@
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+
+  String flag = request.getParameter("flag");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -54,7 +56,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -144,7 +146,7 @@
           </a>
         </li>
 
-        <li class="treeview">
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-building-o"></i> <span>院系管理</span>
             <span class="pull-right-container">
@@ -153,12 +155,12 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
-            <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
+            <li class="active"><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
           </ul>
         </li>
 
 
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
             <span class="pull-right-container">
@@ -167,7 +169,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li class="active"><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
           </ul>
         </li>
 
@@ -222,13 +224,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        教师列表
+        院系列表
         <small>信息显示</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">教师管理</a></li>
-        <li class="active">教师列表</li>
+        <li><a href="#">院系管理</a></li>
+        <li class="active">院系列表</li>
       </ol>
     </section>
 
@@ -268,28 +270,22 @@
               <table id="teacherList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>工号</th>
-                  <th>姓名</th>
-                  <th>密码</th>
-                  <th>性别</th>
-                  <th>手机</th>
-                  <th>生日</th>
+                  <th>院系号</th>
+                  <th>院系名</th>
                   <th>修改</th>
                   <th>删除</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach var="item" items="${teacherList}" varStatus="staturs">
+                <c:forEach var="item" items="${deptList}" varStatus="staturs">
                   <tr>
-                    <td>${item.tno}</td>
+                    <td>${item.dno}</td>
                     <td>${item.name}</td>
-                    <td>${item.password}</td>
-                    <td>${item.sex}</td>
-                    <td>${item.mobile}</td>
-                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="<%=basePath%>/admin/teacherEdit?tno=${item.tno}">编辑</a></td>
-                    <td><a href="<%=basePath%>/admin/teacherDelete?tno=${item.tno}">删除</a></td>
+                    <td><a href="<%=basePath%>/admin/deptEdit?dno=${item.dno}">编辑</a></td>
+                    <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
+                        <a href="<%=basePath%>/admin/deptDelete?dno=${item.dno}" id="yes"></a>
+                    </td>
                   </tr>
                 </c:forEach>
 
@@ -304,6 +300,55 @@
                 </tr>
                 </tfoot>--%>
               </table>
+
+              <%--修改成功窗口--%>
+
+              <div class="modal modal-info fade" id="ifSuccess">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">修改成功</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <%--/修改成功窗口--%>
+
+              <%--删除窗口--%>
+
+              <div class="modal fade" id="deleteConfirm">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">确认要删除吗？</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" id="delete">确认</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <%--/删除窗口--%>
+
             </div>
             <%--/box-body--%>
           </div>
@@ -343,7 +388,17 @@
 <!-- page script -->
 <script type="text/javascript">
   $(document).ready(function () {
-    //getList();
+
+    let flag = <%=flag%>;
+    console.log(flag);
+    if (flag != null && flag=='success') {
+      $("#ifSuccess").modal('show')
+    }
+
+    $("#delete").on('click',function () {
+      $("#deleteConfirm").modal("hide")
+      window.location.href = $('#yes').attr('href');
+    })
   })
   /*function getList() {
     var list = {
