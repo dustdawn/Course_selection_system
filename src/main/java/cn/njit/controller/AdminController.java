@@ -347,7 +347,7 @@ public class AdminController {
         request.setAttribute("user", admin);
         return "redirect:/pages/admin/info";
     }
-    //修改密码
+    //修改密码部分
     @RequestMapping(value = "/pswChange")
     public String pswChange() {
         return "redirect:/pages/admin/pswChange";
