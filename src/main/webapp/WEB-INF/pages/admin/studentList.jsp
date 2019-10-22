@@ -292,7 +292,9 @@
                     <td>${item.mobile}</td>
                     <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
                     <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
-                    <td><a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}">删除</a></td>
+                    <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
+                        <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
+                    </td>
                   </tr>
                 </c:forEach>
 
@@ -330,6 +332,33 @@
                 <!-- /.modal-dialog -->
               </div>
               <%--/修改成功窗口--%>
+
+              <%--删除窗口--%>
+
+              <div class="modal fade" id="deleteConfirm">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">确认要删除吗？</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" id="delete">确认</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <%--/删除窗口--%>
+
+
             </div>
             <%--/box-body--%>
           </div>
@@ -374,6 +403,12 @@
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')
     }
+
+    $("#delete").on('click',function () {
+      $("#deleteConfirm").modal("hide")
+      window.location.href = $('#yes').attr('href');
+    })
+
     $('#studentList').DataTable({
       'paging'      : true,
       'lengthChange': false,
