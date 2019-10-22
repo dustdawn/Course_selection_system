@@ -582,7 +582,7 @@
             remote: {//ajax验证
               url: "<%=basePath%>/admin/checkCourse",
               message: '课程号已存在,请重新输入',
-              delay: 1000,//ajax请求间隔
+              //delay: 1000,//ajax请求间隔
               type: 'POST',
               data: function(validator) {
                 return {

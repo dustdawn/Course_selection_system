@@ -449,11 +449,11 @@
             notEmpty: {
               message: '教师工号不能为空'
             },
-            // threshold: 2,//有2字符以上才发送ajax请求
+            //threshold: 2,//有2字符以上才发送ajax请求
             remote: {//ajax验证
               url: "<%=basePath%>/admin/checkTeacher",
               message: '用户名已存在,请重新输入',
-              delay: 1000,//ajax请求间隔
+              //delay: 1000,//ajax请求间隔
               type: 'POST',
               data: function(validator) {
                 return {

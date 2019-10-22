@@ -90,7 +90,7 @@ public class AdminController {
                 LOGGER.info(">>>添加失败<<<");
             }
         }
-        return "redirect:/pages/admin/teacherForm";
+        return "redirect:/pages/admin/teacherForm?flag='success'";
     }
 
     @RequestMapping(value = "/teacherList")
@@ -127,7 +127,7 @@ public class AdminController {
                 LOGGER.info(">>>修改失败<<<");
             }
         }
-        return "redirect:/admin/teacherList";
+        return "redirect:/admin/teacherList?flag='success'";
     }
 
     @RequestMapping(value = "/teacherDelete")
@@ -158,7 +158,7 @@ public class AdminController {
                 LOGGER.info(">>>添加失败<<<");
             }
         }
-        return "redirect:/pages/admin/studentForm";
+        return "redirect:/pages/admin/studentForm?flag='success'";
     }
 
     @RequestMapping(value = "/studentList")
@@ -194,7 +194,7 @@ public class AdminController {
                 LOGGER.info(">>>修改失败<<<");
             }
         }
-        return "redirect:/admin/studentList";
+        return "redirect:/admin/studentList?flag='success'";
     }
 
     @RequestMapping(value = "/studentDelete")
@@ -223,7 +223,7 @@ public class AdminController {
                 LOGGER.info(">>>添加失败<<<");
             }
         }
-        return "redirect:/pages/admin/courseForm";
+        return "redirect:/pages/admin/courseForm?flag='success'";
     }
 
     @RequestMapping(value = "/courseList")
@@ -259,7 +259,7 @@ public class AdminController {
                 LOGGER.info(">>>修改失败<<<");
             }
         }
-        return "redirect:/admin/courseList";
+        return "redirect:/admin/courseList?flag='success'";
     }
 
     @RequestMapping(value = "/courseDelete")
@@ -363,7 +363,7 @@ public class AdminController {
         String result = "{\"valid\":false}";
         if (null != tno) {
             Teacher teacher = teacherService.selectByPrimaryKey(tno);
-            if (null == teacher) {
+            if (null == teacher && !tno.equals("")) {
                 //用户不存在
                 result = "{\"valid\":true}";
             }else {
@@ -379,7 +379,7 @@ public class AdminController {
     public String checkStudent(String sno) {
 
         String result = "{\"valid\":false}";
-        if (null != sno && sno.equals("")) {
+        if (null != sno && !sno.equals("")) {
             Student student = studentService.selectByPrimaryKey(sno);
             if (null == student) {
                 //用户不存在

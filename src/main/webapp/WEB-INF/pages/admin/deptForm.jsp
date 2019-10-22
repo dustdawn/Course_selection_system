@@ -386,7 +386,7 @@
             remote: {//ajax验证
               url: "<%=basePath%>/admin/checkDept",
               message: '用户名已存在,请重新输入',
-              delay: 500,//ajax请求间隔
+              //delay: 500,//ajax请求间隔
               type: 'POST',
               data: function(validator) {
                 return {
