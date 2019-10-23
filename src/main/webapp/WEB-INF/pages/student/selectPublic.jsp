@@ -195,49 +195,152 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        课程列表
+        <small>信息显示</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">课程管理</a></li>
-        <li class="active">课程录入</li>
+        <li><a href="#">公选课</a></li>
+        <li class="active">课程列表</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+      <div class="row">
+        <div class="col-xs-12">
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <div class="col">
 
-          </div>
-        </div>
-        <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
-          <div class="row">
-            <div class="col-xs-12 text-center">
+
+                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>课程号查询：
+                <input type="text" class="form-control" id="searchByNo" value=""/>
+                </label>
+                <span style="padding-right: 40px">
+                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                </span>
+
+
+
+                <label class="form-inline" for="searchByName" style="padding-left: 40px"/>课程名查询：
+                <input type="text" class="form-control" id="searchByName" value=""/>
+                </label>
+                <span>
+                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                </span>
+
+              </div>
+
 
             </div>
-          </div>
-          <div class="ajax-content">
-            正文
-          </div>
-        </div>
-        <!-- /.box-body -->
+            <%--/box-head--%>
+            <div class="box-body">
+              <table id="courseList" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>课程类型</th>
+                  <th>课程号</th>
+                  <th>课程名</th>
+                  <th>授课教师</th>
+                  <th>所属学院</th>
+                  <th>课程周期</th>
+                  <th>授课地点</th>
+                  <th>学分</th>
+                  <th>剩余名额</th>
+                  <th>选课</th>
+                </tr>
+                </thead>
+                <tbody>
 
-        <!-- /.box-footer-->
+                <c:forEach var="item" items="${courseList}" varStatus="staturs">
+                  <tr>
+                    <td>${item.type}</td>
+                    <td>${item.cno}</td>
+                    <td>${item.name}</td>
+                    <td>${item.teacher.name}</td>
+                    <td>${item.dept.name}</td>
+                    <td>${item.date}</td>
+                    <td>${item.place}</td>
+                    <td>${item.credit}</td>
+                    <td>${item.total}</td>
+                    <td><a href="#">选课</a></td>
+                    </td>
+                  </tr>
+                </c:forEach>
+
+                </tbody>
+                <%--<tfoot>
+                <tr>
+                  <th>工号</th>
+                  <th>姓名</th>
+                  <th>密码</th>
+                  <th>性别</th>
+                  <th>手机</th>
+                </tr>
+                </tfoot>--%>
+              </table>
+
+              <%--修改成功窗口--%>
+
+              <div class="modal modal-info fade" id="ifSuccess">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">修改成功</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <%--/修改成功窗口--%>
+
+              <%--删除窗口--%>
+
+              <div class="modal fade" id="deleteConfirm">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">确认要删除吗？</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" id="delete">确认</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <%--/删除窗口--%>
+
+
+            </div>
+            <%--/box-body--%>
+          </div>
+          <%--/box--%>
+        </div>
+        <%--/col-xs-12--%>
       </div>
-      <!-- /.box -->
+      <%--/row--%>
+
 
     </section>
     <!-- /.content -->
