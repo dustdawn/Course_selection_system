@@ -49,7 +49,8 @@ public class CourseController {
 
     //获取学生的课程名单
     @RequestMapping(value = "courseList")
-    public String courseList(String sno, HttpServletRequest request) {
+    @ResponseBody
+    public List<Course> courseList(String sno, HttpServletRequest request) {
         Student student = new Student();
         student.setSno(sno);
 
@@ -58,7 +59,7 @@ public class CourseController {
 
         List<Course> listByEntity = courseService.findListByEntity(course);
 
-        return "";
+        return listByEntity;
     }
 
 }

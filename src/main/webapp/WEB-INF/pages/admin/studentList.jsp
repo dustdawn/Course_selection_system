@@ -278,6 +278,7 @@
                   <th>生日</th>
                   <th>修改</th>
                   <th>删除</th>
+                  <th>选课列表</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -295,6 +296,7 @@
                     <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
                         <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
                     </td>
+                    <td><a href="javascript:void(0);" onclick="viewList('${item.sno}')">查看</a></td>
                   </tr>
                 </c:forEach>
 
@@ -359,6 +361,51 @@
               <%--/删除窗口--%>
 
 
+              <%--窗口--%>
+
+              <div class="modal fade" id="showList">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">选课列表</h4>
+                    </div>
+                    <div class="modal-body">
+                      <%--表格--%>
+                      <table id="courseList" class="table">
+                        <thead>
+                        <tr>
+                          <th>课程类型</th>
+                          <th>课程号</th>
+                          <th>课程名</th>
+                          <th>授课教师</th>
+                          <th>所属学院</th>
+                          <th>课程周期</th>
+                          <th>授课地点</th>
+                          <th>学分</th>
+                          <th>剩余名额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                      </table>
+                      <%--/表格--%>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">取消</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <%--/窗口--%>
+
+
             </div>
             <%--/box-body--%>
           </div>
@@ -398,12 +445,14 @@
 <!-- page script -->
 <script type="text/javascript">
   $(function () {
+    //删除成功事件
     let flag = <%=flag%>;
     console.log(flag);
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')
     }
 
+    //删除事件
     $("#delete").on('click',function () {
       $("#deleteConfirm").modal("hide")
       window.location.href = $('#yes').attr('href');
@@ -417,7 +466,62 @@
       'info'        : true,
       'autoWidth'   : false
     })
+
+    //关闭列表事件
+    $('#showList').on('hide.bs.modal', function () {
+      let dom = $("#courseList").find('tbody');
+      //清空列表
+      dom.html('');
+    })
+
   })
+
+
+  function viewList(no) {
+    $("#showList").modal("show");
+    $.ajax({
+      //请求方式
+      type: "POST",
+      //请求的媒体类型
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      //请求地址
+      url: "<%=basePath%>/course/courseList",
+      data: {"sno" : no},
+      //返回类型
+      // dataType:"json",
+      //请求成功
+      success: function (result) {
+        console.log("获取列表成功", result);
+        let dom = $("#courseList").find('tbody');
+        if (null != result) {
+          let str = '';
+          for (let i = 0; i < result.length; i++) {
+            str += "<tr>" +
+                    "<td>"+result[i].type+"</td>" +
+                    "<td>"+result[i].cno+"</td>" +
+                    "<td>"+result[i].name+"</td>" +
+                    "<td>"+result[i].teacher.name+"</td>" +
+                    "<td>"+result[i].dept.name+"</td>" +
+                    "<td>"+result[i].date+"</td>" +
+                    "<td>"+result[i].place+"</td>" +
+                    "<td>"+result[i].credit+"</td>" +
+                    "<td>"+result[i].total+"</td>" +
+                    "</tr>"
+
+          }
+          console.log("str is",str);
+          dom.append(str);
+        }
+
+      },
+      //请求失败，包含具体的错误信息
+      error: function (e) {
+        console.log("失败");
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    });
+  }
 </script>
 </body>
 </html>

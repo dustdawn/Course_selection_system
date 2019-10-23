@@ -447,7 +447,7 @@
 <!-- page script -->
 <script type="text/javascript">
   $(function () {
-    //删除确认事件
+    //删除成功事件
     let flag = <%=flag%>;
     console.log(flag);
     if (flag != null && flag=='success') {
