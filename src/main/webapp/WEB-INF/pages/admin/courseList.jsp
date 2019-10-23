@@ -280,7 +280,7 @@
                   <th>剩余名额</th>
                   <th>修改</th>
                   <th>删除</th>
-                  <th>查看选课学生</th>
+                  <th>学生列表</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -495,8 +495,8 @@
       //请求成功
       success: function (result) {
         console.log("获取列表成功", result);
+        let dom = $("#studentList").find('tbody');
         if (null != result) {
-          let dom = $("#studentList").find('tbody');
           let str = '';
           for (let i = 0; i < result.length; i++) {
             let birthday = result[i].birthday;
