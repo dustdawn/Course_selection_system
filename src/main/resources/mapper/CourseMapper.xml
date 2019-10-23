@@ -184,6 +184,9 @@
       <if test="type != null and type != ''">
         and b.`course.type` = #{type,jdbcType=VARCHAR}
       </if>
+      <if test="tno != null and tno != ''">
+        and b.`course.tno` = #{tno,jdbcType=VARCHAR}
+      </if>
     </where>
   </select>
 

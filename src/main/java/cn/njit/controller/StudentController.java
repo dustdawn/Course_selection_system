@@ -75,14 +75,15 @@ public class StudentController {
         Student s = new Student();
         if (null != this.student) {
             s.setSno(student.getSno());
+            Course course = new Course();
+            course.setType("公选课");
+            course.setStudent(s);
+
+            List<Course> courseList = courseService.findListByEntity(course);
+            request.setAttribute("courseList", courseList);
         }
 
-        Course course = new Course();
-        course.setType("公选课");
-        course.setStudent(s);
 
-        List<Course> courseList = courseService.findListByEntity(course);
-        request.setAttribute("courseList", courseList);
 
         return "student/managePublic";
     }
@@ -92,14 +93,13 @@ public class StudentController {
         Student s = new Student();
         if (null != this.student) {
             s.setSno(student.getSno());
+            Course course = new Course();
+            course.setType("选修课");
+            course.setStudent(s);
+
+            List<Course> courseList = courseService.findListByEntity(course);
+            request.setAttribute("courseList", courseList);
         }
-
-        Course course = new Course();
-        course.setType("选修课");
-        course.setStudent(s);
-
-        List<Course> courseList = courseService.findListByEntity(course);
-        request.setAttribute("courseList", courseList);
 
         return "student/manageElective";
     }
@@ -111,23 +111,23 @@ public class StudentController {
         Student s = new Student();
         if (null != this.student) {
             s.setSno(student.getSno());
+
+            Course course = new Course();
+            course.setType("公选课");
+
+            //所有公选课
+            List<Course> allPublicCourse = courseService.findListByEntity(course);
+
+            course.setStudent(s);
+            //已选公选课
+            List<Course> selectPublicCourse = courseService.findListByEntity(course);
+
+            //过滤已选课程
+            List<Course> collect = allPublicCourse.stream().filter(
+                    (Course c) -> !selectPublicCourse.contains(c)).collect(Collectors.toList());
+            request.setAttribute("courseList", collect);
+
         }
-
-        Course course = new Course();
-        course.setType("公选课");
-
-        //所有公选课
-        List<Course> allPublicCourse = courseService.findListByEntity(course);
-
-        course.setStudent(s);
-        //已选公选课
-        List<Course> selectPublicCourse = courseService.findListByEntity(course);
-
-
-        //过滤已选课程
-        List<Course> collect = allPublicCourse.stream().filter(
-                (Course c) -> !selectPublicCourse.contains(c)).collect(Collectors.toList());
-        request.setAttribute("courseList", collect);
 
 
 
@@ -140,22 +140,22 @@ public class StudentController {
         Student s = new Student();
         if (null != this.student) {
             s.setSno(student.getSno());
+
+            Course course = new Course();
+            course.setType("选修课");
+            //所有选修课
+            List<Course> allPublicCourse = courseService.findListByEntity(course);
+
+            course.setStudent(s);
+            //已选选修课
+            List<Course> selectPublicCourse = courseService.findListByEntity(course);
+
+            //过滤已选课程
+            List<Course> collect = allPublicCourse.stream().filter(
+                    (Course c) -> !selectPublicCourse.contains(c)).collect(Collectors.toList());
+            request.setAttribute("courseList", collect);
+
         }
-
-        Course course = new Course();
-        course.setType("选修课");
-        //所有选修课
-        List<Course> allPublicCourse = courseService.findListByEntity(course);
-
-        course.setStudent(s);
-        //已选选修课
-        List<Course> selectPublicCourse = courseService.findListByEntity(course);
-
-
-        //过滤已选课程
-        List<Course> collect = allPublicCourse.stream().filter(
-                (Course c) -> !selectPublicCourse.contains(c)).collect(Collectors.toList());
-        request.setAttribute("courseList", collect);
 
         return "student/selectElective";
     }

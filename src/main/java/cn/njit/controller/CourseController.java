@@ -62,4 +62,14 @@ public class CourseController {
         return listByEntity;
     }
 
+    //获取教师的授课名单
+    @RequestMapping(value = "/teacherCourseList")
+    @ResponseBody
+    public List<Course> teacherCourseList(String tno, HttpServletRequest request) {
+        Course course =  new Course();
+        course.setTno(tno);
+        List<Course> listByEntity = courseService.findListByEntity(course);
+        return listByEntity;
+    }
+
 }

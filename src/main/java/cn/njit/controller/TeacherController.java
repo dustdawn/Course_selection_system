@@ -1,6 +1,8 @@
 package cn.njit.controller;
 
+import cn.njit.entity.Course;
 import cn.njit.entity.Teacher;
+import cn.njit.service.CourseService;
 import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ import java.util.Map;
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private CourseService courseService;
+
+    private Teacher teacher;
 
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
@@ -33,7 +39,7 @@ public class TeacherController {
         String rememberMe = request.getParameter("rememberMe");
         HttpSession session = request.getSession();
         //数据库查询用户
-        Teacher teacher = teacherService.selectByPrimaryKey(no);
+        teacher = teacherService.selectByPrimaryKey(no);
         if (teacher != null){
             System.out.println(teacher.getPassword());
             if (teacher.getPassword().equals(password)) {
@@ -69,5 +75,31 @@ public class TeacherController {
         return teacherService.findList();
     }
 
+    //获取教师授课课程
+    @RequestMapping(value = "/managePublic")
+    public String managePublic(HttpServletRequest request) {
+        if (null != teacher) {
+            Course course =  new Course();
+            course.setTno(this.teacher.getTno());
+            course.setType("公选课");
+            List<Course> listByEntity = courseService.findListByEntity(course);
+            request.setAttribute("courseList", listByEntity);
+        }
+
+        return "teacher/managePublic";
+    }
+
+    //获取教师选修课课程
+    @RequestMapping(value = "/manageElective")
+    public String manageElective(HttpServletRequest request) {
+        if (null != teacher) {
+            Course course =  new Course();
+            course.setTno(this.teacher.getTno());
+            course.setType("选修课");
+            List<Course> listByEntity = courseService.findListByEntity(course);
+            request.setAttribute("courseList", listByEntity);
+        }
+        return "teacher/manageElective";
+    }
 
 }
