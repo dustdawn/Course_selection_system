@@ -1,6 +1,7 @@
 package cn.njit.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
     private String cno;
@@ -27,16 +28,10 @@ public class Course {
     private Teacher teacher;
     //学院对象
     private Dept dept;
+    //学生对象
+    private Student student;
     //学生集合
     private List<Student> studentList;
-
-    public List<Student> getStudentList() {
-        return studentList;
-    }
-
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
-    }
 
     @Override
     public String toString() {
@@ -53,8 +48,25 @@ public class Course {
                 ", delFlag=" + delFlag +
                 ", teacher=" + teacher +
                 ", dept=" + dept +
+                ", student=" + student +
                 ", studentList=" + studentList +
                 '}';
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public Teacher getTeacher() {
@@ -151,5 +163,29 @@ public class Course {
 
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
+    }
+
+    //重写equals方法
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(cno, course.cno) &&
+                Objects.equals(name, course.name) &&
+                Objects.equals(tno, course.tno) &&
+                Objects.equals(dno, course.dno) &&
+                Objects.equals(date, course.date) &&
+                Objects.equals(place, course.place) &&
+                Objects.equals(credit, course.credit) &&
+                Objects.equals(total, course.total) &&
+                Objects.equals(type, course.type) &&
+                Objects.equals(delFlag, course.delFlag);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cno, name, tno, dno, date, place, credit, total, type, delFlag);
     }
 }

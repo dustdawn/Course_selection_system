@@ -18,4 +18,7 @@ public interface StudentMapper {
     int updateByPrimaryKey(Student record);
 
     List<Student> findList();
+
+    //条件查询
+    List<Student> findListByEntity(Student student);
 }

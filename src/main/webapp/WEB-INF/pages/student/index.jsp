@@ -102,7 +102,7 @@
               <li class="user-footer">
 
                 <div class="pull-right">
-                  <a href="<%=basePath%>/stu/logout" class="btn btn-default btn-flat">退出登录</a>
+                  <a href="<%=basePath%>/student/logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -150,8 +150,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/student/selectPublic"><i class="fa fa-circle-o"></i> 公选课选修</a></li>
-            <li><a href="<%=basePath%>/pages/student/selectElective"><i class="fa fa-circle-o"></i> 选修课选修</a></li>
+            <li><a href="<%=basePath%>/student/selectPublic"><i class="fa fa-circle-o"></i> 公选课选修</a></li>
+            <li><a href="<%=basePath%>/student/selectElective"><i class="fa fa-circle-o"></i> 选修课选修</a></li>
           </ul>
         </li>
 
@@ -163,8 +163,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/student/managePublic"><i class="fa fa-circle-o"></i> 公选课管理</a></li>
-            <li><a href="<%=basePath%>/pages/student/manageElective"><i class="fa fa-circle-o"></i> 选修课管理</a></li>
+            <li><a href="<%=basePath%>/student/managePublic"><i class="fa fa-circle-o"></i> 公选课管理</a></li>
+            <li><a href="<%=basePath%>/student/manageElective"><i class="fa fa-circle-o"></i> 选修课管理</a></li>
           </ul>
         </li>
 

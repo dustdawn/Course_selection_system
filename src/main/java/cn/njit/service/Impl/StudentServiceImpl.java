@@ -54,4 +54,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findList() {
         return studentMapper.findList();
     }
+
+    @Override
+    public List<Student> findListByEntity(Student student) {
+        return studentMapper.findListByEntity(student);
+    }
 }

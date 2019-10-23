@@ -52,4 +52,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findList() {
         return courseMapper.findList();
     }
+
+    @Override
+    public List<Course> findListByEntity(Course course) {
+        return courseMapper.findListByEntity(course);
+    }
 }

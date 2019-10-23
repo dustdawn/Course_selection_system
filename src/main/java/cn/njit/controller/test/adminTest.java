@@ -56,6 +56,20 @@ public class adminTest {
         return "success";
     }
 
+    @RequestMapping(value = "studentList")
+    @ResponseBody
+    public String studentList() {
+        Course course = new Course();
+        course.setCno("002");
+
+        Student student = new Student();
+        student.setCourse(course);
+
+        List<Student> listByEntity = studentService.findListByEntity(student);
+        System.out.println();
+        return "success";
+    }
+
 
 
 }

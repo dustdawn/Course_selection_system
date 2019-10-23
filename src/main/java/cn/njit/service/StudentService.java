@@ -29,4 +29,7 @@ public interface StudentService{
     //查询所有student
     List<Student> findList();
 
+    //条件查询
+    List<Student> findListByEntity(Student student);
+
 }

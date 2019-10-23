@@ -19,5 +19,7 @@ public interface CourseMapper {
 
     //查询所有Course
     List<Course> findList();
+    //条件查询Course
+    List<Course> findListByEntity(Course course);
 
 }

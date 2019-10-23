@@ -25,6 +25,10 @@ public class Student {
 
     //专业对象
     private Dept dept;
+    //条件查询
+    private Course course;
+
+
     //课程集合对象
     private List<Course> courseList;
 
@@ -40,8 +44,17 @@ public class Student {
                 ", mobile='" + mobile + '\'' +
                 ", delFlag=" + delFlag +
                 ", dept=" + dept +
+                ", course=" + course +
                 ", courseList=" + courseList +
                 '}';
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public List<Course> getCourseList() {

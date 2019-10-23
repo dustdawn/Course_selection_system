@@ -75,7 +75,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">学生 登录 / LOGIN</p>
 
-    <form action="<%=basePath%>/stu/toLogin" method="post">
+    <form action="<%=basePath%>/student/toLogin" method="post">
       <div class="form-group has-feedback">
         <input name="sno" value="<%=sno%>" type="user" class="form-control" placeholder="请输入学生学号">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>

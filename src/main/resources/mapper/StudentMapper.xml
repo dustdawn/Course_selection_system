@@ -124,6 +124,42 @@
 
   </select>
 
+  <!--条件查询-->
+  <select id="findListByEntity" resultMap="BaseResultMap" parameterType="cn.njit.entity.Student">
+    select *
+    from (
+      select
+        <include refid="studentColumns" />,
+        <include refid="deptColumns" />
+      from student s,dept d
+      where
+            s.dno = d.dno
+        and s.del_flag = 0
+        and d.del_flag = 0
+    ) a left join (
+      select
+        <include refid="studentColumns" />,
+        <include refid="courseColumns" />
+      from cs cs, course c, student s
+      where
+            s.sno = cs.sno
+        and cs.cno = c.cno
+        and c.del_flag = 0
+        and s.del_flag = 0
+    ) b on a.`student.sno` = b.`student.sno`
+    <where>
+      <if test="sno != null and sno != ''">
+        and a.`student.sno` = #{sno,jdbcType=VARCHAR}
+      </if>
+      <if test="course != null and course.cno != null and course.cno != ''">
+        and b.`course.cno` = #{course.cno,jdbcType=VARCHAR}
+      </if>
+      <if test="course != null and course.type != null and course.type != ''">
+        and b.`course.type` = #{course.type,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
   <!--根据sno删除student-->
   <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
     update student
