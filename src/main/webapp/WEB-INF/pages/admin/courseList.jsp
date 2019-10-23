@@ -448,7 +448,7 @@
 <script type="text/javascript">
   $(function () {
     //删除成功事件
-    let flag = <%=flag%>;
+    let flag = '<%=flag%>';
     console.log(flag);
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')

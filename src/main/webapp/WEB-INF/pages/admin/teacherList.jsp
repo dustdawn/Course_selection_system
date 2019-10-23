@@ -444,7 +444,7 @@
 <!-- page script -->
 <script type="text/javascript">
   $(document).ready(function () {
-    let flag = <%=flag%>;
+    let flag = '<%=flag%>';
     console.log(flag);
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')

@@ -80,17 +80,19 @@ public class AdminController {
     //教师管理
     @RequestMapping(value = "/teacherForm", method = RequestMethod.POST)
     public String teacherForm(Teacher teacher) {
-
+        String re = "";
         if (null != teacher) {
             teacher.setDelFlag(0);
             int flag = teacherService.insertSelective(teacher);
             if (1 == flag) {
                 LOGGER.info(">>>添加成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>添加失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/pages/admin/teacherForm?flag='success'";
+        return "redirect:/pages/admin/teacherForm?flag=" + re;
     }
 
     @RequestMapping(value = "/teacherList")
@@ -117,17 +119,19 @@ public class AdminController {
 
     @RequestMapping(value = "/teacherUpdate")
     public String teacherUpdate(Teacher teacher) {
-
+        String re = "";
         if (null != teacher) {
             teacher.setDelFlag(0);
             int flag = teacherService.updateByPrimaryKeySelective(teacher);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>修改失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/admin/teacherList?flag='success'";
+        return "redirect:/admin/teacherList?flag=" + re;
     }
 
     @RequestMapping(value = "/teacherDelete")
@@ -148,17 +152,19 @@ public class AdminController {
     //学生管理
     @RequestMapping(value = "/studentForm")
     public String studentForm(Student student) {
-
+        String re = "";
         if (null != student) {
             student.setDelFlag(0);
             int flag = studentService.insertSelective(student);
             if (1 == flag) {
                 LOGGER.info(">>>添加成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>添加失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/pages/admin/studentForm?flag='success'";
+        return "redirect:/pages/admin/studentForm?flag=" + re;
     }
 
     @RequestMapping(value = "/studentList")
@@ -184,17 +190,19 @@ public class AdminController {
 
     @RequestMapping(value = "/studentUpdate")
     public String studentUpdate(Student student) {
-
+        String re = "";
         if (null != student) {
             student.setDelFlag(0);
             int flag = studentService.updateByPrimaryKeySelective(student);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>修改失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/admin/studentList?flag='success'";
+        return "redirect:/admin/studentList?flag=" + re;
     }
 
     @RequestMapping(value = "/studentDelete")
@@ -214,16 +222,19 @@ public class AdminController {
     //课程管理
     @RequestMapping(value = "/courseForm")
     public String courseForm(Course course) {
+        String re = "";
         if (null != course) {
             course.setDelFlag(0);
             int flag = courseService.insertSelective(course);
             if (1 == flag) {
                 LOGGER.info(">>>添加成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>添加失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/pages/admin/courseForm?flag='success'";
+        return "redirect:/pages/admin/courseForm?flag=" + re;
     }
 
     @RequestMapping(value = "/courseList")
@@ -250,16 +261,19 @@ public class AdminController {
 
     @RequestMapping(value = "/courseUpdate")
     public String courseUpdate(Course course) {
+        String re = "";
         if (null != course) {
             course.setDelFlag(0);
             int flag = courseService.updateByPrimaryKeySelective(course);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>修改失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/admin/courseList?flag='success'";
+        return "redirect:/admin/courseList?flag=" + re;
     }
 
     @RequestMapping(value = "/courseDelete")
@@ -280,16 +294,19 @@ public class AdminController {
     //院系管理
     @RequestMapping(value = "/deptForm")
     public String deptForm(Dept dept) {
+        String re = "";
         if (null != dept) {
             dept.setDelFlag(0);
             int flag = deptService.insertSelective(dept);
             if (1 == flag) {
                 LOGGER.info(">>>添加成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>添加失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/pages/admin/deptForm?flag='success'";
+        return "redirect:/pages/admin/deptForm?flag="+re;
     }
 
     @RequestMapping(value = "/deptList")
@@ -316,16 +333,19 @@ public class AdminController {
 
     @RequestMapping(value = "/deptUpdate")
     public String deptUpdate(Dept dept) {
+        String re = "";
         if (null != dept) {
             dept.setDelFlag(0);
             int flag = deptService.updateByPrimaryKeySelective(dept);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
+                re = "success";
             }else {
                 LOGGER.info(">>>修改失败<<<");
+                re = "fail";
             }
         }
-        return "redirect:/admin/deptList?flag='success'";
+        return "redirect:/admin/deptList?flag="+re;
     }
 
     @RequestMapping(value = "/deptDelete")
