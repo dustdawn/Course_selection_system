@@ -1,7 +1,7 @@
 package cn.njit.service.Impl;
 
 import cn.njit.dao.AdminMapper;
-import cn.njit.entry.Admin;
+import cn.njit.entity.Admin;
 import cn.njit.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

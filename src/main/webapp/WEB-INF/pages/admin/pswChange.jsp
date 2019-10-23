@@ -52,7 +52,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>选课系统</b></span>
+      <span class="logo-lg"><b>选课管理系统</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -140,6 +140,19 @@
           <a href="<%=basePath%>/pages/admin/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-building-o"></i> <span>院系管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
+          </ul>
         </li>
 
 

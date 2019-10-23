@@ -1,8 +1,8 @@
 package cn.njit.controller.test;
 
-import cn.njit.entry.Course;
-import cn.njit.entry.Student;
-import cn.njit.entry.Teacher;
+import cn.njit.entity.Course;
+import cn.njit.entity.Student;
+import cn.njit.entity.Teacher;
 import cn.njit.service.CourseService;
 import cn.njit.service.StudentService;
 import cn.njit.service.TeacherService;

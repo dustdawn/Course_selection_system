@@ -5,7 +5,7 @@ package cn.njit.service;
  * @date 2019/10/18 15:01
  */
 
-import cn.njit.entry.Teacher;
+import cn.njit.entity.Teacher;
 
 import java.util.List;
 

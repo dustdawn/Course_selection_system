@@ -3,7 +3,7 @@
 <mapper namespace="cn.njit.dao.StudentMapper" >
   <!--property为实体类中属性，column为数据库查询结果名-->
   <!--student对象-->
-  <resultMap id="BaseResultMap" type="cn.njit.entry.Student" >
+  <resultMap id="BaseResultMap" type="cn.njit.entity.Student" >
     <id column="student.sno" property="sno" jdbcType="VARCHAR" />
     <result column="student.name" property="name" jdbcType="VARCHAR" />
     <result column="student.password" property="password" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
     <result column="student.delFlag" property="delFlag" jdbcType="INTEGER" />
 
     <!--dept对象：多对一-->
-    <association property="dept" javaType="cn.njit.entry.Dept">
+    <association property="dept" javaType="cn.njit.entity.Dept">
       <id property="dno" column="dept.dno"/>
       <result property="name" column="dept.name"/>
       <result property="delFlag" column="dept.delFlag"/>
@@ -22,7 +22,7 @@
 
 
     <!--courseList对象：一对多-->
-    <collection property="courseList" ofType="cn.njit.entry.Course" javaType="java.util.ArrayList">
+    <collection property="courseList" ofType="cn.njit.entity.Course" javaType="java.util.ArrayList">
       <id property="cno" column="course.cno"/>
       <result property="name" column="course.name"/>
       <result property="tno" column="course.tno"/>
@@ -132,7 +132,7 @@
   </update>
 
   <!--全属性添加-->
-  <insert id="insert" parameterType="cn.njit.entry.Student" >
+  <insert id="insert" parameterType="cn.njit.entity.Student" >
     insert into student (sno, name, password, 
       sex, dno, birthday, mobile, 
       del_flag)
@@ -142,7 +142,7 @@
   </insert>
 
   <!--添加student-->
-  <insert id="insertSelective" parameterType="cn.njit.entry.Student" >
+  <insert id="insertSelective" parameterType="cn.njit.entity.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="sno != null" >
@@ -199,7 +199,7 @@
   </insert>
 
   <!--根据sno修改属性-->
-  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entry.Student" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entity.Student" >
     update student
     <set >
       <if test="name != null" >
@@ -228,7 +228,7 @@
   </update>
 
   <!--全属性修改-->
-  <update id="updateByPrimaryKey" parameterType="cn.njit.entry.Student" >
+  <update id="updateByPrimaryKey" parameterType="cn.njit.entity.Student" >
     update student
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

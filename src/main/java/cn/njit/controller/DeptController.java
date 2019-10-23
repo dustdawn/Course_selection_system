@@ -1,6 +1,6 @@
 package cn.njit.controller;
 
-import cn.njit.entry.Dept;
+import cn.njit.entity.Dept;
 import cn.njit.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

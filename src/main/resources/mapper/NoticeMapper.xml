@@ -3,11 +3,11 @@
 <mapper namespace="cn.njit.dao.NoticeMapper" >
 
 
-  <resultMap id="BaseResultMap" type="cn.njit.entry.Notice" >
+  <resultMap id="BaseResultMap" type="cn.njit.entity.Notice" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="del_flag" property="delFlag" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.njit.entry.Notice" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="cn.njit.entity.Notice" extends="BaseResultMap" >
     <result column="text" property="text" jdbcType="LONGVARCHAR" />
   </resultMap>
 
@@ -48,7 +48,7 @@
 
 
 
-  <insert id="insert" parameterType="cn.njit.entry.Notice" >
+  <insert id="insert" parameterType="cn.njit.entity.Notice" >
     insert into notice (id, del_flag, text
       )
     values (#{id,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{text,jdbcType=LONGVARCHAR}
@@ -56,7 +56,7 @@
   </insert>
 
 
-  <insert id="insertSelective" parameterType="cn.njit.entry.Notice" >
+  <insert id="insertSelective" parameterType="cn.njit.entity.Notice" >
     insert into notice
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -83,7 +83,7 @@
   </insert>
 
 
-  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entry.Notice" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.njit.entity.Notice" >
     update notice
     <set >
       <if test="delFlag != null" >
@@ -95,13 +95,13 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.njit.entry.Notice" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.njit.entity.Notice" >
     update notice
     set del_flag = #{delFlag,jdbcType=INTEGER},
       text = #{text,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.njit.entry.Notice" >
+  <update id="updateByPrimaryKey" parameterType="cn.njit.entity.Notice" >
     update notice
     set del_flag = #{delFlag,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}

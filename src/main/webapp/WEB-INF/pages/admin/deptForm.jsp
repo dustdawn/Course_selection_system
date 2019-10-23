@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -145,7 +143,7 @@
           </a>
         </li>
 
-        <li class="treeview">
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-building-o"></i> <span>院系管理</span>
             <span class="pull-right-container">
@@ -153,7 +151,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
             <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
           </ul>
         </li>
@@ -161,18 +159,18 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
+            <i class="fa fa-graduation-cap"></i> <span>院系管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
+            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
+            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
           </ul>
         </li>
 
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-group"></i> <span>学生管理</span>
             <span class="pull-right-container">
@@ -181,7 +179,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li class="active"><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
           </ul>
         </li>
 
@@ -223,94 +221,73 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        学生列表
-        <small>信息显示</small>
+        院系管理
+        <small>信息添加</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">学生管理</a></li>
-        <li class="active">学生列表</li>
+        <li><a href="#">院系管理</a></li>
+        <li class="active">院系录入</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <div class="row">
-        <div class="col-xs-12">
+      <!-- Default box -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">添加</h3>
 
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <div class="col">
+        </div>
 
+        <div class="box-body">
 
-                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>学号查询：
-                <input type="text" class="form-control" id="searchByNo" value=""/>
-                </label>
-                <span style="padding-right: 40px">
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
-
-
-
-                <label class="form-inline" for="searchByName" style="padding-left: 40px"/>姓名查询：
-                <input type="text" class="form-control" id="searchByName" value=""/>
-                </label>
-                <span>
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
+          <form action="<%=basePath%>/admin/deptForm" method="post">
+            <%--表单盒子体--%>
+            <div class="box-body">
+              <div class="col-md-12">
+              <%--院系号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="deptNo">院系号</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-university"></i>
+                      </div>
+                      <input type="text" class="form-control" id="deptNo" name="dno" value="" placeholder="请输入院系号">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              <%--院系名--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="deptName">院系名</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-map"></i>
+                      </div>
+                      <input type="text" class="form-control" id="deptName" name="name" value="" placeholder="请输入院系名">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
-
             </div>
-            <%--/box-head--%>
-            <div class="box-body">
-              <table id="studentList" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>学号</th>
-                  <th>姓名</th>
-                  <th>密码</th>
-                  <th>性别</th>
-                  <th>院系</th>
-                  <th>手机</th>
-                  <th>生日</th>
-                  <th>修改</th>
-                  <th>删除</th>
-                </tr>
-                </thead>
-                <tbody>
 
-                <c:forEach var="item" items="${studentList}" varStatus="staturs">
-                  <tr>
-                    <td>${item.sno}</td>
-                    <td>${item.name}</td>
-                    <td>${item.password}</td>
-                    <td>${item.sex}</td>
-                    <td>${item.dept.name}</td>
-                    <td>${item.mobile}</td>
-                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
-                    <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
-                        <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
-                    </td>
-                  </tr>
-                </c:forEach>
 
-                </tbody>
-                <%--<tfoot>
-                <tr>
-                  <th>工号</th>
-                  <th>姓名</th>
-                  <th>密码</th>
-                  <th>性别</th>
-                  <th>手机</th>
-                </tr>
-                </tfoot>--%>
-              </table>
 
-              <%--修改成功窗口--%>
+
+
+            <div class="box-footer" align="center">
+              <button type="button" class="btn btn-warning" id="empty">清空</button>
+              <button type="submit" class="btn btn-primary" id="save">保存</button>
+            </div>
+
+              <%--保存成功窗口--%>
 
               <div class="modal modal-info fade" id="ifSuccess">
                 <div class="modal-dialog">
@@ -321,7 +298,7 @@
                       <h4 class="modal-title">提示</h4>
                     </div>
                     <div class="modal-body">
-                      <h4 class="modal-title" align="center">修改成功</h4>
+                      <h4 class="modal-title" align="center">保存成功</h4>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
@@ -331,42 +308,21 @@
                 </div>
                 <!-- /.modal-dialog -->
               </div>
-              <%--/修改成功窗口--%>
+              <%--/保存成功窗口--%>
 
-              <%--删除窗口--%>
-
-              <div class="modal fade" id="deleteConfirm">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">提示</h4>
-                    </div>
-                    <div class="modal-body">
-                      <h4 class="modal-title" align="center">确认要删除吗？</h4>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
-                      <button type="button" class="btn btn-primary" id="delete">确认</button>
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-              </div>
-              <!-- /.modal -->
-              <%--/删除窗口--%>
+          </form>
+          <%--表单尾--%>
 
 
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <strong style="color: red">请确保修改院系信息未重复</strong>
             </div>
-            <%--/box-body--%>
           </div>
-          <%--/box--%>
+
         </div>
-        <%--/col-xs-12--%>
+
       </div>
-      <%--/row--%>
 
 
     </section>
@@ -382,9 +338,6 @@
 <script src="<%=basePath%>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="<%=basePath%>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<%=basePath%>/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- PACE -->
 <script src="<%=basePath%>/bower_components/PACE/pace.min.js"></script>
 <!-- SlimScroll -->
@@ -396,28 +349,63 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
-  $(function () {
+  // 清空事件
+  $(document).ready(function () {
+    $("#empty").bind("click", function () {
+        //alert(55);
+      $("#deptNo").val("");
+      $("#deptName").val("");
+    })
+
     let flag = <%=flag%>;
     console.log(flag);
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')
     }
-
-    $("#delete").on('click',function () {
-      $("#deleteConfirm").modal("hide")
-      window.location.href = $('#yes').attr('href');
-    })
-
-    $('#studentList').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
   })
+
+  $(function () {
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        dno: {
+          validators: {
+            notEmpty: {
+              message: '院系号不能为空'
+            },
+            // threshold: 2,//有2字符以上才发送ajax请求
+            remote: {//ajax验证
+              url: "<%=basePath%>/admin/checkDept",
+              message: '用户名已存在,请重新输入',
+              //delay: 500,//ajax请求间隔
+              type: 'POST',
+              data: function(validator) {
+                return {
+                  tno : $("input[name=dno]").val()
+                };
+              }
+            }
+          }
+        },
+        name: {
+          validators: {
+            notEmpty: {
+              message: '院系名不能为空'
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>

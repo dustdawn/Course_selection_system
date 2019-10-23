@@ -7,6 +7,7 @@
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+
   String flag = request.getParameter("flag");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -145,7 +146,7 @@
           </a>
         </li>
 
-        <li class="treeview">
+        <li class="active treeview">
           <a href="#">
             <i class="fa fa-building-o"></i> <span>院系管理</span>
             <span class="pull-right-container">
@@ -154,7 +155,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/deptForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
-            <li><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
+            <li class="active"><a href="<%=basePath%>/admin/deptList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
           </ul>
         </li>
 
@@ -172,7 +173,7 @@
           </ul>
         </li>
 
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-group"></i> <span>学生管理</span>
             <span class="pull-right-container">
@@ -181,7 +182,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li class="active"><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
           </ul>
         </li>
 
@@ -223,13 +224,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        学生列表
+        院系列表
         <small>信息显示</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">学生管理</a></li>
-        <li class="active">学生列表</li>
+        <li><a href="#">院系管理</a></li>
+        <li class="active">院系列表</li>
       </ol>
     </section>
 
@@ -244,8 +245,8 @@
               <div class="col">
 
 
-                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>学号查询：
-                <input type="text" class="form-control" id="searchByNo" value=""/>
+                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>工号查询：
+                  <input type="text" class="form-control" id="searchByNo" value=""/>
                 </label>
                 <span style="padding-right: 40px">
                   <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
@@ -254,7 +255,7 @@
 
 
                 <label class="form-inline" for="searchByName" style="padding-left: 40px"/>姓名查询：
-                <input type="text" class="form-control" id="searchByName" value=""/>
+                  <input type="text" class="form-control" id="searchByName" value=""/>
                 </label>
                 <span>
                   <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
@@ -266,34 +267,24 @@
             </div>
             <%--/box-head--%>
             <div class="box-body">
-              <table id="studentList" class="table table-bordered table-hover">
+              <table id="teacherList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>学号</th>
-                  <th>姓名</th>
-                  <th>密码</th>
-                  <th>性别</th>
-                  <th>院系</th>
-                  <th>手机</th>
-                  <th>生日</th>
+                  <th>院系号</th>
+                  <th>院系名</th>
                   <th>修改</th>
                   <th>删除</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach var="item" items="${studentList}" varStatus="staturs">
+                <c:forEach var="item" items="${deptList}" varStatus="staturs">
                   <tr>
-                    <td>${item.sno}</td>
+                    <td>${item.dno}</td>
                     <td>${item.name}</td>
-                    <td>${item.password}</td>
-                    <td>${item.sex}</td>
-                    <td>${item.dept.name}</td>
-                    <td>${item.mobile}</td>
-                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
+                    <td><a href="<%=basePath%>/admin/deptEdit?dno=${item.dno}">编辑</a></td>
                     <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
-                        <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
+                        <a href="<%=basePath%>/admin/deptDelete?dno=${item.dno}" id="yes"></a>
                     </td>
                   </tr>
                 </c:forEach>
@@ -358,7 +349,6 @@
               <!-- /.modal -->
               <%--/删除窗口--%>
 
-
             </div>
             <%--/box-body--%>
           </div>
@@ -379,7 +369,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="<%=basePath%>/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
@@ -397,7 +387,8 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  $(function () {
+  $(document).ready(function () {
+
     let flag = <%=flag%>;
     console.log(flag);
     if (flag != null && flag=='success') {
@@ -408,8 +399,41 @@
       $("#deleteConfirm").modal("hide")
       window.location.href = $('#yes').attr('href');
     })
+  })
+  /*function getList() {
+    var list = {
+      tno : $("#searchByNo").val(),
+      name : $("#searchByName").val()
+    }
+    $.ajax({
+      //请求方式
+      type : "POST",
+      //请求的媒体类型
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      //请求地址
+      url : "<=basePath/admin/teacherList",
+      //数据，json字符串
+      data : list,
+      //返回类型
+      // dataType:"json",
+      //请求成功
+      success : function(result) {
+        console.log("成功", result);
 
-    $('#studentList').DataTable({
+      },
+      //请求失败，包含具体的错误信息
+      error : function(e){
+        console.log("失败");
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    });
+    $("#searchByNo").val("");
+    $("#searchByName").val("");
+  }*/
+
+  $(function () {
+    $('#teacherList').DataTable({
       'paging'      : true,
       'lengthChange': false,
       'searching'   : false,

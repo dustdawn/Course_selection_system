@@ -1,6 +1,6 @@
 package cn.njit.dao;
 
-import cn.njit.entry.Admin;
+import cn.njit.entity.Admin;
 
 public interface AdminMapper {
     int deleteByPrimaryKey(String no);

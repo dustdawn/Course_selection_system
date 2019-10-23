@@ -5,7 +5,7 @@ package cn.njit.service;
  * @date 2019/10/18 9:58
  */
 
-import cn.njit.entry.Admin;
+import cn.njit.entity.Admin;
 
 /**
  * AdminService
