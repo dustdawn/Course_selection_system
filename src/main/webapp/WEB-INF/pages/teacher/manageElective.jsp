@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="true" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/index" class="logo">
+    <a href="<%=basePath%>/pages/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -126,7 +126,7 @@
         </div>
         <div class="pull-left info">
           <p>${userSession.name}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：管理员</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：教师</a>
         </div>
       </div>
 
@@ -137,13 +137,10 @@
         <!--功能菜单都用这个模板-->
 
         <li>
-          <a href="<%=basePath%>/pages/admin/index">
+          <a href="<%=basePath%>/pages/teacher/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
-
-
-
 
         <li class="active treeview">
           <a href="#">
@@ -153,12 +150,23 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/teacher/courseForm"><i class="fa fa-circle-o"></i> 公选课</a></li>
-            <li class="active"><a href="<%=basePath%>/pages/teacher/courseList"><i class="fa fa-circle-o"></i> 选修课</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/manageElective"><i class="fa fa-circle-o"></i> 公选课</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/teacher/managePublic"><i class="fa fa-circle-o"></i> 选修课</a></li>
           </ul>
         </li>
 
-
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<%=basePath%>/pages/teacher/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+          </ul>
+        </li>
 
       </ul>
     </section>
@@ -172,49 +180,91 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        选修课列表
+        <small>信息显示</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="#">课程管理</a></li>
-        <li class="active">课程列表</li>
+        <li><a href="#">选修课管理</a></li>
+        <li class="active">选修课列表</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+      <div class="row">
+        <div class="col-xs-12">
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <div class="col">
 
-          </div>
-        </div>
-        <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
-          <div class="row">
-            <div class="col-xs-12 text-center">
+
+                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>课程名称查询：
+                <input type="text" class="form-control" id="searchByNo" value=""/>
+                </label>
+                <span style="padding-right: 40px">
+                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                </span>
+
+
+
+                <label class="form-inline" for="searchByName" style="padding-left: 40px"/>课程编号查询：
+                <input type="text" class="form-control" id="searchByName" value=""/>
+                </label>
+                <span>
+                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                </span>
+
+              </div>
+
 
             </div>
-          </div>
-          <div class="ajax-content">
-            正文
-          </div>
-        </div>
-        <!-- /.box-body -->
+            <%--/box-head--%>
+            <div class="box-body">
+              <table id="teacherList" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>课程名称</th>
+                  <th>课程编号</th>
+                  <th>选课人数</th>
+                </tr>
+                </thead>
+                <tbody>
 
-        <!-- /.box-footer-->
+                <c:forEach var="item" items="${teacherList}" varStatus="staturs">
+                  <tr>
+                    <td>${item.tno}</td>
+                    <td>${item.name}</td>
+                    <td>${item.password}</td>
+                    <td>${item.sex}</td>
+                    <td>${item.mobile}</td>
+                    <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
+                    <td><a href="<%=basePath%>/admin/editStudent?item.tno=${item.tno}">编辑</a></td>
+                  </tr>
+                </c:forEach>
+
+                </tbody>
+                <%--<tfoot>
+                <tr>
+                  <th>工号</th>
+                  <th>姓名</th>
+                  <th>密码</th>
+                  <th>性别</th>
+                  <th>手机</th>
+                </tr>
+                </tfoot>--%>
+              </table>
+            </div>
+            <%--/box-body--%>
+          </div>
+          <%--/box--%>
+        </div>
+        <%--/col-xs-12--%>
       </div>
-      <!-- /.box -->
+      <%--/row--%>
+
 
     </section>
     <!-- /.content -->

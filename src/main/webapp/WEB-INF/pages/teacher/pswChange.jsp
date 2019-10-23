@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="true" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -48,7 +48,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/index" class="logo">
+    <a href="<%=basePath%>/pages/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -126,7 +126,7 @@
         </div>
         <div class="pull-left info">
           <p>${userSession.name}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：管理员</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> 登录身份：教师</a>
         </div>
       </div>
 
@@ -137,7 +137,7 @@
         <!--功能菜单都用这个模板-->
 
         <li>
-          <a href="<%=basePath%>/pages/admin/index">
+          <a href="<%=basePath%>/pages/teacher/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
@@ -145,40 +145,14 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
+            <i class="fa fa-graduation-cap"></i> <span>课程管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-group"></i> <span>学生管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-book"></i> <span>课程管理</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/managePublic"><i class="fa fa-circle-o"></i> 公选课</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/manageElective"><i class="fa fa-circle-o"></i> 选修课</a></li>
           </ul>
         </li>
 
@@ -190,8 +164,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
-            <li class="active"><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li class="active"><a href="<%=basePath%>/pages/teacher/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
 

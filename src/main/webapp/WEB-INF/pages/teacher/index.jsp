@@ -129,17 +129,6 @@
           <a href="#"><i class="fa fa-circle text-success"></i>登录身份：教师</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">导航菜单</li>
@@ -154,7 +143,7 @@
 
 
 
-        <li>
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-book"></i> <span>课程管理</span>
             <span class="pull-right-container">
@@ -162,11 +151,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/teacher/courseForm"><i class="fa fa-circle-o"></i> 公选课</a></li>
-            <li><a href="<%=basePath%>/pages/teacher/courseList"><i class="fa fa-circle-o"></i> 选修课</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/managePublic"><i class="fa fa-circle-o"></i> 公选课</a></li>
+            <li><a href="<%=basePath%>/pages/teacher/manageElective"><i class="fa fa-circle-o"></i> 选修课</a></li>
           </ul>
         </li>
-
 
         <li class="treeview">
           <a href="#">
