@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="true" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -252,8 +252,87 @@
           <div class="row">
             <div class="col-xs-12 text-center">
 
-              <a href="http://www.baidu.com" id="yes">444</a>
-              <button type="button" class="btn btn-primary" id="b"></button>
+              <%--窗口--%>
+
+              <div class="modal fade" id="showList">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <%--表格--%>
+                      <table id="studentList" class="table">
+                        <thead>
+                        <tr>
+                          <th>学号</th>
+                          <th>姓名</th>
+                          <th>密码</th>
+                          <th>性别</th>
+                          <th>院系</th>
+                          <th>手机</th>
+                          <th>生日</th>
+                          <th>修改</th>
+                          <th>删除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>a</td>
+                            <td>a</td>
+                            <td>a</td>
+                            <td>a</td>
+                            <td>a</td>
+                            <td>a</td>
+                            <td>a</td>
+                            <td>a</td>
+                            <td><a>1</a></td>
+                          </tr>
+
+
+                        <c:forEach var="item" items="${studentList}" varStatus="staturs">
+                          <tr>
+                            <td>${item.sno}</td>
+                            <td>${item.name}</td>
+                            <td>${item.password}</td>
+                            <td>${item.sex}</td>
+                            <td>${item.dept.name}</td>
+                            <td>${item.mobile}</td>
+                            <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
+                            <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
+                            <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
+                              <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
+                            </td>
+                          </tr>
+                        </c:forEach>
+
+                        </tbody>
+                        <%--<tfoot>
+                        <tr>
+                          <th>工号</th>
+                          <th>姓名</th>
+                          <th>密码</th>
+                          <th>性别</th>
+                          <th>手机</th>
+                        </tr>
+                        </tfoot>--%>
+                      </table>
+                      <%--/表格--%>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" id="delete">确认</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <%--/窗口--%>
 
             </div>
           </div>
@@ -294,14 +373,7 @@
 <script type="text/javascript">
   $(function () {
 
-    $("#b").bind("click", function () {
-      alert(33)
-
-      let h = $('#yes').attr('href');
-      alert(h)
-      window.location.href = h
-    })
-
+    $("#showList").modal("show");
   })
 
 

@@ -21,7 +21,7 @@ import java.util.Map;
  * @date 2019/10/18 15:04
  */
 @Controller
-@RequestMapping("/tea")
+@RequestMapping("/teacher")
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;

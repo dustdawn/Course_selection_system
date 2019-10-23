@@ -507,7 +507,7 @@
       //请求的媒体类型
       contentType: "application/x-www-form-urlencoded;charset=UTF-8",
       //请求地址
-      url: "<%=basePath%>/tea/getNameList",
+      url: "<%=basePath%>/teacher/getNameList",
       data: {},
       //返回类型
       // dataType:"json",

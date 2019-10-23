@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -279,6 +280,7 @@
                   <th>剩余名额</th>
                   <th>修改</th>
                   <th>删除</th>
+                  <th>查看选课学生</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -298,6 +300,7 @@
                     <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
                         <a href="<%=basePath%>/admin/courseDelete?cno=${item.cno}" id="yes"></a>
                     </td>
+                    <td><a href="javascript:void(0);" onclick="viewList('${item.cno}')">查看</a></td>
                   </tr>
                 </c:forEach>
 
@@ -362,6 +365,49 @@
               <%--/删除窗口--%>
 
 
+              <%--窗口--%>
+
+              <div class="modal fade" id="showList">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">学生列表</h4>
+                    </div>
+                    <div class="modal-body">
+                      <%--表格--%>
+                      <table id="studentList" class="table">
+                        <thead>
+                        <tr>
+                          <th>学号</th>
+                          <th>姓名</th>
+                          <th>密码</th>
+                          <th>性别</th>
+                          <th>院系</th>
+                          <th>手机</th>
+                          <th>生日</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                      </table>
+                      <%--/表格--%>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">取消</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              <%--/窗口--%>
+
+
             </div>
             <%--/box-body--%>
           </div>
@@ -401,16 +447,20 @@
 <!-- page script -->
 <script type="text/javascript">
   $(function () {
+    //删除确认事件
     let flag = <%=flag%>;
     console.log(flag);
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')
     }
 
+    //删除事件
     $("#delete").on('click',function () {
       $("#deleteConfirm").modal("hide")
       window.location.href = $('#yes').attr('href');
     })
+
+
 
     $('#courseList').DataTable({
       'paging'      : true,
@@ -420,7 +470,62 @@
       'info'        : true,
       'autoWidth'   : false
     })
+
+    //关闭列表事件
+    $('#showList').on('hide.bs.modal', function () {
+      let dom = $("#studentList").find('tbody');
+      //清空列表
+      dom.html('');
+    })
+
   })
+
+  function viewList(no) {
+    $("#showList").modal("show");
+    $.ajax({
+      //请求方式
+      type: "POST",
+      //请求的媒体类型
+      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+      //请求地址
+      url: "<%=basePath%>/course/studentList",
+      data: {"cno" : no},
+      //返回类型
+      // dataType:"json",
+      //请求成功
+      success: function (result) {
+        console.log("获取列表成功", result);
+        if (null != result) {
+          let dom = $("#studentList").find('tbody');
+          let str = '';
+          for (let i = 0; i < result.length; i++) {
+            let birthday = result[i].birthday;
+            let date = new Date(birthday);
+            result[i].birthday = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+            str += "<tr>" +
+                      "<td>"+result[i].sno+"</td>" +
+                      "<td>"+result[i].name+"</td>" +
+                      "<td>"+result[i].password+"</td>" +
+                      "<td>"+result[i].sex+"</td>" +
+                      "<td>"+result[i].dept.name+"</td>" +
+                      "<td>"+result[i].mobile+"</td>" +
+                      "<td>"+result[i].birthday+"</td>" +
+                    "</tr>"
+
+          }
+          console.log("str is",str);
+          dom.append(str);
+        }
+
+      },
+      //请求失败，包含具体的错误信息
+      error: function (e) {
+        console.log("失败");
+        console.log(e.status);
+        console.log(e.responseText);
+      }
+    });
+  }
 </script>
 </body>
 </html>
