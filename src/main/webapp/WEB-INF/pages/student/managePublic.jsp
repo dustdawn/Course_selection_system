@@ -159,7 +159,7 @@
 
         <li class="active treeview">
           <a href="#">
-            <i class="fa fa-book"></i> <span>已选课程管理</span>
+            <i class="fa fa-bookmark"></i> <span>已选课程管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -177,7 +177,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/student/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/student/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
             <li><a href="<%=basePath%>/pages/student/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>

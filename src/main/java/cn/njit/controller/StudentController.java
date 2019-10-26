@@ -5,6 +5,7 @@ import cn.njit.entity.Student;
 import cn.njit.service.CourseService;
 import cn.njit.service.StudentService;
 import cn.njit.utils.LoginUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,10 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+
+    //创建一个日志对象，就可以通过日志输出
+    private static final Logger LOGGER =
+            Logger.getLogger(StudentController.class);
 
     private Student student;
 
@@ -158,6 +163,58 @@ public class StudentController {
         }
 
         return "student/selectElective";
+    }
+
+    //个人信息
+    @RequestMapping(value = "/info")
+    public String info(HttpServletRequest request) {
+        if (null != student) {
+            request.setAttribute("student", student);
+        }
+
+        return "student/info";
+    }
+
+    //信息修改
+    @RequestMapping(value = "/studentUpdate")
+    public String studentUpdate(Student student) {
+        if (null != student) {
+            student.setDelFlag(0);
+            int flag = studentService.updateByPrimaryKeySelective(student);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+                this.student = studentService.selectByPrimaryKey(student.getSno());
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/student/info";
+    }
+
+    //密码修改
+    @RequestMapping(value = "/studentPswChange")
+    public String studentPswChange(HttpServletRequest request) {
+        String oldPassword = request.getParameter("passwordOld");
+        String newPassword = request.getParameter("passwordNew");
+        String re = "";
+        if (oldPassword != null && newPassword != null) {
+            if (null != student && student.getPassword().equals(oldPassword)) {
+                student.setPassword(newPassword);
+                int flag = studentService.updateByPrimaryKeySelective(student);
+                if (1 == flag) {
+                    LOGGER.info(">>>修改成功<<<");
+                    this.student = studentService.selectByPrimaryKey(student.getSno());
+                    re = "修改密码成功";
+                }else {
+                    LOGGER.info(">>>修改失败<<<");
+                    re = "修改密码失败";
+                }
+            }else {
+                re = "输入原密码错误";
+            }
+        }
+        request.setAttribute("re", re);
+        return "student/pswChange";
     }
 
 
