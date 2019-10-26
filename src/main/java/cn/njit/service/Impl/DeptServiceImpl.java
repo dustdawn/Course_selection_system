@@ -5,6 +5,7 @@ import cn.njit.entity.Dept;
 import cn.njit.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/20 21:45
  */
+@Transactional
 @Service
 public class DeptServiceImpl implements DeptService {
     @Autowired
