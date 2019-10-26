@@ -1,10 +1,12 @@
+<%@ page import="cn.njit.entity.Admin" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page isELIgnored="true" %>
+<%@ page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
           + path + "/";
+  Admin admin = (Admin) request.getAttribute("admin");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -203,7 +205,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li class="active"><a href="<%=basePath%>/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
             <li><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
@@ -220,8 +222,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        个人信息
+        <small>信息修改</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
@@ -234,111 +236,101 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+          <h3 class="box-title">修改</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-
-          </div>
         </div>
         <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
-          <div class="row">
-            <div class="col-xs-12 text-center">
 
-              <%--窗口--%>
-
-              <div class="modal fade" id="showList">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">提示</h4>
-                    </div>
-                    <div class="modal-body">
-                      <%--表格--%>
-                      <table id="studentList" class="table">
-                        <thead>
-                        <tr>
-                          <th>学号</th>
-                          <th>姓名</th>
-                          <th>密码</th>
-                          <th>性别</th>
-                          <th>院系</th>
-                          <th>手机</th>
-                          <th>生日</th>
-                          <th>修改</th>
-                          <th>删除</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>a</td>
-                            <td>a</td>
-                            <td>a</td>
-                            <td>a</td>
-                            <td>a</td>
-                            <td>a</td>
-                            <td>a</td>
-                            <td>a</td>
-                            <td><a>1</a></td>
-                          </tr>
-
-
-                        <c:forEach var="item" items="${studentList}" varStatus="staturs">
-                          <tr>
-                            <td>${item.sno}</td>
-                            <td>${item.name}</td>
-                            <td>${item.password}</td>
-                            <td>${item.sex}</td>
-                            <td>${item.dept.name}</td>
-                            <td>${item.mobile}</td>
-                            <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
-                            <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
-                            <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
-                              <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
-                            </td>
-                          </tr>
-                        </c:forEach>
-
-                        </tbody>
-                        <%--<tfoot>
-                        <tr>
-                          <th>工号</th>
-                          <th>姓名</th>
-                          <th>密码</th>
-                          <th>性别</th>
-                          <th>手机</th>
-                        </tr>
-                        </tfoot>--%>
-                      </table>
-                      <%--/表格--%>
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
-                      <button type="button" class="btn btn-primary" id="delete">确认</button>
+          <form action="<%=basePath%>/admin/adminUpdate" method="post">
+            <%--表单盒子体--%>
+            <div class="box-body">
+              <div class="col-md-12">
+                <%--工号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="adminNo">管理员工号</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-university"></i>
+                      </div>
+                      <input type="text" readonly class="form-control" id="adminNo" name="no" value="${admin.no}" placeholder="请输入教师工号">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
-                  <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
+                <%--姓名--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="adminName">姓名</label>
+                    <div class="input-group name">
+                      <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </div>
+                      <input type="text" class="form-control" id="adminName" name="name" value="${admin.name}" placeholder="请输入姓名">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-              <!-- /.modal -->
-              <%--/窗口--%>
+
+              <div class="col-md-12">
+                <%--性别--%>
+                <!-- 可选下拉框 -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="adminSex">性别</label>
+                    <div class="input-group sex">
+                      <div class="input-group-addon">
+                        <i class="fa fa-male"></i>
+                        <i class="fa fa-female"></i>
+                      </div>
+                      <select class="form-control select2" style="width: 100%;" name="sex" id="adminSex">
+                        <option value="">---请选择---</option>
+                        <option value="男" <%if(admin.getSex().equals("男")){%>selected<%}%> >男</option>
+                        <option value="女" <%if(admin.getSex().equals("女")){%>selected<%}%> >女</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+                <%--手机号--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="adminMobile">手机号码</label>
+                    <div class="input-group phone">
+                      <div class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                      </div>
+                      <input type="text" class="form-control" id="adminMobile" name="mobile" value="${admin.mobile}" placeholder="请输入手机号">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
 
             </div>
+
+
+
+            <div class="box-footer" align="center">
+              <button type="button" class="btn btn-warning" id="empty">清空</button>
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </form>
+          <%--表单尾--%>
+
+
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <strong style="color: red">请确保添加信息未重复</strong>
+            </div>
           </div>
-          <div class="ajax-content">
-            正文
-          </div>
+
         </div>
         <!-- /.box-body -->
 
@@ -369,16 +361,56 @@
 <script src="<%=basePath%>/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  $(function () {
+  // 清空事件
+  $(document).ready(function () {
+    $("#empty").bind("click", function () {
+      //alert(55);
+      $("#adminName").val("");
 
-    $("#showList").modal("show");
+      $("#adminSex").val("");
+      $("#adminMobile").val("");
+    })
   })
 
-
-
-
+  $(function () {
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        tno: {
+          validators: {
+            notEmpty: {
+              message: '教师工号不能为空'
+            }
+          }
+        },
+        name: {
+          validators: {
+            notEmpty: {
+              message: '姓名不能为空'
+            }
+          }
+        },
+        mobile: {
+          validators: {
+            regexp: {
+              regexp: /^1(3|4|5|6|7|8|9)\d{9}$/,
+              message: '请输入正确的号码格式'
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>

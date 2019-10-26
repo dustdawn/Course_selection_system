@@ -203,7 +203,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
             <li class="active"><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
@@ -220,8 +220,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        密码
+        <small>密码修改</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
@@ -234,9 +234,9 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+          <h3 class="box-title">修改</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -246,17 +246,93 @@
           </div>
         </div>
         <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
-          <div class="row">
-            <div class="col-xs-12 text-center">
+
+          <form action="<%=basePath%>/admin/pswChange" method="post">
+            <%--表单盒子体--%>
+            <div class="box-body">
+
+
+              <div class="col-md-12">
+                <%--密码1--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherPassword1">请输入旧密码</label>
+                    <div class="input-group password">
+                      <div class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                      <input type="password" class="form-control" id="teacherPassword1" name="passwordOld" value="" placeholder="请输入旧密码">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-md-12">
+                <%--密码2--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherPassword2">请输入新密码</label>
+                    <div class="input-group password">
+                      <div class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                      <input type="password" class="form-control" id="teacherPassword2" name="passwordNew" value="" placeholder="请输入新密码">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <%--密码3--%>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="teacherPassword3">请再次输入新密码</label>
+                    <div class="input-group password">
+                      <div class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                      <input type="password" class="form-control" id="teacherPassword3" name="passwordAgain" value="" placeholder="请再次输入新密码">
+                      <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
-          </div>
-          <div class="ajax-content">
-            正文
-          </div>
+
+
+            <div class="box-footer" align="center">
+              <button type="submit" class="btn btn-primary">修改</button>
+            </div>
+
+            <%--修改成功窗口--%>
+
+            <div class="modal modal-info fade" id="ifSuccess">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                  </div>
+                  <div class="modal-body">
+                    <h4 class="modal-title" align="center">${re}</h4>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <%--/修改成功窗口--%>
+          </form>
+          <%--表单尾--%>
+
         </div>
         <!-- /.box-body -->
 
@@ -288,18 +364,50 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
+
+  $(function () {
+    let s = '${re}';
+    if (s != "") {
+      $("#ifSuccess").modal('show');
+    }
+    console.log(s);
+    console.log(typeof s);
+
+
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        passwordNew: {
+          validators: {
+            notEmpty: {
+              message: '密码不能为空'
+            }
+          }
+        },
+        passwordAgain: {
+          validators: {
+            notEmpty: {
+              message: '密码不能为空'
+            },
+            identical: {
+              field: 'passwordNew',
+              message: '两次输入的密码不同'
+            }
+          }
+        }
+
       }
-    })
-  })
+    });
+  });
 </script>
 </body>
 </html>
