@@ -458,7 +458,7 @@
     $("#empty").bind("click", function () {
       //alert(55);
       $("#courseType").val("");
-      $("#courseNo").val("");
+
       $("#courseName").val("");
       $("#courseTeacher").val("");
       $("#courseDept").val("");

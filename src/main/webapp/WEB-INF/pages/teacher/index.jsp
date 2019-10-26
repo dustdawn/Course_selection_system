@@ -102,7 +102,7 @@
               <li class="user-footer">
 
                 <div class="pull-right">
-                  <a href="<%=basePath%>/tea/logout" class="btn btn-default btn-flat">退出登录</a>
+                  <a href="<%=basePath%>/teacher/logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
@@ -136,7 +136,7 @@
         <!--功能菜单都用这个模板-->
 
         <li class="active">
-          <a href="#">
+          <a href="<%=basePath%>/pages/teacher/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
@@ -151,20 +151,20 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/teacher/managePublic"><i class="fa fa-circle-o"></i> 公选课</a></li>
-            <li><a href="<%=basePath%>/pages/teacher/manageElective"><i class="fa fa-circle-o"></i> 选修课</a></li>
+            <li><a href="<%=basePath%>/teacher/managePublic"><i class="fa fa-circle-o"></i> 公选课</a></li>
+            <li><a href="<%=basePath%>/teacher/manageElective"><i class="fa fa-circle-o"></i> 选修课</a></li>
           </ul>
         </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>个人信息及密码</span>
+            <i class="fa fa-info"></i> <span>个人信息及密码</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/teacher/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/teacher/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
             <li><a href="<%=basePath%>/pages/teacher/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
@@ -185,9 +185,9 @@
         <small>加载范例</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Pace page</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
+        <li><a href="#">主页</a></li>
+        <li class="active">index</li>
       </ol>
     </section>
 
@@ -251,17 +251,7 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
-    })
-  })
+
 
 </script>
 </body>

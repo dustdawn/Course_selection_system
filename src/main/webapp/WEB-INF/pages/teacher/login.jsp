@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@page isELIgnored="true" %>
+<%@page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -74,7 +74,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">教师 登录 / LOGIN</p>
 
-    <form action="<%=basePath%>/tea/toLogin" method="post">
+    <form action="<%=basePath%>/teacher/toLogin" method="post">
       <div class="form-group has-feedback">
         <input name="tno" value="<%=tno%>" type="user" class="form-control" placeholder="请输入教师工号">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>

@@ -421,7 +421,7 @@
   // 清空事件
   $(document).ready(function () {
     $("#empty").bind("click", function () {
-      $("#studentNo").val("");
+
       $("#studentName").val("");
       $("#studentPassword").val("");
       $("#studentSex").val("");
