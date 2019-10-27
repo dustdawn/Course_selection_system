@@ -97,8 +97,9 @@ public class AdminController {
         //保存后，重定向到noticeList方法达到显示所有通告效果
         String re="";
         if (notice!=null){
-            notice.setId( UUID.randomUUID().toString());
+            notice.setId(UUID.randomUUID().toString().replaceAll("-", ""));
             notice.setDelFlag(0);
+            notice.setContent(notice.getContent().replaceAll("\\r\\n", "<br/>"));
             int flag = noticeService.insertSelective(notice);
             if (1 == flag) {
                 LOGGER.info(">>>添加成功<<<");

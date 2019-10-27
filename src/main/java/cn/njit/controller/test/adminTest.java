@@ -103,6 +103,10 @@ public class adminTest {
         return "redirect:/test/noticeList";
     }
 
+    public static void main(String[] args) {
+
+    }
+
 
 
 }
