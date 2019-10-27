@@ -5,19 +5,21 @@
 
   <resultMap id="BaseResultMap" type="cn.njit.entity.Notice" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="del_flag" property="delFlag" jdbcType="INTEGER" />
   </resultMap>
+
   <resultMap id="ResultMapWithBLOBs" type="cn.njit.entity.Notice" extends="BaseResultMap" >
     <result column="text" property="text" jdbcType="LONGVARCHAR" />
   </resultMap>
 
 
   <sql id="Base_Column_List" >
-    id, del_flag
+    id, ,title, del_flag
   </sql>
 
   <sql id="Blob_Column_List" >
-    text
+    content
   </sql>
 
 
@@ -49,9 +51,9 @@
 
 
   <insert id="insert" parameterType="cn.njit.entity.Notice" >
-    insert into notice (id, del_flag, text
+    insert into notice (id, title, content, del_flag
       )
-    values (#{id,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{text,jdbcType=LONGVARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{text,jdbcType=LONGVARCHAR}, #{delFlag,jdbcType=INTEGER}
       )
   </insert>
 
@@ -62,22 +64,28 @@
       <if test="id != null" >
         id,
       </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
       <if test="delFlag != null" >
         del_flag,
-      </if>
-      <if test="text != null" >
-        text,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
+      <if test="title != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
       <if test="delFlag != null" >
         #{delFlag,jdbcType=INTEGER},
-      </if>
-      <if test="text != null" >
-        #{text,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -89,8 +97,11 @@
       <if test="delFlag != null" >
         del_flag = #{delFlag,jdbcType=INTEGER},
       </if>
-      <if test="text != null" >
-        text = #{text,jdbcType=LONGVARCHAR},
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -98,12 +109,14 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.njit.entity.Notice" >
     update notice
     set del_flag = #{delFlag,jdbcType=INTEGER},
-      text = #{text,jdbcType=LONGVARCHAR}
+      content = #{content,jdbcType=LONGVARCHAR},
+      title = #{title,jdbcType=VARCHAR},
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.njit.entity.Notice" >
     update notice
-    set del_flag = #{delFlag,jdbcType=INTEGER}
+    set title = #{title,jdbcType=VARCHAR},
+        del_flag = #{delFlag,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
