@@ -364,13 +364,51 @@ public class AdminController {
     //个人信息管理
     @RequestMapping(value = "/info")
     public String info(HttpServletRequest request) {
-        request.setAttribute("user", admin);
-        return "redirect:/pages/admin/info";
+        if (null != admin) {
+            request.setAttribute("admin", admin);
+        }
+
+        return "admin/info";
     }
     //修改密码部分
     @RequestMapping(value = "/pswChange")
-    public String pswChange() {
-        return "redirect:/pages/admin/pswChange";
+    public String pswChange(HttpServletRequest request) {
+        String oldPassword = request.getParameter("passwordOld");
+        String newPassword = request.getParameter("passwordNew");
+        String re = "";
+        if (oldPassword != null && newPassword != null) {
+            if (null != admin && admin.getPassword().equals(oldPassword)) {
+                admin.setPassword(newPassword);
+                int flag = adminService.updateByPrimaryKeySelective(admin);
+                if (1 == flag) {
+                    LOGGER.info(">>>修改成功<<<");
+                    this.admin = adminService.selectByPrimaryKey(admin.getNo());
+                    re = "修改密码成功";
+                }else {
+                    LOGGER.info(">>>修改失败<<<");
+                    re = "修改密码失败";
+                }
+            }else {
+                re = "输入原密码错误";
+            }
+        }
+        request.setAttribute("re", re);
+        return "admin/pswChange";
+    }
+
+    //信息修改
+    @RequestMapping(value = "/adminUpdate")
+    public String teacherUpdate(Admin admin) {
+        if (null != admin) {
+            int flag = adminService.updateByPrimaryKeySelective(admin);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+                this.admin = adminService.selectByPrimaryKey(admin.getNo());
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/admin/info";
     }
 
     /**
@@ -447,4 +485,10 @@ public class AdminController {
         }
         return result;
     }
+
+
+
+
+
+
 }

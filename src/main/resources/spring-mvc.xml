@@ -69,6 +69,7 @@
     <mvc:resources location="/" mapping="/**/*.png"/>
     <mvc:resources location="/" mapping="/**/*.gif"/>
     <mvc:resources location="/" mapping="/**/*.woff"/>
+    <mvc:resources location="/" mapping="/**/*.woff2"/>
     <mvc:resources location="/" mapping="/**/*.ttf"/>
     <mvc:resources location="/" mapping="/**/*.jpg"/>
     <mvc:resources location="/" mapping="/**/*.mp3"/>

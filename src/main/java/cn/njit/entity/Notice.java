@@ -5,7 +5,25 @@ public class Notice {
 
     private Integer delFlag;
 
-    private String text;
+    private String title;
+
+    private String content;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
 
     public String getId() {
         return id;
@@ -23,11 +41,4 @@ public class Notice {
         this.delFlag = delFlag;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text == null ? null : text.trim();
-    }
 }

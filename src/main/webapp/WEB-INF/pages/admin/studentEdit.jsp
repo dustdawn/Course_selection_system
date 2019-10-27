@@ -210,7 +210,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
+            <li><a href="<%=basePath%>/admin/info"><i class="fa fa-circle-o"></i> 个人信息</a></li>
             <li><a href="<%=basePath%>/pages/admin/pswChange"><i class="fa fa-circle-o"></i> 密码修改</a></li>
           </ul>
         </li>
@@ -421,7 +421,7 @@
   // 清空事件
   $(document).ready(function () {
     $("#empty").bind("click", function () {
-      $("#studentNo").val("");
+
       $("#studentName").val("");
       $("#studentPassword").val("");
       $("#studentSex").val("");

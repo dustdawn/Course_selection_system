@@ -5,6 +5,7 @@ import cn.njit.entity.Teacher;
 import cn.njit.service.CourseService;
 import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,10 @@ import java.util.Map;
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
+    //创建一个日志对象，就可以通过日志输出
+    private static final Logger LOGGER =
+            Logger.getLogger(TeacherController.class);
+
     @Autowired
     private TeacherService teacherService;
     @Autowired
@@ -100,6 +105,114 @@ public class TeacherController {
             request.setAttribute("courseList", listByEntity);
         }
         return "teacher/manageElective";
+    }
+
+    //课程编辑
+    @RequestMapping(value = "/courseEdit")
+    public String courseEdit(HttpServletRequest request, String cno) {
+        if (null != cno && !cno.equals("")) {
+            Course course = courseService.selectByPrimaryKey(cno);
+            if (null != course) {
+                request.setAttribute("course", course);
+            }
+        }
+        return "teacher/courseEdit";
+    }
+
+    @RequestMapping(value = "/courseUpdate")
+    public String courseUpdate(Course course) {
+        String re = "";
+        String type = "";
+        if (null != course) {
+            course.setDelFlag(0);
+            type = course.getType();
+            int flag = courseService.updateByPrimaryKeySelective(course);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+                re = "success";
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+                re = "fail";
+            }
+        }
+        if (type.equals("选修课")) {
+            return "redirect:/teacher/manageElective?flag=" + re;
+        }
+        return "redirect:/teacher/managePublic?flag=" + re;
+    }
+
+    //删除课程
+    @RequestMapping(value = "/courseDelete")
+    public String courseDelete(String cno) {
+        Course course = null;
+        if (null != cno && !cno.equals("")) {
+            course = courseService.selectByPrimaryKey(cno);
+            int flag = courseService.deleteByPrimaryKey(cno);
+            if (1 == flag) {
+                LOGGER.info(">>>删除成功<<<");
+            }else {
+                LOGGER.info(">>>删除失败<<<");
+            }
+        }
+
+        if (null != course) {
+            if (course.getType().equals("选修课")) {
+                return "redirect:/teacher/manageElective";
+            }
+        }
+        return "redirect:/teacher/managePublic";
+    }
+
+    //个人信息
+    @RequestMapping(value = "/info")
+    public String info(HttpServletRequest request) {
+        if (null != teacher) {
+            request.setAttribute("teacher", teacher);
+        }
+
+        return "teacher/info";
+    }
+
+    //信息修改
+    @RequestMapping(value = "/teacherUpdate")
+    public String teacherUpdate(Teacher teacher) {
+        if (null != teacher) {
+            teacher.setDelFlag(0);
+            int flag = teacherService.updateByPrimaryKeySelective(teacher);
+            if (1 == flag) {
+                LOGGER.info(">>>修改成功<<<");
+                this.teacher = teacherService.selectByPrimaryKey(teacher.getTno());
+            }else {
+                LOGGER.info(">>>修改失败<<<");
+            }
+        }
+        return "redirect:/teacher/info";
+    }
+
+    //密码修改
+    @RequestMapping(value = "/teacherPswChange")
+    public String teacherPswChange(HttpServletRequest request) {
+        String oldPassword = request.getParameter("passwordOld");
+        String newPassword = request.getParameter("passwordNew");
+        String re = "";
+        if (oldPassword != null && newPassword != null) {
+            if (null != teacher && teacher.getPassword().equals(oldPassword)) {
+                teacher.setPassword(newPassword);
+                int flag = teacherService.updateByPrimaryKeySelective(teacher);
+                if (1 == flag) {
+                    LOGGER.info(">>>修改成功<<<");
+                    this.teacher = teacherService.selectByPrimaryKey(teacher.getTno());
+                    re = "修改密码成功";
+                }else {
+                    LOGGER.info(">>>修改失败<<<");
+                    re = "修改密码失败";
+                }
+            }else {
+                re = "输入原密码错误";
+            }
+        }
+        request.setAttribute("re", re);
+        return "teacher/pswChange";
     }
 
 }
