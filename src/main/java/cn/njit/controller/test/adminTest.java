@@ -1,6 +1,7 @@
 package cn.njit.controller.test;
 
 import cn.njit.entity.Course;
+import cn.njit.entity.Notice;
 import cn.njit.entity.Student;
 import cn.njit.entity.Teacher;
 import cn.njit.service.CourseService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -68,6 +70,20 @@ public class adminTest {
         List<Student> listByEntity = studentService.findListByEntity(student);
         System.out.println();
         return "success";
+    }
+
+    //点击主页，把连接改成<%=basePath%>/test/noticeList,表示点击主页时走这个方法
+    @RequestMapping(value = "noticeList")
+    public String noticeList(HttpServletRequest request) {
+        //然后把查询到的noticeList放到request域里，调用request.setAttribute,处理完转发到admin下的index页面
+        return "admin/index";
+    }
+
+    //添加通告时调用的方法，notice接收，去看实体类的属性，记得设置delFlag
+    @RequestMapping(value = "noticeForm")
+    public String noticeForm(HttpServletRequest request, Notice notice) {
+        //保存后，重定向到noticeList方法达到显示所有通告效果
+        return "redirect:/test/noticeList";
     }
 
 
