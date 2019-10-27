@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author dustdawn
@@ -37,6 +38,8 @@ public class AdminController {
     private CourseService courseService;
     @Autowired
     private DeptService deptService;
+    @Autowired
+    private NoticeService noticeService;
 
     private Admin admin;
 
@@ -59,7 +62,7 @@ public class AdminController {
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }
-                return "redirect:/pages/admin/index";
+                return "redirect:/admin/index";
             }else {
                 request.setAttribute("errorMsg", "用户密码错误");
                 System.out.println("密码错误");
@@ -77,6 +80,37 @@ public class AdminController {
         session.invalidate();
         return "admin/login";
     }
+
+    //主页
+    //点击主页，把连接改成<%=basePath%>/test/noticeList,表示点击主页时走这个方法
+    @RequestMapping(value = "index")
+    public String noticeList(HttpServletRequest request) {
+        //然后把查询到的noticeList放到request域里，调用request.setAttribute,处理完转发到admin下的index页面
+        List<Notice> noticeList = noticeService.findList();
+        request.setAttribute("noticeList", noticeList);
+        return "admin/index";
+    }
+
+    //添加通告时调用的方法，notice接收，去看实体类的属性，记得设置delFlag
+    @RequestMapping(value = "noticeForm")
+    public String noticeForm(HttpServletRequest request, Notice notice) {
+        //保存后，重定向到noticeList方法达到显示所有通告效果
+        String re="";
+        if (notice!=null){
+            notice.setId( UUID.randomUUID().toString());
+            notice.setDelFlag(0);
+            int flag = noticeService.insertSelective(notice);
+            if (1 == flag) {
+                LOGGER.info(">>>添加成功<<<");
+                re = "success";
+            }else {
+                LOGGER.info( ">>>添加失败<<<" );
+                re = "fail";
+            }
+        }
+        return "redirect:/admin/index?re=" + re;
+    }
+
     //教师管理
     @RequestMapping(value = "/teacherForm", method = RequestMethod.POST)
     public String teacherForm(Teacher teacher) {

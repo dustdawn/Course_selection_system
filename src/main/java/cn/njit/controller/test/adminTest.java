@@ -5,6 +5,7 @@ import cn.njit.entity.Notice;
 import cn.njit.entity.Student;
 import cn.njit.entity.Teacher;
 import cn.njit.service.CourseService;
+import cn.njit.service.NoticeService;
 import cn.njit.service.StudentService;
 import cn.njit.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author dustdawn
@@ -30,6 +32,8 @@ public class adminTest {
     private StudentService studentService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private NoticeService noticeService;
     @RequestMapping(value = "/method", method = RequestMethod.POST)
     public ModelAndView method(Teacher teacher) {
         System.out.println(teacher);
@@ -76,6 +80,8 @@ public class adminTest {
     @RequestMapping(value = "noticeList")
     public String noticeList(HttpServletRequest request) {
         //然后把查询到的noticeList放到request域里，调用request.setAttribute,处理完转发到admin下的index页面
+        List<Notice> noticeList = noticeService.findList();
+        request.setAttribute("noticeList", noticeList);
         return "admin/index";
     }
 
@@ -83,6 +89,17 @@ public class adminTest {
     @RequestMapping(value = "noticeForm")
     public String noticeForm(HttpServletRequest request, Notice notice) {
         //保存后，重定向到noticeList方法达到显示所有通告效果
+        String re="";
+        if (notice!=null){
+            notice.setId(UUID.randomUUID().toString());
+            notice.setDelFlag(0);
+            int flag = noticeService.insertSelective(notice);
+            if (1 == flag) {
+                re = "success";
+            }else {
+                re = "fail";
+            }
+        }
         return "redirect:/test/noticeList";
     }
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -48,7 +49,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/admin/index" class="logo">
+    <a href="<%=basePath%>/admin/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -137,7 +138,7 @@
         <!--功能菜单都用这个模板-->
 
         <li class="active">
-          <a href="<%=basePath%>/pages/admin/index">
+          <a href="<%=basePath%>/admin/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
@@ -225,7 +226,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
-        <li><a href="<%=basePath%>/pages/admin/index">主页</a></li>
+        <li><a href="<%=basePath%>/admin/index">主页</a></li>
         <li class="active">index</li>
       </ol>
     </section>
@@ -238,7 +239,7 @@
 
         <p>选课过程中出现问题，请联系管理员</p>
       </div>
-      <form action="<%=basePath%>/admin/index" method="post">
+      <form action="<%=basePath%>/admin/noticeForm" method="post">
 
         <div class="box box-primary">
           <div class="box-header">
@@ -259,7 +260,7 @@
             </div>
             <div class="form-group col-md-12">
               <label>正文</label>
-              <textarea class="form-control " rows="10" name="text" id="text" placeholder="请输入公告"></textarea>
+              <textarea class="form-control " rows="10" name="content" id="content" placeholder="请输入公告"></textarea>
             </div>
 
             <div class="box-footer" align="center">
@@ -275,9 +276,10 @@
 
 
       <!-- 内容 -->
-      <div class="box">
+      <c:forEach var="item" items="${noticeList}" varStatus="staturs">
+        <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">关于2019-2020学年选课通知</h3>
+          <h3 class="box-title">${item.title}</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -287,21 +289,7 @@
           </div>
         </div>
         <div class="box-body">
-          各学院、2019级新同学：<br/>
-
-          2019-2020学年第一学期2019级新生选课工作将于8月21日开始，请学院做好新生选课指导工作，各位同学按照规定时间和选课指南中相关要求选课。<br/><br/>
-
-          选课时间安排如下：<br/><br/>
-
-          第一轮选课：8月21日8:30－8月25日24:00，新生在校外选课。<br/>
-
-          第二轮选课：新生入学教育周内（8月28日－8月30日），学校安排机房分时段由学院（部）指导学生选课。<br/>
-
-          第三轮选课：开学第一周内（9月2日－8日），学生退选和补选。<br/>
-
-          第二轮选课程结束后，教务处将根据选课情况对部分教学班进行调整，请各位同学在选课结束后密切关注各自课表的变化，以开学第二周系统中最终显示个人课表为准。<br/>
-
-          本学期新生教学从2019年9月2日开始。<br/>
+          ${item.content}
           <br/>
           <br/>
           <div class="row">
@@ -325,6 +313,7 @@
         <!-- /.box-body -->
         <!-- /.box-footer-->
       </div>
+      </c:forEach>
       <!-- /.box -->
 
 
@@ -357,25 +346,15 @@
 <script src="<%=basePath%>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
-    })
-  })
 
   // 清空事件
   $(document).ready(function () {
     $("#empty").bind("click", function () {
       //alert(55);
       $("#title").val("");
-      $("#text").val("");
+      $("#content").val("");
     })
+  })
 
 </script>
 </body>

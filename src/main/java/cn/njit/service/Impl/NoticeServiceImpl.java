@@ -4,6 +4,7 @@ import cn.njit.dao.NoticeMapper;
 import cn.njit.entity.Notice;
 import cn.njit.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/27 13:22
  */
+@Service
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
