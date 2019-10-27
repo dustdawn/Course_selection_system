@@ -238,6 +238,41 @@
 
         <p>选课过程中出现问题，请联系管理员</p>
       </div>
+      <form action="<%=basePath%>/admin/index" method="post">
+
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">添加公告</h3>
+            <!-- tools box -->
+            <div class="pull-right box-tools">
+              <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse" >
+                <i class="fa fa-minus"></i></button>
+            </div>
+            <!-- /. tools -->
+          </div>
+
+          <%--公告体--%>
+          <div class="box-body">
+            <div class="form-group col-md-12">
+              <label >标题</label>
+              <input  type="text" class="form-control" id="title" name="title" placeholder="标题">
+            </div>
+            <div class="form-group col-md-12">
+              <label>正文</label>
+              <textarea class="form-control " rows="10" name="text" id="text" placeholder="请输入公告"></textarea>
+            </div>
+
+            <div class="box-footer" align="center">
+              <button type="button" class="btn btn-warning" id="empty">清空</button>
+              <button type="submit" class="btn btn-primary" id="save">保存</button>
+            </div>
+
+          </div>
+          <%--/公告体--%>
+
+      </form>
+
+
 
       <!-- 内容 -->
       <div class="box">
@@ -295,7 +330,6 @@
 
 
 
-
     </section>
     <!-- /.content -->
   </div>
@@ -319,6 +353,8 @@
 <script src="<%=basePath%>/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=basePath%>/dist/js/demo.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="<%=basePath%>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- page script -->
 <script type="text/javascript">
   // To make Pace works on Ajax calls
@@ -332,6 +368,15 @@
       }
     })
   })
+
+  // 清空事件
+  $(document).ready(function () {
+    $("#empty").bind("click", function () {
+      //alert(55);
+      $("#title").val("");
+      $("#text").val("");
+    })
+
 </script>
 </body>
 </html>
