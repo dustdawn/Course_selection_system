@@ -1,8 +1,10 @@
 package cn.njit.controller;
 
 import cn.njit.entity.Course;
+import cn.njit.entity.Notice;
 import cn.njit.entity.Teacher;
 import cn.njit.service.CourseService;
+import cn.njit.service.NoticeService;
 import cn.njit.service.TeacherService;
 import cn.njit.utils.LoginUtil;
 import org.apache.log4j.Logger;
@@ -34,6 +36,8 @@ public class TeacherController {
     private TeacherService teacherService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private NoticeService noticeService;
 
     private Teacher teacher;
 
@@ -55,7 +59,7 @@ public class TeacherController {
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }
-                return "redirect:/pages/teacher/index";
+                return "redirect:/teacher/index";
             }else {
                 request.setAttribute("errorMsg", "用户密码错误");
                 System.out.println("密码错误");
@@ -72,6 +76,14 @@ public class TeacherController {
         session.removeAttribute("userSession");
         session.removeAttribute("currentTime");
         return "teacher/login";
+    }
+
+    //主页
+    @RequestMapping(value = "index")
+    public String noticeList(HttpServletRequest request) {
+        List<Notice> noticeList = noticeService.findList();
+        request.setAttribute("noticeList", noticeList);
+        return "teacher/index";
     }
 
     @RequestMapping(value = "/getNameList",method = RequestMethod.POST)

@@ -50,7 +50,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/teacher/index" class="logo">
+    <a href="<%=basePath%>/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -139,7 +139,7 @@
         <!--功能菜单都用这个模板-->
 
         <li>
-          <a href="<%=basePath%>/pages/teacher/index">
+          <a href="<%=basePath%>/teacher/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>

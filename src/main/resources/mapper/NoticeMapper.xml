@@ -39,6 +39,7 @@
     <include refid="Blob_Column_List" />
     from notice
     where del_flag = 0
+    group by id desc
   </select>
 
 

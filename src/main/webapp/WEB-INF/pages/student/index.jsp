@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -48,7 +49,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<%=basePath%>/pages/student/index" class="logo">
+    <a href="<%=basePath%>/student/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -136,7 +137,7 @@
         <!--功能菜单都用这个模板-->
 
         <li class="active">
-          <a href="<%=basePath%>/pages/student/index">
+          <a href="<%=basePath%>/student/index">
             <i class="fa fa-folder"></i> <span>主页</span>
           </a>
         </li>
@@ -196,49 +197,68 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        显示页功能
-        <small>加载范例</small>
+        主页
+        <small>通知公告</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Pace page</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> 导航菜单</a></li>
+        <li><a href="#">主页</a></li>
+        <li class="active">index</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">标题</h3>
+      <!-- 内容 -->
+      <c:forEach var="item" items="${noticeList}" varStatus="staturs">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">${item.title}</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
           </div>
-        </div>
-        <div class="box-body">
-          页面在这加载
-          <br/>
-          <br/>
-          <div class="row">
-            <div class="col-xs-12 text-center">
+          <div class="box-body">
+              ${item.content}
+            <br/>
+            <br/>
+            <div class="row">
+              <div class="col-xs-12 text-center">
 
+              </div>
+            </div>
+            <div class="ajax-content" align="right">
+              <button type="button" class="btn btn-danger" onclick="deleteNotice('${item.id}')">删除</button>
             </div>
           </div>
-          <div class="ajax-content">
-            55
-          </div>
-        </div>
-        <!-- /.box-body -->
+            <%--正文结束--%>
+          <!-- /.box-body -->
 
-        <!-- /.box-footer-->
-      </div>
+            <%--添加成功窗口--%>
+
+          <div class="modal modal-info fade" id="ifSuccess">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                  <h4 class="modal-title" align="center">添加成功</h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+            <%--/添加成功窗口--%>
+
+          <!-- /.box-footer-->
+        </div>
+      </c:forEach>
       <!-- /.box -->
 
     </section>
@@ -266,17 +286,7 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
-    })
-  })
+
 
 </script>
 </body>

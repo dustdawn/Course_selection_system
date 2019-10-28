@@ -14,9 +14,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author dustdawn
@@ -82,10 +82,8 @@ public class AdminController {
     }
 
     //主页
-    //点击主页，把连接改成<%=basePath%>/test/noticeList,表示点击主页时走这个方法
     @RequestMapping(value = "index")
     public String noticeList(HttpServletRequest request) {
-        //然后把查询到的noticeList放到request域里，调用request.setAttribute,处理完转发到admin下的index页面
         List<Notice> noticeList = noticeService.findList();
         request.setAttribute("noticeList", noticeList);
         return "admin/index";
@@ -97,7 +95,8 @@ public class AdminController {
         //保存后，重定向到noticeList方法达到显示所有通告效果
         String re="";
         if (notice != null){
-            notice.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+            //notice.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+            notice.setId(Calendar.getInstance().getTimeInMillis() + "");
             notice.setDelFlag(0);
             notice.setContent(notice.getContent().replaceAll("\\r\\n", "<br/>"));
             int flag = noticeService.insertSelective(notice);
