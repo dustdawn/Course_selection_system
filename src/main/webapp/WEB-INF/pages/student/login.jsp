@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@page isELIgnored="false" %>
+<%@ page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -21,7 +21,7 @@
 
   }
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -106,7 +106,6 @@
 
 
     <div class="social-auth-links text-left">
-      <a href="#">忘记密码</a><br>
       <a href="<%=basePath%>/pages/teacher/login" class="text-center">教师登录</a>
       <a href="<%=basePath%>/pages/admin/login" class="text-center">管理员登录</a>
 

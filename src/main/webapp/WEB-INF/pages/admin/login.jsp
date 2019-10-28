@@ -94,7 +94,7 @@
 
 
     <div class="social-auth-links text-left">
-      <a href="#">忘记密码</a><br>
+
       <a href="<%=basePath%>/pages/student/login" class="text-center">学生登录</a>
       <a href="<%=basePath%>/pages/teacher/login" class="text-center">教师登录</a>
 

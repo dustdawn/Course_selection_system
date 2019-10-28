@@ -96,7 +96,7 @@ public class AdminController {
     public String noticeForm(HttpServletRequest request, Notice notice) {
         //保存后，重定向到noticeList方法达到显示所有通告效果
         String re="";
-        if (notice!=null){
+        if (notice != null){
             notice.setId(UUID.randomUUID().toString().replaceAll("-", ""));
             notice.setDelFlag(0);
             notice.setContent(notice.getContent().replaceAll("\\r\\n", "<br/>"));
@@ -109,7 +109,22 @@ public class AdminController {
                 re = "fail";
             }
         }
-        return "redirect:/admin/index?re=" + re;
+        return "redirect:/admin/index?flag=" + re;
+    }
+
+    //添加通告时调用的方法，notice接收，去看实体类的属性，记得设置delFlag
+    @RequestMapping(value = "noticeDelete")
+    public String noticeDelete(HttpServletRequest request, String id) {
+        //保存后，重定向到noticeList方法达到显示所有通告效果
+        if (id != null && !id.equals("")){
+            int flag = noticeService.deleteByPrimaryKey(id);
+            if (1 == flag) {
+                LOGGER.info(">>>删除成功<<<");
+            }else {
+                LOGGER.info( ">>>删除失败<<<" );
+            }
+        }
+        return "redirect:/admin/index";
     }
 
     //教师管理

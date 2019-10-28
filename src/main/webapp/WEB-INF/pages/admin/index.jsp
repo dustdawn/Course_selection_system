@@ -255,7 +255,7 @@
           <%--公告体--%>
           <div class="box-body">
             <div class="form-group col-md-12">
-              <label >标题</label>
+              <label>标题</label>
               <input  type="text" class="form-control" id="title" name="title" placeholder="标题">
             </div>
             <div class="form-group col-md-12">
@@ -270,47 +270,61 @@
 
           </div>
           <%--/公告体--%>
+        </div>
 
+        <br/>
       </form>
+
+
 
 
 
       <!-- 内容 -->
       <c:forEach var="item" items="${noticeList}" varStatus="staturs">
-        <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">${item.title}</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">${item.title}</h3>
 
           </div>
-        </div>
-        <div class="box-body">
-          ${item.content}
-          <br/>
-          <br/>
-          <div class="row">
-            <div class="col-xs-12 text-center">
+          <div class="box-body">
+            ${item.content}
+            <br/>
+            <br/>
+            <div class="row">
+              <div class="col-xs-12 text-center">
 
+              </div>
+            </div>
+            <div class="ajax-content" align="right">
+              <button type="button" class="btn btn-danger" onclick="deleteNotice('${item.id}')">删除</button>
             </div>
           </div>
-          <div class="ajax-content">
-            <table class="table table-bordered text-center">
-              <tr>
-                <th><button type="button" class="btn btn-block btn-primary">Primary</button></th>
-                <th><button type="button" class="btn btn-block btn-success">Success</button></th>
-                <th><button type="button" class="btn btn-block btn-info">Info</button></th>
-                <th><button type="button" class="btn btn-block btn-danger">Danger</button></th>
-                <th><button type="button" class="btn btn-block btn-warning">Warning</button></th>
-              </tr>
-            </table>
-          </div>
-        </div>
         <%--正文结束--%>
         <!-- /.box-body -->
+
+            <%--添加成功窗口--%>
+
+          <div class="modal modal-info fade" id="ifSuccess">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                  <h4 class="modal-title" align="center">添加成功</h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <%--/添加成功窗口--%>
+
         <!-- /.box-footer-->
       </div>
       </c:forEach>
@@ -344,6 +358,9 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<%=basePath%>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<%--bootstrapValidator的cdn--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <!-- page script -->
 <script type="text/javascript">
 
@@ -354,7 +371,43 @@
       $("#title").val("");
       $("#content").val("");
     })
+    if('<%=request.getParameter("flag")%>' == 'success') {
+      $("#ifSuccess").modal('show')
+    }
   })
+
+  function deleteNotice(id) {
+    window.location.href = "<%=basePath%>/admin/noticeDelete?id=" + id;
+  }
+
+
+  $(function () {
+    $('form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        title: {
+          validators: {
+            notEmpty: {
+              message: '公告标题不能为空'
+            }
+          }
+        },
+        content: {
+          validators: {
+            notEmpty: {
+              message: '公告内容不能为空'
+            }
+          }
+        },
+
+      }
+    });
+  });
 
 </script>
 </body>
