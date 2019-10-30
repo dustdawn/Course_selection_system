@@ -146,10 +146,12 @@ public class AdminController {
 
     @RequestMapping(value = "/teacherList")
     public String teacherList(HttpServletRequest request) {
-        System.out.println(request.getParameter("tno"));
-        System.out.println(request.getParameter("name"));
-        List<Teacher> teacherList = teacherService.findList();
+        String tno = request.getParameter("tno");
+        String name = request.getParameter("name");
+        List<Teacher> teacherList = teacherService.findListByParameter(tno, name);
         request.setAttribute("teacherList", teacherList);
+        request.setAttribute("tno", tno);
+        request.setAttribute("name", name);
         return "admin/teacherList";
     }
 

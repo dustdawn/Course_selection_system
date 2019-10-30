@@ -52,4 +52,9 @@ public class TeacherServiceImpl implements TeacherService{
     public List<Teacher> findList() {
         return teacherMapper.findList();
     }
+
+    @Override
+    public List<Teacher> findListByParameter(String tno, String name) {
+        return teacherMapper.findListByParameter(tno, name);
+    }
 }

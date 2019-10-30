@@ -31,6 +31,20 @@
     where del_flag = 0
   </select>
 
+  <!--模糊查询所有teacher集合-->
+  <select id="findListByParameter" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where del_flag = 0
+    <if test="tno != null and tno != ''">
+      and tno like "%"#{tno}"%"
+    </if>
+    <if test="name != null and name != ''">
+      and name like "%"#{name}"%"
+    </if>
+  </select>
+
   <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
     update teacher
     set del_flag = 1

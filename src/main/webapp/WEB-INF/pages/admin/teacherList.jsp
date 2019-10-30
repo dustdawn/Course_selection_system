@@ -240,24 +240,21 @@
         <div class="col-xs-12">
 
           <div class="box box-primary">
+            <form action="<%=basePath%>/admin/teacherList">
             <div class="box-header with-border">
               <div class="col">
 
 
-                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>工号查询：
-                  <input type="text" class="form-control" id="searchByNo" value=""/>
+                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>教师工号查询：
+                  <input type="text" class="form-control" id="searchByNo" value="${tno}" name="tno"/>
                 </label>
-                <span style="padding-right: 40px">
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
-
 
 
                 <label class="form-inline" for="searchByName" style="padding-left: 40px"/>姓名查询：
-                  <input type="text" class="form-control" id="searchByName" value=""/>
+                  <input type="text" class="form-control" id="searchByName" value="${name}" name="name"/>
                 </label>
                 <span>
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                  <button type="submit" class="btn btn-info btn-flat">筛选</button>
                 </span>
 
               </div>
@@ -405,6 +402,7 @@
 
             </div>
             <%--/box-body--%>
+            </form>
           </div>
           <%--/box--%>
         </div>

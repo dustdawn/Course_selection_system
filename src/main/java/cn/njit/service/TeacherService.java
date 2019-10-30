@@ -26,4 +26,7 @@ public interface TeacherService {
     int updateByPrimaryKey(Teacher record);
 
     List<Teacher> findList();
+
+    //模糊查询
+    List<Teacher> findListByParameter(String tno, String name);
 }
