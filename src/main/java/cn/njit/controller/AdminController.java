@@ -364,6 +364,8 @@ public class AdminController {
         String name = request.getParameter("name");
         List<Dept> deptList = deptService.findListByParameter(dno, name);
         request.setAttribute("deptList", deptList);
+        request.setAttribute("dno", dno);
+        request.setAttribute("name", name);
         return "admin/deptList";
     }
 

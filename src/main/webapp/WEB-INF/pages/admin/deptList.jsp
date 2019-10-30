@@ -247,12 +247,12 @@
 
 
                 <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>院系号查询：
-                  <input type="text" class="form-control" id="searchByNo" value="" name="dno"/>
+                  <input type="text" class="form-control" id="searchByNo" value="${dno}" name="dno"/>
                 </label>
 
 
                 <label class="form-inline" for="searchByName" style="padding-left: 40px"/>院系名查询：
-                  <input type="text" class="form-control" id="searchByName" value="" name="name"/>
+                  <input type="text" class="form-control" id="searchByName" value="${name}" name="name"/>
                 </label>
                 <span>
                   <button type="submit" class="btn btn-info btn-flat">筛选</button>
