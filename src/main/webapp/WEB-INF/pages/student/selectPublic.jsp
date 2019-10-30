@@ -308,6 +308,30 @@
                 <!-- /.modal-dialog -->
               </div>
               <%--/修改成功窗口--%>
+
+              <%--修改失败窗口--%>
+
+              <div class="modal modal-warning fade" id="ifFail">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h4 class="modal-title" align="center">选课失败</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <%--/修改失败窗口--%>
+
                 <%--确认窗口--%>
 
                 <div class="modal fade" id="selectConfirm">
@@ -378,6 +402,8 @@
       console.log(flag);
       if (flag != null && flag == 'success') {
           $("#ifSuccess").modal('show')
+      }else {
+        $("#ifFail").modal('show')
       }
 
     $('#courseList').DataTable({
