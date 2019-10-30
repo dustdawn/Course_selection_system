@@ -283,9 +283,7 @@
                     <td>${item.dno}</td>
                     <td>${item.name}</td>
                     <td><a href="<%=basePath%>/admin/deptEdit?dno=${item.dno}">编辑</a></td>
-                    <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
-                        <a href="<%=basePath%>/admin/deptDelete?dno=${item.dno}" id="yes"></a>
-                    </td>
+                    <td><a href="javascript:void(0);" onclick="Confirm('${item.dno}')">删除</a></td>
                   </tr>
                 </c:forEach>
 
@@ -395,11 +393,17 @@
       $("#ifSuccess").modal('show')
     }
 
-    $("#delete").on('click',function () {
-      $("#deleteConfirm").modal("hide")
-      window.location.href = $('#yes').attr('href');
-    })
+
   })
+
+  function Confirm(no) {
+    //删除事件
+    $("#deleteConfirm").modal("show");
+
+    $("#delete").click(function () {
+      window.location.href = '<%=basePath%>/admin/deptDelete?dno=' + no;
+    })
+  }
   /*function getList() {
     var list = {
       tno : $("#searchByNo").val(),

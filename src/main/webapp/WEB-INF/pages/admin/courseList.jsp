@@ -297,9 +297,7 @@
                     <td>${item.credit}</td>
                     <td>${item.total}</td>
                     <td><a href="<%=basePath%>/admin/courseEdit?cno=${item.cno}">编辑</a></td>
-                    <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
-                        <a href="<%=basePath%>/admin/courseDelete?cno=${item.cno}" id="yes"></a>
-                    </td>
+                    <td><a href="javascript:void(0);" onclick="Confirm('${item.cno}')">删除</a></td>
                     <td><a href="javascript:void(0);" onclick="viewList('${item.cno}')">查看</a></td>
                   </tr>
                 </c:forEach>
@@ -454,13 +452,6 @@
       $("#ifSuccess").modal('show')
     }
 
-    //删除事件
-    $("#delete").on('click',function () {
-      $("#deleteConfirm").modal("hide")
-      window.location.href = $('#yes').attr('href');
-    })
-
-
 
     $('#courseList').DataTable({
       'paging'      : true,
@@ -479,6 +470,14 @@
     })
 
   })
+  function Confirm(no) {
+    //删除事件
+    $("#deleteConfirm").modal("show");
+
+    $("#delete").click(function () {
+      window.location.href = '<%=basePath%>/admin/courseDelete?cno=' + no;
+    })
+  }
 
   function viewList(no) {
     $("#showList").modal("show");

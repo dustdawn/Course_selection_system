@@ -293,9 +293,7 @@
                     <td>${item.mobile}</td>
                     <td><fmt:formatDate value="${item.birthday}" pattern="yyyy-MM-dd"/></td>
                     <td><a href="<%=basePath%>/admin/studentEdit?sno=${item.sno}">编辑</a></td>
-                    <td><a href="#" data-toggle="modal" data-target="#deleteConfirm">删除</a>
-                        <a href="<%=basePath%>/admin/studentDelete?sno=${item.sno}" id="yes"></a>
-                    </td>
+                    <td><a href="javascript:void(0);" onclick="Confirm('${item.sno}')">删除</a></td>
                     <td><a href="javascript:void(0);" onclick="viewList('${item.sno}')">查看</a></td>
                   </tr>
                 </c:forEach>
@@ -475,6 +473,15 @@
     })
 
   })
+
+  function Confirm(no) {
+    //删除事件
+    $("#deleteConfirm").modal("show");
+
+    $("#delete").click(function () {
+      window.location.href = '<%=basePath%>/admin/studentDelete?sno=' + no;
+    })
+  }
 
 
   function viewList(no) {
