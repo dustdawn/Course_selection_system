@@ -99,7 +99,7 @@
   </select>
 
   <!--查询所有student-->
-  <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="findList" resultMap="BaseResultMap" >
     select *
     from (
       select
@@ -122,6 +122,44 @@
         and s.del_flag = 0
     ) b on a.`student.sno` = b.`student.sno`
 
+  </select>
+
+
+  <!--模糊查询所有student-->
+  <select id="findListByParameter" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from (
+    select
+    <include refid="studentColumns" />,
+    <include refid="deptColumns" />
+    from student s,dept d
+    where
+    s.dno = d.dno
+    and s.del_flag = 0
+    and d.del_flag = 0
+    ) a left join (
+    select
+    <include refid="studentColumns" />,
+    <include refid="courseColumns" />
+    from cs cs, course c, student s
+    where
+    s.sno = cs.sno
+    and cs.cno = c.cno
+    and c.del_flag = 0
+    and s.del_flag = 0
+    ) b on a.`student.sno` = b.`student.sno`
+
+    <where>
+      <if test="studentNo != null and studentNo != ''">
+        and a.`student.sno` like "%"#{studentNo}"%"
+      </if>
+      <if test="studentName != null and studentName != ''">
+        and a.`student.name` like "%"#{studentName}"%"
+      </if>
+      <if test="deptName != null and deptName != ''">
+        and a.`dept.name` like "%"#{deptName}"%"
+      </if>
+    </where>
   </select>
 
   <!--条件查询-->

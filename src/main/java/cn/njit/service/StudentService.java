@@ -32,4 +32,7 @@ public interface StudentService{
     //条件查询
     List<Student> findListByEntity(Student student);
 
+    //模糊查询
+    List<Student> findListByParameter(String sno, String name, String dname);
+
 }

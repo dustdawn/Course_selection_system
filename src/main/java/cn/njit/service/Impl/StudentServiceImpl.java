@@ -59,4 +59,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findListByEntity(Student student) {
         return studentMapper.findListByEntity(student);
     }
+
+    @Override
+    public List<Student> findListByParameter(String sno, String name, String dname) {
+        return studentMapper.findListByParameter(sno, name, dname);
+    }
 }
