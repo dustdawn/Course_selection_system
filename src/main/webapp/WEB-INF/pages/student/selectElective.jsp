@@ -399,7 +399,7 @@
     console.log(flag);
     if (flag != null && flag=='success') {
       $("#ifSuccess").modal('show')
-    }else {
+    }else if (flag != null && flag == 'fail'){
       $("#ifFail").modal('show')
     }
 
