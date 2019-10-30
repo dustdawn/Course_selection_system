@@ -248,14 +248,29 @@ public class StudentController {
                 CourseStudent cs = new CourseStudent();
                 cs.setCno(course.getCno());
                 cs.setSno(this.student.getSno());
-                int flag = csService.insert(cs);
-                if (1 == flag) {
-                    LOGGER.info(">>>添加成功<<<");
-                    re = "success";
+                //选课业务逻辑
+                if (course.getTotal() > 0) {
+                    synchronized (this) {
+                        if (course.getTotal() > 0) {
+                            int flag = csService.insert(cs);
+                            course.setTotal(course.getTotal()-1);
+                            courseService.updateByPrimaryKeySelective(course);
+                            if (1 == flag) {
+                                LOGGER.info(">>>选课成功<<<");
+                                re = "success";
+                            }else {
+                                LOGGER.info(">>>选课失败<<<");
+                            }
+                        }
+                    }
                 }else {
-                    LOGGER.info(">>>添加失败<<<");
+                    LOGGER.info(">>>选课失败<<<");
                     re = "fail";
                 }
+                //-------------
+
+
+
 
                 if (course.getType().equals("选修课")) {
                     return "redirect:/student/selectElective?flag=" + re;
@@ -275,12 +290,22 @@ public class StudentController {
                 CourseStudent cs = new CourseStudent();
                 cs.setCno(course.getCno());
                 cs.setSno(this.student.getSno());
+
+                //退选业务逻辑
+
                 int flag = csService.delete(cs);
+                course.setTotal(course.getTotal()+1);
+                courseService.updateByPrimaryKeySelective(course);
                 if (1 == flag) {
-                    LOGGER.info(">>>退选成功<<<");
+                    LOGGER.info(">>>选课成功<<<");
+
                 }else {
-                    LOGGER.info(">>>退选失败<<<");
+                    LOGGER.info(">>>选课失败<<<");
                 }
+
+                //-------------
+
+
 
                 if (course.getType().equals("选修课")) {
                     return "redirect:/student/manageElective";

@@ -253,7 +253,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentNo" name="sno" value="20216020" placeholder="请输入学号">
+                      <input type="text" class="form-control" id="studentNo" name="sno" value="2021602" placeholder="请输入学号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -330,7 +330,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="studentDate" name="birthday" value="" placeholder="yyyy-mm-dd">
+                      <input type="text" class="form-control pull-right" id="studentDate" name="birthday" value="1997-10-06" placeholder="yyyy-mm-dd">
                     </div>
                   </div>
                 </div>

@@ -358,6 +358,9 @@
 <script src="<%=basePath%>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<%=basePath%>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="<%=basePath%>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<%=basePath%>/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- PACE -->
 <script src="<%=basePath%>/bower_components/PACE/pace.min.js"></script>
 <!-- SlimScroll -->
@@ -376,6 +379,15 @@
       if (flag != null && flag == 'success') {
           $("#ifSuccess").modal('show')
       }
+
+    $('#courseList').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
 
   })
 

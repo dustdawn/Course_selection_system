@@ -179,13 +179,13 @@
         and b.`student.sno` = #{student.sno,jdbcType=VARCHAR}
       </if>
       <if test="cno != null and cno != ''">
-        and b.`course.cno` = #{cno,jdbcType=VARCHAR}
+        and a.`course.cno` = #{cno,jdbcType=VARCHAR}
       </if>
       <if test="type != null and type != ''">
-        and b.`course.type` = #{type,jdbcType=VARCHAR}
+        and a.`course.type` = #{type,jdbcType=VARCHAR}
       </if>
       <if test="tno != null and tno != ''">
-        and b.`course.tno` = #{tno,jdbcType=VARCHAR}
+        and a.`course.tno` = #{tno,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
