@@ -22,4 +22,7 @@ public interface DeptService {
     int updateByPrimaryKey(Dept record);
 
     List<Dept> findList();
+
+    //模糊查询
+    List<Dept> findListByParameter(String dno, String name);
 }

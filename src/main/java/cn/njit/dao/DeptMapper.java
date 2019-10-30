@@ -1,6 +1,7 @@
 package cn.njit.dao;
 
 import cn.njit.entity.Dept;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface DeptMapper {
     int updateByPrimaryKey(Dept record);
 
     List<Dept> findList();
+
+    List<Dept> findListByParameter(@Param("dno") String dno, @Param("name") String name);
 }

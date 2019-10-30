@@ -52,4 +52,10 @@ public class DeptServiceImpl implements DeptService {
     public List<Dept> findList() {
         return deptMapper.findList();
     }
+
+
+    @Override
+    public List<Dept> findListByParameter(String dno, String name) {
+        return deptMapper.findListByParameter(dno,name);
+    }
 }

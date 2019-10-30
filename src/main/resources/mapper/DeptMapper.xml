@@ -20,6 +20,19 @@
     where dno = #{dno,jdbcType=VARCHAR} and del_flag = 0
   </select>
 
+  <!--模糊查询-->
+  <select id="findListByParameter" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from dept
+    where del_flag = 0
+    <if test="dno != null and dno != ''">
+      and dno like "%"#{dno}"%"
+    </if>
+    <if test="name != null and dno != ''">
+      and name like "%"#{name}"%"
+    </if>
+  </select>
 
   <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select

@@ -360,12 +360,10 @@ public class AdminController {
 
     @RequestMapping(value = "/deptList")
     public String deptList(HttpServletRequest request) {
-        System.out.println(request.getParameter("dno"));
-        System.out.println(request.getParameter("name"));
-
-        List<Dept> deptList = deptService.findList();
+        String dno = request.getParameter("dno");
+        String name = request.getParameter("name");
+        List<Dept> deptList = deptService.findListByParameter(dno, name);
         request.setAttribute("deptList", deptList);
-        System.out.println();
         return "admin/deptList";
     }
 

@@ -241,24 +241,21 @@
         <div class="col-xs-12">
 
           <div class="box box-primary">
+            <form action="<%=basePath%>/admin/deptList">
             <div class="box-header with-border">
               <div class="col">
 
 
-                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>工号查询：
-                  <input type="text" class="form-control" id="searchByNo" value=""/>
+                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>院系号查询：
+                  <input type="text" class="form-control" id="searchByNo" value="" name="dno"/>
                 </label>
-                <span style="padding-right: 40px">
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
 
 
-
-                <label class="form-inline" for="searchByName" style="padding-left: 40px"/>姓名查询：
-                  <input type="text" class="form-control" id="searchByName" value=""/>
+                <label class="form-inline" for="searchByName" style="padding-left: 40px"/>院系名查询：
+                  <input type="text" class="form-control" id="searchByName" value="" name="name"/>
                 </label>
                 <span>
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                  <button type="submit" class="btn btn-info btn-flat">筛选</button>
                 </span>
 
               </div>
@@ -267,6 +264,7 @@
             </div>
             <%--/box-head--%>
             <div class="box-body">
+
               <table id="teacherList" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -298,6 +296,7 @@
                 </tr>
                 </tfoot>--%>
               </table>
+
 
               <%--修改成功窗口--%>
 
@@ -349,6 +348,7 @@
 
             </div>
             <%--/box-body--%>
+            </form>
           </div>
           <%--/box--%>
         </div>
@@ -404,37 +404,8 @@
       window.location.href = '<%=basePath%>/admin/deptDelete?dno=' + no;
     })
   }
-  /*function getList() {
-    var list = {
-      tno : $("#searchByNo").val(),
-      name : $("#searchByName").val()
-    }
-    $.ajax({
-      //请求方式
-      type : "POST",
-      //请求的媒体类型
-      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-      //请求地址
-      url : "<=basePath/admin/teacherList",
-      //数据，json字符串
-      data : list,
-      //返回类型
-      // dataType:"json",
-      //请求成功
-      success : function(result) {
-        console.log("成功", result);
 
-      },
-      //请求失败，包含具体的错误信息
-      error : function(e){
-        console.log("失败");
-        console.log(e.status);
-        console.log(e.responseText);
-      }
-    });
-    $("#searchByNo").val("");
-    $("#searchByName").val("");
-  }*/
+
 
   $(function () {
     $('#teacherList').DataTable({
