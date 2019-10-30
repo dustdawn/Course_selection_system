@@ -187,13 +187,14 @@ public class TeacherController {
 
     //信息修改
     @RequestMapping(value = "/teacherUpdate")
-    public String teacherUpdate(Teacher teacher) {
+    public String teacherUpdate(Teacher teacher, HttpServletRequest request) {
         if (null != teacher) {
             teacher.setDelFlag(0);
             int flag = teacherService.updateByPrimaryKeySelective(teacher);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
                 this.teacher = teacherService.selectByPrimaryKey(teacher.getTno());
+                request.getSession().setAttribute("userSession", teacher);
             }else {
                 LOGGER.info(">>>修改失败<<<");
             }

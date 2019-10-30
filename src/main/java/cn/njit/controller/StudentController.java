@@ -1,9 +1,11 @@
 package cn.njit.controller;
 
 import cn.njit.entity.Course;
+import cn.njit.entity.CourseStudent;
 import cn.njit.entity.Notice;
 import cn.njit.entity.Student;
 import cn.njit.service.CourseService;
+import cn.njit.service.CourseStudentService;
 import cn.njit.service.NoticeService;
 import cn.njit.service.StudentService;
 import cn.njit.utils.LoginUtil;
@@ -41,6 +43,9 @@ public class StudentController {
     private CourseService courseService;
     @Autowired
     private NoticeService noticeService;
+
+    @Autowired
+    private CourseStudentService csService;
 
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
@@ -189,13 +194,14 @@ public class StudentController {
 
     //信息修改
     @RequestMapping(value = "/studentUpdate")
-    public String studentUpdate(Student student) {
+    public String studentUpdate(Student student, HttpServletRequest request) {
         if (null != student) {
             student.setDelFlag(0);
             int flag = studentService.updateByPrimaryKeySelective(student);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
                 this.student = studentService.selectByPrimaryKey(student.getSno());
+                request.getSession().setAttribute("userSession", student);
             }else {
                 LOGGER.info(">>>修改失败<<<");
             }
@@ -227,6 +233,61 @@ public class StudentController {
         }
         request.setAttribute("re", re);
         return "student/pswChange";
+    }
+
+
+
+    //选课业务
+    @RequestMapping(value = "/courseSelect")
+    public String courseSelect(HttpServletRequest request, String cno) {
+        String re = "";
+        if (null != cno && request.getSession().getAttribute("userSession") != null && null != this.student) {
+            Course course = courseService.selectByPrimaryKey(cno);
+            if (course != null) {
+                //获取cs对象，添加cs
+                CourseStudent cs = new CourseStudent();
+                cs.setCno(course.getCno());
+                cs.setSno(this.student.getSno());
+                int flag = csService.insert(cs);
+                if (1 == flag) {
+                    LOGGER.info(">>>添加成功<<<");
+                    re = "success";
+                }else {
+                    LOGGER.info(">>>添加失败<<<");
+                    re = "fail";
+                }
+
+                if (course.getType().equals("选修课")) {
+                    return "redirect:/student/selectElective?flag=" + re;
+                }
+            }
+        }
+        return "redirect:/student/selectPublic?flag=" + re;
+    }
+
+    //退选业务
+    @RequestMapping(value = "/courseWithdrawal")
+    public String courseWithdrawal(HttpServletRequest request, String cno) {
+        if (null != cno && request.getSession().getAttribute("userSession") != null && null != this.student) {
+            Course course = courseService.selectByPrimaryKey(cno);
+            if (null != course) {
+                //获取cs对象，删除cs
+                CourseStudent cs = new CourseStudent();
+                cs.setCno(course.getCno());
+                cs.setSno(this.student.getSno());
+                int flag = csService.delete(cs);
+                if (1 == flag) {
+                    LOGGER.info(">>>退选成功<<<");
+                }else {
+                    LOGGER.info(">>>退选失败<<<");
+                }
+
+                if (course.getType().equals("选修课")) {
+                    return "redirect:/student/manageElective";
+                }
+            }
+        }
+        return "redirect:/student/managePublic";
     }
 
 

@@ -265,7 +265,7 @@
                     <td>${item.place}</td>
                     <td>${item.credit}</td>
                     <td>${item.total}</td>
-                    <td><a href="#">退选</a></td>
+                    <td><a href="#" onclick="Confirm('${item.cno}')">退选</a></td>
                     </td>
                   </tr>
                 </c:forEach>
@@ -282,28 +282,6 @@
                 </tfoot>--%>
               </table>
 
-              <%--修改成功窗口--%>
-
-              <div class="modal modal-info fade" id="ifSuccess">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">提示</h4>
-                    </div>
-                    <div class="modal-body">
-                      <h4 class="modal-title" align="center">修改成功</h4>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-              </div>
-              <%--/修改成功窗口--%>
 
               <%--删除窗口--%>
 
@@ -316,7 +294,7 @@
                       <h4 class="modal-title">提示</h4>
                     </div>
                     <div class="modal-body">
-                      <h4 class="modal-title" align="center">确认要删除吗？</h4>
+                      <h4 class="modal-title" align="center">确认要退选此课程吗？</h4>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
@@ -366,17 +344,22 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
-  })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
+  $(document).ready(function () {
+
+    $("#delete").on('click',function () {
+      $("#deleteConfirm").modal("hide")
+      window.location.href = $('#yes').attr('href');
     })
   })
+
+  function Confirm(no) {
+
+      $("#deleteConfirm").modal("show");
+
+      $("#delete").click(function () {
+          window.location.href = '<%=basePath%>/student/courseWithdrawal?cno=' + no;
+      })
+  }
 </script>
 </body>
 </html>

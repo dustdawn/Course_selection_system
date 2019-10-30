@@ -5,6 +5,7 @@ import cn.njit.entity.Notice;
 import cn.njit.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @date 2019/10/27 13:22
  */
 @Service
+@Transactional
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired

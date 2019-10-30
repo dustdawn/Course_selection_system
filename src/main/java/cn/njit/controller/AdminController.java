@@ -447,12 +447,13 @@ public class AdminController {
 
     //信息修改
     @RequestMapping(value = "/adminUpdate")
-    public String teacherUpdate(Admin admin) {
+    public String teacherUpdate(Admin admin, HttpServletRequest request) {
         if (null != admin) {
             int flag = adminService.updateByPrimaryKeySelective(admin);
             if (1 == flag) {
                 LOGGER.info(">>>修改成功<<<");
                 this.admin = adminService.selectByPrimaryKey(admin.getNo());
+                request.getSession().setAttribute("userSession", admin);
             }else {
                 LOGGER.info(">>>修改失败<<<");
             }

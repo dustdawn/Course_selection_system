@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.njit.dao.CourseStudentMapper" >
+
+    <!--添加-->
+  <insert id="insert"  parameterType="cn.njit.entity.CourseStudent">
+        INSERT INTO cs(cno, sno)
+        VALUES (#{cno,jdbcType=VARCHAR},#{sno,jdbcType=VARCHAR})
+  </insert>
+  <!--删除-->
+    <delete id="delete" parameterType="cn.njit.entity.CourseStudent">
+        delete
+        from cs
+        where cno=#{cno,jdbcType=VARCHAR} and sno=#{sno,jdbcType=VARCHAR}
+    </delete>
+
+  <!-- 学生映射结果集 -->
+  <resultMap type="cn.njit.entity.Student" id="resultStudentMap">
+    <result property="sno" column="s.sno"/>
+    <result property="name" column="s.name"/>
+    <result property="delFlag" column="s.delFlag"/>
+  </resultMap>
+
+  <!-- 课程映射结果集  -->
+  <resultMap type="cn.njit.entity.Course" id="resultCourseMap">
+    <result property="cno" column="c.cno"/>
+    <result property="name" column="c.name"/>
+    <result property="delFlag" column="c.delFlag"/>
+  </resultMap>
+
+  <select id="getCourseByStudentNo" resultMap="resultCourseMap" parameterType="java.lang.String">
+		SELECT c.cno,c.name,c.del_flag
+		FROM course c,student s,cs cs
+		WHERE cs.cno = c.cno and cs.sno = s.sno
+		and c.del_flag=0
+		and s.del_flag=0
+		and s.sno=#{sno,jdbcType=VARCHAR}
+	</select>
+
+
+  <select id="getStudentByCourseNo" resultMap="resultStudentMap" parameterType="java.lang.String">
+		SELECT s.sno,s.name,s.del_flag
+		FROM course c,student s,cs cs
+		WHERE cs.cno = c.cno and cs.sno = s.sno
+		and c.del_flag=0
+		and s.del_flag=0
+		and c.cno=#{cno,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>

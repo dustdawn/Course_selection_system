@@ -268,7 +268,7 @@
                     <td>${item.place}</td>
                     <td>${item.credit}</td>
                     <td>${item.total}</td>
-                    <td><a href="#">选课</a></td>
+                    <td><a href="#" onclick="Confirm('${item.cno}')">选课</a></td>
                     </td>
                   </tr>
                 </c:forEach>
@@ -296,7 +296,7 @@
                       <h4 class="modal-title">提示</h4>
                     </div>
                     <div class="modal-body">
-                      <h4 class="modal-title" align="center">修改成功</h4>
+                      <h4 class="modal-title" align="center">选课成功</h4>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">关闭</button>
@@ -308,9 +308,9 @@
               </div>
               <%--/修改成功窗口--%>
 
-              <%--删除窗口--%>
+              <%--确认窗口--%>
 
-              <div class="modal fade" id="deleteConfirm">
+              <div class="modal fade" id="selectConfirm">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -319,11 +319,11 @@
                       <h4 class="modal-title">提示</h4>
                     </div>
                     <div class="modal-body">
-                      <h4 class="modal-title" align="center">确认要删除吗？</h4>
+                      <h4 class="modal-title" align="center">确认要选择此课程吗？</h4>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
-                      <button type="button" class="btn btn-primary" id="delete">确认</button>
+                      <button type="button" class="btn btn-primary" id="select">确认</button>
                     </div>
                   </div>
                   <!-- /.modal-content -->
@@ -331,8 +331,7 @@
                 <!-- /.modal-dialog -->
               </div>
               <!-- /.modal -->
-              <%--/删除窗口--%>
-
+              <%--/确认窗口--%>
 
             </div>
             <%--/box-body--%>
@@ -369,17 +368,23 @@
 <script src="<%=basePath%>/dist/js/demo.js"></script>
 <!-- page script -->
 <script type="text/javascript">
-  // To make Pace works on Ajax calls
-  $(document).ajaxStart(function () {
-    Pace.restart()
+  $(document).ready(function () {
+    let flag = '<%=request.getParameter("flag")%>';
+    console.log(flag);
+    if (flag != null && flag=='success') {
+      $("#ifSuccess").modal('show')
+    }
+
   })
-  $('.ajax').click(function () {
-    $.ajax({
-      url: '#', success: function (result) {
-        $('.ajax-content').html('<hr>Ajax Request Completed !')
-      }
-    })
-  })
+
+  function Confirm(no) {
+
+      $("#selectConfirm").modal("show");
+
+      $("#select").click(function () {
+          window.location.href = '<%=basePath%>/student/courseSelect?cno=' + no;
+      })
+  }
 </script>
 </body>
 </html>
