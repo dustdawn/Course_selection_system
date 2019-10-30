@@ -203,7 +203,7 @@
               <div class="col">
 
 
-                <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>课程名称查询：
+                <%--<label class="form-inline" for="searchByNo" style="padding-left: 40px"/>课程名称查询：
                 <input type="text" class="form-control" id="searchByNo" value=""/>
                 </label>
                 <span style="padding-right: 40px">
@@ -217,7 +217,7 @@
                 </label>
                 <span>
                   <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
+                </span>--%>
 
               </div>
 

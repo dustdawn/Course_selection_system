@@ -219,8 +219,14 @@
       <if test="student != null and student.sno != null and student.sno != ''">
         and b.`student.sno` = #{student.sno,jdbcType=VARCHAR}
       </if>
+      <if test="dept != null and dept.name != null and dept.name != ''">
+        and a.`dept.name` like "%"#{dept.name,jdbcType=VARCHAR}"%"
+      </if>
       <if test="cno != null and cno != ''">
-        and a.`course.cno` = #{cno,jdbcType=VARCHAR}
+        and a.`course.cno` like "%"#{cno,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="name != null and name != ''">
+        and a.`course.name` like "%"#{name,jdbcType=VARCHAR}"%"
       </if>
       <if test="type != null and type != ''">
         and a.`course.type` = #{type,jdbcType=VARCHAR}

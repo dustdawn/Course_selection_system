@@ -1,9 +1,6 @@
 package cn.njit.controller;
 
-import cn.njit.entity.Course;
-import cn.njit.entity.CourseStudent;
-import cn.njit.entity.Notice;
-import cn.njit.entity.Student;
+import cn.njit.entity.*;
 import cn.njit.service.CourseService;
 import cn.njit.service.CourseStudentService;
 import cn.njit.service.NoticeService;
@@ -130,12 +127,21 @@ public class StudentController {
     //课程选修
     @RequestMapping(value = "/selectPublic")
     public String selectPublic(HttpServletRequest request) {
+        String cno = request.getParameter("cno");
+        String name = request.getParameter("name");
+        String dname = request.getParameter("dname");
         Student s = new Student();
         if (null != this.student) {
             s.setSno(student.getSno());
 
             Course course = new Course();
+            Dept dept = new Dept();
+            dept.setName(dname);
+
             course.setType("公选课");
+            course.setCno(cno);
+            course.setName(name);
+            course.setDept(dept);
 
             //所有公选课
             List<Course> allPublicCourse = courseService.findListByEntity(course);
@@ -148,6 +154,9 @@ public class StudentController {
             List<Course> collect = allPublicCourse.stream().filter(
                     (Course c) -> !selectPublicCourse.contains(c)).collect(Collectors.toList());
             request.setAttribute("courseList", collect);
+            request.setAttribute("cno", cno);
+            request.setAttribute("name", name);
+            request.setAttribute("dname", dname);
 
         }
 
@@ -159,12 +168,22 @@ public class StudentController {
 
     @RequestMapping(value = "/selectElective")
     public String selectElective(HttpServletRequest request) {
+        String cno = request.getParameter("cno");
+        String name = request.getParameter("name");
+        String dname = request.getParameter("dname");
         Student s = new Student();
         if (null != this.student) {
             s.setSno(student.getSno());
 
             Course course = new Course();
+            Dept dept = new Dept();
+            dept.setName(dname);
+
             course.setType("选修课");
+            course.setCno(cno);
+            course.setName(name);
+            course.setDept(dept);
+
             //所有选修课
             List<Course> allPublicCourse = courseService.findListByEntity(course);
 
@@ -176,6 +195,9 @@ public class StudentController {
             List<Course> collect = allPublicCourse.stream().filter(
                     (Course c) -> !selectPublicCourse.contains(c)).collect(Collectors.toList());
             request.setAttribute("courseList", collect);
+            request.setAttribute("cno", cno);
+            request.setAttribute("name", name);
+            request.setAttribute("dname", dname);
 
         }
 
