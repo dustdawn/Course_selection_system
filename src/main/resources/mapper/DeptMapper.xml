@@ -29,7 +29,7 @@
     <if test="dno != null and dno != ''">
       and dno like "%"#{dno}"%"
     </if>
-    <if test="name != null and dno != ''">
+    <if test="name != null and name != ''">
       and name like "%"#{name}"%"
     </if>
   </select>
