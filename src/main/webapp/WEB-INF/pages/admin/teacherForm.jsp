@@ -255,7 +255,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherNo" name="tno" value="10116020" placeholder="请输入教师工号">
+                      <input type="text" class="form-control" id="teacherNo" name="tno" value="" placeholder="请输入教师工号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -268,7 +268,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-user"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherName" name="name" value="教师" placeholder="请输入姓名">
+                      <input type="text" class="form-control" id="teacherName" name="name" value="" placeholder="请输入姓名">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -285,7 +285,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-lock"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherPassword" name="password" value="123" placeholder="请输入密码">
+                      <input type="text" class="form-control" id="teacherPassword" name="password" value="" placeholder="请输入密码">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -323,7 +323,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                       </div>
-                      <input type="text" class="form-control" id="teacherMobile" name="mobile" value="18129386754" placeholder="请输入手机号">
+                      <input type="text" class="form-control" id="teacherMobile" name="mobile" value="" placeholder="请输入手机号">
                     </div>
                   </div>
                 </div>

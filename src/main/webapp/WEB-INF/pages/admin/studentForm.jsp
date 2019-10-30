@@ -253,7 +253,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentNo" name="sno" value="2021602" placeholder="请输入学号">
+                      <input type="text" class="form-control" id="studentNo" name="sno" value="" placeholder="请输入学号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -266,7 +266,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-user"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentName" name="name" value="学生" placeholder="请输入姓名">
+                      <input type="text" class="form-control" id="studentName" name="name" value="" placeholder="请输入姓名">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -283,7 +283,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-lock"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentPassword" name="password" value="123" placeholder="请输入密码">
+                      <input type="text" class="form-control" id="studentPassword" name="password" value="" placeholder="请输入密码">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -318,7 +318,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                       </div>
-                      <input type="text" class="form-control" id="studentMobile" name="mobile" value="18129386754" placeholder="请输入手机号">
+                      <input type="text" class="form-control" id="studentMobile" name="mobile" value="" placeholder="请输入手机号">
                     </div>
                   </div>
                 </div>
@@ -330,7 +330,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="studentDate" name="birthday" value="1997-10-06" placeholder="yyyy-mm-dd">
+                      <input type="text" class="form-control pull-right" id="studentDate" name="birthday" value="" placeholder="yyyy-mm-dd">
                     </div>
                   </div>
                 </div>

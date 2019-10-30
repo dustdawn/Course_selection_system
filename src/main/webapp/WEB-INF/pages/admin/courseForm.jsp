@@ -270,7 +270,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-university"></i>
                       </div>
-                      <input type="text" class="form-control" id="courseNo" name="cno" value="001" placeholder="请输入课程号">
+                      <input type="text" class="form-control" id="courseNo" name="cno" value="" placeholder="请输入课程号">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -287,7 +287,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-navicon "></i>
                       </div>
-                      <input type="text" class="form-control" id="courseName" name="name" value="操作系统" placeholder="请输入课程名">
+                      <input type="text" class="form-control" id="courseName" name="name" value="" placeholder="请输入课程名">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -338,7 +338,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" class="form-control" id="courseDate" name="date" value="12周-14周" placeholder="请输入课程周期">
+                      <input type="text" class="form-control" id="courseDate" name="date" value="" placeholder="请输入课程周期">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -354,7 +354,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-play-circle"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="coursePlace" name="place" value="东A101" placeholder="请输入授课地点">
+                      <input type="text" class="form-control pull-right" id="coursePlace" name="place" value="" placeholder="请输入授课地点">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -367,7 +367,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-credit-card"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="courseCredit" name="credit" value="2" placeholder="请输入学分">
+                      <input type="text" class="form-control pull-right" id="courseCredit" name="credit" value="" placeholder="请输入学分">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
@@ -385,7 +385,7 @@
                       <div class="input-group-addon">
                         <i class="fa fa-users"></i>
                       </div>
-                      <input type="text" class="form-control pull-right" id="courseTotal" name="total" value="40" placeholder="请输入剩余名额">
+                      <input type="text" class="form-control pull-right" id="courseTotal" name="total" value="" placeholder="请输入剩余名额">
                       <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     </div>
                   </div>
