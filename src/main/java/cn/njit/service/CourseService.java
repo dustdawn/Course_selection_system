@@ -24,4 +24,7 @@ public interface CourseService {
     List<Course> findList();
     //条件查询Course
     List<Course> findListByEntity(Course course);
+
+    //模糊查询
+    List<Course> findListByParameter(String cno, String name, String dname);
 }

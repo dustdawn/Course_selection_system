@@ -240,24 +240,28 @@
         <div class="col-xs-12">
 
           <div class="box box-primary">
+            <form action="<%=basePath%>/admin/courseList">
             <div class="box-header with-border">
               <div class="col">
 
 
                 <label class="form-inline" for="searchByNo" style="padding-left: 40px"/>课程号查询：
-                <input type="text" class="form-control" id="searchByNo" value=""/>
+                  <input type="text" class="form-control" id="searchByNo" value="${cno}" name="cno"/>
                 </label>
-                <span style="padding-right: 40px">
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
-                </span>
-
 
 
                 <label class="form-inline" for="searchByName" style="padding-left: 40px"/>课程名查询：
-                <input type="text" class="form-control" id="searchByName" value=""/>
+                  <input type="text" class="form-control" id="searchByName" value="${name}" name="name"/>
                 </label>
+
+                <label class="form-inline" for="searchByDept" style="padding-left: 40px"/>所属院系查询：
+                  <input type="text" class="form-control" id="searchByDept" value="${dname}" name="dname"/>
+                </label>
+
+
+
                 <span>
-                  <button type="button" class="btn btn-info btn-flat" onclick="getList()">筛选</button>
+                  <button type="submit" class="btn btn-info btn-flat">筛选</button>
                 </span>
 
               </div>
@@ -408,6 +412,8 @@
 
             </div>
             <%--/box-body--%>
+            <%--表单尾--%>
+            </form>
           </div>
           <%--/box--%>
         </div>
@@ -468,6 +474,7 @@
       //清空列表
       dom.html('');
     })
+
 
   })
   function Confirm(no) {

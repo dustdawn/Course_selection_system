@@ -57,4 +57,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findListByEntity(Course course) {
         return courseMapper.findListByEntity(course);
     }
+
+    @Override
+    public List<Course> findListByParameter(String cno, String name, String dname) {
+        return courseMapper.findListByParameter(cno, name, dname);
+    }
 }

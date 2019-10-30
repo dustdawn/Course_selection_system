@@ -1,6 +1,7 @@
 package cn.njit.dao;
 
 import cn.njit.entity.Course;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +22,8 @@ public interface CourseMapper {
     List<Course> findList();
     //条件查询Course
     List<Course> findListByEntity(Course course);
+
+    //模糊查询
+    List<Course> findListByParameter(@Param("courseNo")String cno, @Param("courseName")String name, @Param("deptName")String dname);
 
 }

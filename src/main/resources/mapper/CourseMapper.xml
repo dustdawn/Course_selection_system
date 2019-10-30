@@ -121,7 +121,7 @@
   </select>
 
   <!--查询所有course-->
-  <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="findList" resultMap="BaseResultMap" >
     select *
     from (
       select
@@ -146,6 +146,47 @@
         and s.del_flag = 0
     ) b on a.`course.cno` = b.`course.cno`
 
+
+  </select>
+
+
+  <!--模糊查询所有course-->
+  <select id="findListByParameter" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from (
+    select
+    <include refid="courseColumns" />,
+    <include refid="teacherColumns" />,
+    <include refid="deptColumns" />
+    from course c,teacher t,dept d
+    where
+    c.tno = t.tno
+    and c.dno = d.dno
+    and t.del_flag = 0
+    and d.del_flag = 0
+    and c.del_flag = 0
+    ) a left join (
+    select
+    <include refid="courseColumns" />,
+    <include refid="studentColumns" />
+    from course c,student s,cs cs
+    where
+    c.cno = cs.cno
+    and s.sno = cs.sno
+    and s.del_flag = 0
+    ) b on a.`course.cno` = b.`course.cno`
+
+    <where>
+      <if test="courseNo != null and courseNo != ''">
+        and a.`course.cno` like "%"#{courseNo}"%"
+      </if>
+      <if test="courseName != null and courseName != ''">
+        and a.`course.name` like "%"#{courseName}"%"
+      </if>
+      <if test="deptName != null and deptName != ''">
+        and a.`dept.name` like "%"#{deptName}"%"
+      </if>
+    </where>
 
   </select>
 

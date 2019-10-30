@@ -294,12 +294,15 @@ public class AdminController {
 
     @RequestMapping(value = "/courseList")
     public String courseList(HttpServletRequest request) {
-        System.out.println(request.getParameter("cno"));
-        System.out.println(request.getParameter("name"));
+        String cno = request.getParameter("cno");
+        String name = request.getParameter("name");
+        String dname = request.getParameter("dname");
 
-        List<Course> courseList = courseService.findList();
+        List<Course> courseList = courseService.findListByParameter(cno, name, dname);
         request.setAttribute("courseList", courseList);
-        System.out.println();
+        request.setAttribute("cno", cno);
+        request.setAttribute("name", name);
+        request.setAttribute("dname", dname);
         return "admin/courseList";
     }
 
