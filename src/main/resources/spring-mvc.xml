@@ -95,6 +95,8 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <!--<mvc:default-servlet-handler/>-->
+
 
 
 
