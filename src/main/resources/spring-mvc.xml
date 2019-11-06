@@ -74,6 +74,7 @@
     <mvc:resources location="/" mapping="/**/*.jpg"/>
     <mvc:resources location="/" mapping="/**/*.mp3"/>
     <mvc:resources location="/" mapping="/**/*.mp4"/>
+    <mvc:resources location="/" mapping="/**/*.map"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
