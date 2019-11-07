@@ -2,7 +2,7 @@ package cn.njit.controller;
 
 import cn.njit.entity.*;
 import cn.njit.service.*;
-import cn.njit.utils.LoginUtil;
+import cn.njit.utils.LoginUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +56,9 @@ public class AdminController {
         if (admin != null){
             if (admin.getPassword().equals(password)) {
                 session.setAttribute("userSession", admin);
-                session.setAttribute("currentTime", LoginUtil.getTime());
+                session.setAttribute("currentTime", LoginUtils.getTime());
                 if ("true".equals(rememberMe)) {
-                    Map<String, Cookie> map = LoginUtil.saveCookie("admin", admin.getNo(), admin.getPassword());
+                    Map<String, Cookie> map = LoginUtils.saveCookie("admin", admin.getNo(), admin.getPassword());
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }

@@ -5,7 +5,7 @@ import cn.njit.service.CourseService;
 import cn.njit.service.CourseStudentService;
 import cn.njit.service.NoticeService;
 import cn.njit.service.StudentService;
-import cn.njit.utils.LoginUtil;
+import cn.njit.utils.LoginUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,9 +55,9 @@ public class StudentController {
         if (student != null){
             if (student.getPassword().equals(password)) {
                 session.setAttribute("userSession", student);
-                session.setAttribute("currentTime", LoginUtil.getTime());
+                session.setAttribute("currentTime", LoginUtils.getTime());
                 if ("true".equals(rememberMe)) {
-                    Map<String, Cookie> map = LoginUtil.saveCookie("student", student.getSno(), student.getPassword());
+                    Map<String, Cookie> map = LoginUtils.saveCookie("student", student.getSno(), student.getPassword());
                     response.addCookie(map.get("no"));
                     response.addCookie(map.get("password"));
                 }
