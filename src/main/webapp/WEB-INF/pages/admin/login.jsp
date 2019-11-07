@@ -57,7 +57,7 @@
 <body background="<%=basePath%>/image/login.jpg" width="100%"; height="100%";>
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Course_selection_system</b><br/>在线选课系统</a>
+    <a href="#"><b>Course_selection_system</b><br/>在线选课系统</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
