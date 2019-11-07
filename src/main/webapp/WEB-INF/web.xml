@@ -26,10 +26,33 @@
       <param-value>UTF-8</param-value> <!--参数值-->
     </init-param>
   </filter>
+
+  <!--验证码过滤器-->
+  <filter>
+    <filter-name>validateCodeFilter</filter-name>
+    <filter-class>cn.njit.filter.ValidateCodeFilter</filter-class>
+  </filter>
+
   <filter-mapping><!--用来定义filter所对应的URL-->
     <filter-name>encodingFilter</filter-name>     <!--指定对应filter的名字-->
     <url-pattern>/*</url-pattern>       <!--指定filter所对应的URL-->
   </filter-mapping>
+
+
+  <filter-mapping>
+    <filter-name>validateCodeFilter</filter-name>
+    <url-pattern>/admin/toLogin</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>validateCodeFilter</filter-name>
+    <url-pattern>/student/toLogin</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>validateCodeFilter</filter-name>
+    <url-pattern>/teacher/toLogin</url-pattern>
+  </filter-mapping>
+
+
 
   <!--登录过滤器-->
   <!--<filter>      &lt;!&ndash; 用来声明filter的相关设定,过滤器可以截取和修改一个Servlet或JSP页面的请求或从一个Servlet或JSP页面发出的响应&ndash;&gt;

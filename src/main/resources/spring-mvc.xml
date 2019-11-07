@@ -82,6 +82,7 @@
             <!-- 与登录相关的请求 -->
             <mvc:exclude-mapping path="/**/toLogin" />
             <mvc:exclude-mapping path="/pages/**/login" />
+            <mvc:exclude-mapping path="/verify/**" />
             <!--测试接口-->
             <mvc:exclude-mapping path="/test/**" />
             <!-- 以下是静态资源 -->
@@ -95,6 +96,7 @@
             <bean id="userLoginInterceptor" class="cn.njit.interceptor.UserLoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
+
 
     <!--<mvc:default-servlet-handler/>-->
 

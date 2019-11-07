@@ -83,6 +83,23 @@
         <input name="password" value="<%=tpassword%>" type="password" class="form-control" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+
+
+      <div class="form-group">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" name="lastestCode" placeholder="请输入验证码">
+          </div>
+
+          <div class="col-xs-6">
+            <img src="<%=basePath%>/verify/getGifCode" id="codeImg" onclick="changeCode()"/>
+          </div>
+
+        </div>
+      </div>
+
+
       <div class="form-group message">
         <label id="my_msg" colspan="2" style="text-align: center;color: red;display: none">${errorMsg}</label>
       </div>
@@ -159,7 +176,15 @@
               message: '密码不能为空'
             }
           }
+        },
+        lastestCode: {
+          validators: {
+            notEmpty: {
+              message: '验证码不能为空'
+            }
+          }
         }
+
       }
     });
   });

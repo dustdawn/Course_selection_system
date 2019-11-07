@@ -72,9 +72,30 @@
         <input name="password" value="<%=password%>" type="password" class="form-control" placeholder="请输入密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <div class="form-group message">
-           <label id="my_msg" colspan="2" style="text-align: center;color: red;display: none">${errorMsg}</label>
+
+      <div class="form-group">
+
+        <div class="row">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" name="lastestCode" placeholder="请输入验证码">
+          </div>
+
+          <div class="col-xs-6">
+            <img src="<%=basePath%>/verify/getGifCode" id="codeImg" onclick="changeCode()"/>
+          </div>
+
+        </div>
       </div>
+
+
+
+
+
+
+      <div class="form-group">
+        <label id="my_msg" colspan="2" style="text-align: left;color: red;display: none">${errorMsg}</label>
+      </div>
+
 
       <div class="row">
         <div class="col-xs-8">
@@ -90,6 +111,9 @@
         </div>
         <!-- /.col -->
       </div>
+
+
+
     </form>
 
 
@@ -116,6 +140,9 @@
 <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script>
+  function changeCode() {
+    $("#codeImg").attr('src', '<%=basePath%>/verify/getGifCode'+'?'+Math.random());
+  }
 
   $(function () {
     if (${errorMsg != null}) {
@@ -152,6 +179,13 @@
           validators: {
             notEmpty: {
               message: '密码不能为空'
+            }
+          }
+        },
+        lastestCode: {
+          validators: {
+            notEmpty: {
+              message: '验证码不能为空'
             }
           }
         }
