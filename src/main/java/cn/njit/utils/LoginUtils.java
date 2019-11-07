@@ -11,7 +11,7 @@ import java.util.Map;
  * @author dustdawn
  * @date 2019/10/18 14:44
  */
-public class LoginUtil {
+public class LoginUtils {
     public static Map<String, Cookie> saveCookie(String user, String no, String password) {
         //自动登录
 

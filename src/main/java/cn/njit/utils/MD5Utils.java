@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
  * @author dustdawn
  * @date 2019/10/21 10:32
  */
-public class MD5Util {
+public class MD5Utils {
     /**
      * 使用md5的算法进行加密
      */
