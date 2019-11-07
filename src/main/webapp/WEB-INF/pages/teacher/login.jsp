@@ -103,6 +103,7 @@
       <div class="form-group message">
         <label id="my_msg" colspan="2" style="text-align: center;color: red;display: none">${errorMsg}</label>
       </div>
+
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
@@ -121,9 +122,8 @@
 
 
     <div class="social-auth-links text-left">
-      <a href="<%=basePath%>/pages/student/login" class="text-center">学生登录</a>
+      <a href="<%=basePath%>/pages/student/login" class="text-center">教师登录</a>
       <a href="<%=basePath%>/pages/admin/login" class="text-center">管理员登录</a>
-
     </div>
 
   </div>

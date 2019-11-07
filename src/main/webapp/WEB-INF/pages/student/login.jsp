@@ -124,7 +124,6 @@
     <div class="social-auth-links text-left">
       <a href="<%=basePath%>/pages/teacher/login" class="text-center">教师登录</a>
       <a href="<%=basePath%>/pages/admin/login" class="text-center">管理员登录</a>
-
     </div>
 
   </div>
