@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
+<%@page isELIgnored="false" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -12,7 +12,6 @@
   //获取当前站点的所有Cookie
   Cookie[] cookies = request.getCookies();
   for (int i = 0;cookies != null && i < cookies.length; i++) {//对cookies中的数据进行遍历，找到用户名、密码的数据
-
     if ("sno".equals(cookies[i].getName())) {
       sno = cookies[i].getValue();
     } else if ("spassword".equals(cookies[i].getName())) {
@@ -21,7 +20,7 @@
 
   }
 %>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
   <meta charset="utf-8">
@@ -100,6 +99,7 @@
         </div>
       </div>
 
+
       <div class="form-group message">
         <label id="my_msg" colspan="2" style="text-align: center;color: red;display: none">${errorMsg}</label>
       </div>
@@ -108,7 +108,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input value="true" type="checkbox" name="rememberMe"> 记住
+              <input value="true" type="checkbox" name="rememberMe" checked> 记住
             </label>
           </div>
         </div>
@@ -141,6 +141,10 @@
 <!-- iCheck -->
 <script src="<%=basePath%>/plugins/iCheck/icheck.min.js"></script>
 <script>
+  function changeCode() {
+    $("#codeImg").attr('src', '<%=basePath%>/verify/getGifCode'+'?'+Math.random());
+  }
+
   $(function () {
     if (${errorMsg != null}) {
       $('#my_msg').show();
@@ -162,7 +166,7 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        sno: {
+        tno: {
           message: '用户名验证失败',
           validators: {
             notEmpty: {
@@ -184,6 +188,7 @@
             }
           }
         }
+
       }
     });
   });

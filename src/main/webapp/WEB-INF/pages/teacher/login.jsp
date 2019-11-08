@@ -108,7 +108,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input value="true" type="checkbox" name="rememberMe"> 记住
+              <input value="true" type="checkbox" name="rememberMe" checked> 记住
             </label>
           </div>
         </div>
@@ -122,7 +122,7 @@
 
 
     <div class="social-auth-links text-left">
-      <a href="<%=basePath%>/pages/student/login" class="text-center">教师登录</a>
+      <a href="<%=basePath%>/pages/student/login" class="text-center">学生登录</a>
       <a href="<%=basePath%>/pages/admin/login" class="text-center">管理员登录</a>
     </div>
 
@@ -141,6 +141,10 @@
 <!-- iCheck -->
 <script src="<%=basePath%>/plugins/iCheck/icheck.min.js"></script>
 <script>
+  function changeCode() {
+    $("#codeImg").attr('src', '<%=basePath%>/verify/getGifCode'+'?'+Math.random());
+  }
+
   $(function () {
     if (${errorMsg != null}) {
       $('#my_msg').show();

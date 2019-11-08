@@ -101,7 +101,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input value="true" type="checkbox" name="rememberMe"> 记住
+              <input value="true" type="checkbox" name="rememberMe" checked> 记住
             </label>
           </div>
         </div>
