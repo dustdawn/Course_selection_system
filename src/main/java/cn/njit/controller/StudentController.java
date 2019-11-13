@@ -28,7 +28,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/student")
 public class StudentController {
 
-    //创建一个日志对象，就可以通过日志输出
+    /**
+     * 创建一个日志对象，就可以通过日志输出
+     */
     private static final Logger LOGGER =
             Logger.getLogger(StudentController.class);
 
