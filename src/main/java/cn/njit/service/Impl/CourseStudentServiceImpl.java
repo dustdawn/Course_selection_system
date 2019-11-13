@@ -15,13 +15,14 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/28 15:49
  */
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class CourseStudentServiceImpl implements CourseStudentService {
 
     @Autowired
     private CourseStudentMapper csMapper;
 
+    @Transactional(readOnly = false)
     @Override
     public int insert(CourseStudent cs) {
         return csMapper.insert(cs);

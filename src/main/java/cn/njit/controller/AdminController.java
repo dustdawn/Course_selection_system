@@ -43,7 +43,12 @@ public class AdminController {
 
     private Admin admin;
 
-    //登录
+    /**
+     * 管理员登录
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/toLogin", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
 
@@ -53,7 +58,7 @@ public class AdminController {
         HttpSession session = request.getSession();
         //数据库查询用户
         admin = adminService.selectByPrimaryKey(no);
-        if (admin != null){
+        if (null != admin){
             if (admin.getPassword().equals(password)) {
                 session.setAttribute("userSession", admin);
                 session.setAttribute("currentTime", LoginUtils.getTime());
@@ -74,14 +79,22 @@ public class AdminController {
         }
     }
 
-    //注销
+    /**
+     * 注销
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "admin/login";
     }
 
-    //主页
+    /**
+     * 主页
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "index")
     public String noticeList(HttpServletRequest request) {
         List<Notice> noticeList = noticeService.findList();
@@ -89,7 +102,12 @@ public class AdminController {
         return "admin/index";
     }
 
-    //添加通告时调用的方法，notice接收，去看实体类的属性，记得设置delFlag
+    /**
+     * 通告提交
+     * @param request
+     * @param notice
+     * @return
+     */
     @RequestMapping(value = "noticeForm")
     public String noticeForm(HttpServletRequest request, Notice notice) {
         //保存后，重定向到noticeList方法达到显示所有通告效果

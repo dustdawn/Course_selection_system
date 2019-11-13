@@ -20,7 +20,9 @@ public class LoggerUtils {
      * @param message	输出信息
      */
     public static void debug(Class<? extends Object> clazz ,String message){
-        if(!isDebug)return ;
+        if(!isDebug) {
+            return ;
+        }
         Logger logger = Logger.getLogger(clazz);
         logger.debug(message);
     }
@@ -31,7 +33,9 @@ public class LoggerUtils {
      * @param value		输出信息value
      */
     public static void fmtDebug(Class<? extends Object> clazz,String fmtString,Object...value){
-        if(!isDebug)return ;
+        if(!isDebug) {
+            return ;
+        }
         if(StringUtils.isBlank(fmtString)){
             return ;
         }

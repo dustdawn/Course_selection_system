@@ -13,8 +13,8 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/27 13:22
  */
+@Transactional(readOnly = true)
 @Service
-@Transactional
 public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
@@ -25,11 +25,13 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeMapper.deleteByPrimaryKey(id);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insert(Notice record) {
         return noticeMapper.insert(record);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insertSelective(Notice record) {
         return noticeMapper.insertSelective(record);

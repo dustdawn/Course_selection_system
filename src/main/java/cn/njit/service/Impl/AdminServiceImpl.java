@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author dustdawn
  * @date 2019/10/18 9:58
  */
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -22,11 +22,13 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.deleteByPrimaryKey(no);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insert(Admin record) {
         return adminMapper.insert(record);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insertSelective(Admin record) {
         return adminMapper.insertSelective(record);

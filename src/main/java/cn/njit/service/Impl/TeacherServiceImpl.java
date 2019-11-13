@@ -13,7 +13,7 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/18 15:03
  */
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class TeacherServiceImpl implements TeacherService{
     @Autowired
@@ -23,11 +23,13 @@ public class TeacherServiceImpl implements TeacherService{
         return teacherMapper.deleteByPrimaryKey(tno);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insert(Teacher record) {
         return teacherMapper.insert(record);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insertSelective(Teacher record) {
         return teacherMapper.insertSelective(record);

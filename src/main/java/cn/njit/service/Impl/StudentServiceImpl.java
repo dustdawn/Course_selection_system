@@ -13,7 +13,7 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/9/30 13:27
  */
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class StudentServiceImpl implements StudentService {
 
@@ -25,11 +25,13 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.deleteByPrimaryKey(sno);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insert(Student record) {
         return studentMapper.insert(record);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insertSelective(Student record) {
         return studentMapper.insertSelective(record);

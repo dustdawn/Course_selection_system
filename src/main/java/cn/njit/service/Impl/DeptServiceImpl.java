@@ -13,7 +13,7 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/20 21:45
  */
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class DeptServiceImpl implements DeptService {
     @Autowired
@@ -24,11 +24,13 @@ public class DeptServiceImpl implements DeptService {
         return deptMapper.deleteByPrimaryKey(cno);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insert(Dept record) {
         return deptMapper.insert(record);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public int insertSelective(Dept record) {
         return deptMapper.insertSelective(record);
