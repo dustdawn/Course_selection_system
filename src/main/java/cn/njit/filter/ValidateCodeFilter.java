@@ -8,15 +8,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author dustdawn
+ * @date 2019/11/7 10:40
+ */
 
 //Filter的生命周期先于springMvcServlet创建所以注解无效
 //@WebFilter(filterName = "ValidateCodeFilter", urlPatterns = "/**/toLogin")
 
 public class ValidateCodeFilter implements Filter {
+    @Override
     public void destroy() {
         LoggerUtils.debug(getClass(), "验证码校验过滤器关闭>>>>>>>>");
     }
 
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
@@ -39,6 +45,7 @@ public class ValidateCodeFilter implements Filter {
         chain.doFilter(req, resp);
     }
 
+    @Override
     public void init(FilterConfig config) throws ServletException {
         LoggerUtils.debug(getClass(), "验证码校验过滤器启动>>>>>>>>");
     }
