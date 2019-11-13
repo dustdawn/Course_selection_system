@@ -4,7 +4,10 @@ package cn.njit.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-
+/**
+ * @author dustdawn
+ * @date 2019/10/9 9:34
+ */
 public class Teacher {
     private String tno;
 

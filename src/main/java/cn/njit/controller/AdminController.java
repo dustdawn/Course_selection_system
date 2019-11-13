@@ -25,9 +25,10 @@ import java.util.Map;
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
-    //创建一个日志对象，就可以通过日志输出
-    private static final Logger LOGGER =
-            Logger.getLogger(AdminController.class);
+    /**
+     * 创建一个日志对象，就可以通过日志输出
+     */
+    private static final Logger LOGGER = Logger.getLogger(AdminController.class);
     @Autowired
     private AdminService adminService;
     @Autowired
@@ -108,7 +109,7 @@ public class AdminController {
      * @param notice
      * @return
      */
-    @RequestMapping(value = "noticeForm")
+    @RequestMapping(value = "noticeForm", method = RequestMethod.POST)
     public String noticeForm(HttpServletRequest request, Notice notice) {
         //保存后，重定向到noticeList方法达到显示所有通告效果
         String re="";
@@ -129,11 +130,16 @@ public class AdminController {
         return "redirect:/admin/index?flag=" + re;
     }
 
-    //添加通告时调用的方法，notice接收，去看实体类的属性，记得设置delFlag
+    /**
+     * 添加通告时
+     * @param request
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "noticeDelete")
     public String noticeDelete(HttpServletRequest request, String id) {
         //保存后，重定向到noticeList方法达到显示所有通告效果
-        if (id != null && !id.equals("")){
+        if (null != id && !"".equals(id)){
             int flag = noticeService.deleteByPrimaryKey(id);
             if (1 == flag) {
                 LOGGER.info(">>>删除成功<<<");
@@ -144,7 +150,11 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
-    //教师管理
+    /**
+     * 教师管理
+     * @param teacher
+     * @return
+     */
     @RequestMapping(value = "/teacherForm", method = RequestMethod.POST)
     public String teacherForm(Teacher teacher) {
         String re = "";
@@ -162,6 +172,11 @@ public class AdminController {
         return "redirect:/pages/admin/teacherForm?flag=" + re;
     }
 
+    /**
+     * 教师列表
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/teacherList")
     public String teacherList(HttpServletRequest request) {
         String tno = request.getParameter("tno");
@@ -173,6 +188,12 @@ public class AdminController {
         return "admin/teacherList";
     }
 
+    /**
+     * 教师编辑回显
+     * @param request
+     * @param tno
+     * @return
+     */
     @RequestMapping(value = "/teacherEdit")
     public String teacherEdit(HttpServletRequest request, String tno) {
 
@@ -186,7 +207,12 @@ public class AdminController {
         return "admin/teacherEdit";
     }
 
-    @RequestMapping(value = "/teacherUpdate")
+    /**
+     * 教师编辑修改
+     * @param teacher
+     * @return
+     */
+    @RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST)
     public String teacherUpdate(Teacher teacher) {
         String re = "";
         if (null != teacher) {
@@ -217,9 +243,12 @@ public class AdminController {
         return "redirect:/admin/teacherList";
     }
 
-
-    //学生管理
-    @RequestMapping(value = "/studentForm")
+    /**
+     * 学生添加
+     * @param student
+     * @return
+     */
+    @RequestMapping(value = "/studentForm", method = RequestMethod.POST)
     public String studentForm(Student student) {
         String re = "";
         if (null != student) {
@@ -261,7 +290,7 @@ public class AdminController {
         return "admin/studentEdit";
     }
 
-    @RequestMapping(value = "/studentUpdate")
+    @RequestMapping(value = "/studentUpdate", method = RequestMethod.POST)
     public String studentUpdate(Student student) {
         String re = "";
         if (null != student) {
@@ -292,8 +321,12 @@ public class AdminController {
         return "redirect:/admin/studentList";
     }
 
-    //课程管理
-    @RequestMapping(value = "/courseForm")
+    /**
+     * 课程管理
+     * @param course
+     * @return
+     */
+    @RequestMapping(value = "/courseForm", method = RequestMethod.POST)
     public String courseForm(Course course) {
         String re = "";
         if (null != course) {
@@ -335,7 +368,7 @@ public class AdminController {
         return "admin/courseEdit";
     }
 
-    @RequestMapping(value = "/courseUpdate")
+    @RequestMapping(value = "/courseUpdate", method = RequestMethod.POST)
     public String courseUpdate(Course course) {
         String re = "";
         if (null != course) {
@@ -365,10 +398,12 @@ public class AdminController {
         return "redirect:/admin/courseList";
     }
 
-
-
-    //院系管理
-    @RequestMapping(value = "/deptForm")
+    /**
+     * 院系管理
+     * @param dept
+     * @return
+     */
+    @RequestMapping(value = "/deptForm", method = RequestMethod.POST)
     public String deptForm(Dept dept) {
         String re = "";
         if (null != dept) {
@@ -407,7 +442,7 @@ public class AdminController {
         return "admin/deptEdit";
     }
 
-    @RequestMapping(value = "/deptUpdate")
+    @RequestMapping(value = "/deptUpdate", method = RequestMethod.POST)
     public String deptUpdate(Dept dept) {
         String re = "";
         if (null != dept) {
@@ -437,7 +472,11 @@ public class AdminController {
         return "redirect:/admin/deptList";
     }
 
-    //个人信息管理
+    /**
+     * 个人信息管理
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/info")
     public String info(HttpServletRequest request) {
         if (null != admin) {
@@ -446,8 +485,13 @@ public class AdminController {
 
         return "admin/info";
     }
-    //修改密码部分
-    @RequestMapping(value = "/pswChange")
+
+    /**
+     * 修改密码
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/pswChange", method = RequestMethod.POST)
     public String pswChange(HttpServletRequest request) {
         String oldPassword = request.getParameter("passwordOld");
         String newPassword = request.getParameter("passwordNew");
@@ -472,8 +516,13 @@ public class AdminController {
         return "admin/pswChange";
     }
 
-    //信息修改
-    @RequestMapping(value = "/adminUpdate")
+    /**
+     * 信息修改
+     * @param admin
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/adminUpdate", method = RequestMethod.POST)
     public String teacherUpdate(Admin admin, HttpServletRequest request) {
         if (null != admin) {
             int flag = adminService.updateByPrimaryKeySelective(admin);

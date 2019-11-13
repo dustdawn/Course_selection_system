@@ -28,7 +28,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
-    //创建一个日志对象，就可以通过日志输出
+    /**
+     * 创建一个日志对象，就可以通过日志输出
+     */
     private static final Logger LOGGER =
             Logger.getLogger(TeacherController.class);
 
@@ -78,7 +80,11 @@ public class TeacherController {
         return "teacher/login";
     }
 
-    //主页
+    /**
+     * 主页
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "index")
     public String noticeList(HttpServletRequest request) {
         List<Notice> noticeList = noticeService.findList();
@@ -92,7 +98,11 @@ public class TeacherController {
         return teacherService.findList();
     }
 
-    //获取教师授课课程
+    /**
+     * 获取教师授课课程
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/managePublic")
     public String managePublic(HttpServletRequest request) {
         if (null != teacher) {
@@ -106,7 +116,11 @@ public class TeacherController {
         return "teacher/managePublic";
     }
 
-    //获取教师选修课课程
+    /**
+     * 获取选修课程
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/manageElective")
     public String manageElective(HttpServletRequest request) {
         if (null != teacher) {
@@ -119,7 +133,12 @@ public class TeacherController {
         return "teacher/manageElective";
     }
 
-    //课程编辑
+    /**
+     * 课程信息编辑
+     * @param request
+     * @param cno
+     * @return
+     */
     @RequestMapping(value = "/courseEdit")
     public String courseEdit(HttpServletRequest request, String cno) {
         if (null != cno && !cno.equals("")) {
@@ -131,7 +150,7 @@ public class TeacherController {
         return "teacher/courseEdit";
     }
 
-    @RequestMapping(value = "/courseUpdate")
+    @RequestMapping(value = "/courseUpdate", method = RequestMethod.POST)
     public String courseUpdate(Course course) {
         String re = "";
         String type = "";
@@ -153,7 +172,11 @@ public class TeacherController {
         return "redirect:/teacher/managePublic?flag=" + re;
     }
 
-    //删除课程
+    /**
+     * 课程删除
+     * @param cno
+     * @return
+     */
     @RequestMapping(value = "/courseDelete")
     public String courseDelete(String cno) {
         Course course = null;
@@ -175,7 +198,11 @@ public class TeacherController {
         return "redirect:/teacher/managePublic";
     }
 
-    //个人信息
+    /**
+     * 个人信息
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/info")
     public String info(HttpServletRequest request) {
         if (null != teacher) {
@@ -185,8 +212,13 @@ public class TeacherController {
         return "teacher/info";
     }
 
-    //信息修改
-    @RequestMapping(value = "/teacherUpdate")
+    /**
+     * 教师个人信息修改
+     * @param teacher
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST)
     public String teacherUpdate(Teacher teacher, HttpServletRequest request) {
         if (null != teacher) {
             teacher.setDelFlag(0);
@@ -202,8 +234,12 @@ public class TeacherController {
         return "redirect:/teacher/info";
     }
 
-    //密码修改
-    @RequestMapping(value = "/teacherPswChange")
+    /**
+     * 密码修改
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/teacherPswChange", method = RequestMethod.POST)
     public String teacherPswChange(HttpServletRequest request) {
         String oldPassword = request.getParameter("passwordOld");
         String newPassword = request.getParameter("passwordNew");

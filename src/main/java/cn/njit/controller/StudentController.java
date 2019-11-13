@@ -80,7 +80,11 @@ public class StudentController {
         return "student/login";
     }
 
-    //主页
+    /**
+     * 主页
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "index")
     public String noticeList(HttpServletRequest request) {
         List<Notice> noticeList = noticeService.findList();
@@ -88,7 +92,11 @@ public class StudentController {
         return "student/index";
     }
 
-    //课程管理
+    /**
+     * 课程管理
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/managePublic")
     public String managePublic(HttpServletRequest request) {
         Student s = new Student();
@@ -123,8 +131,11 @@ public class StudentController {
         return "student/manageElective";
     }
 
-
-    //课程选修
+    /**
+     * 课程选修
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/selectPublic")
     public String selectPublic(HttpServletRequest request) {
         String cno = request.getParameter("cno");
@@ -204,7 +215,11 @@ public class StudentController {
         return "student/selectElective";
     }
 
-    //个人信息
+    /**
+     * 个人信息
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/info")
     public String info(HttpServletRequest request) {
         if (null != student) {
@@ -214,8 +229,13 @@ public class StudentController {
         return "student/info";
     }
 
-    //信息修改
-    @RequestMapping(value = "/studentUpdate")
+    /**
+     * 信息修改
+     * @param student
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/studentUpdate", method = RequestMethod.POST)
     public String studentUpdate(Student student, HttpServletRequest request) {
         if (null != student) {
             student.setDelFlag(0);
@@ -231,8 +251,12 @@ public class StudentController {
         return "redirect:/student/info";
     }
 
-    //密码修改
-    @RequestMapping(value = "/studentPswChange")
+    /**
+     * 密码修改
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/studentPswChange", method = RequestMethod.POST)
     public String studentPswChange(HttpServletRequest request) {
         String oldPassword = request.getParameter("passwordOld");
         String newPassword = request.getParameter("passwordNew");
@@ -257,9 +281,12 @@ public class StudentController {
         return "student/pswChange";
     }
 
-
-
-    //选课业务
+    /**
+     * 选课
+     * @param request
+     * @param cno
+     * @return
+     */
     @RequestMapping(value = "/courseSelect")
     public String courseSelect(HttpServletRequest request, String cno) {
         String re = "";
@@ -302,7 +329,12 @@ public class StudentController {
         return "redirect:/student/selectPublic?flag=" + re;
     }
 
-    //退选业务
+    /**
+     * 退选
+     * @param request
+     * @param cno
+     * @return
+     */
     @RequestMapping(value = "/courseWithdrawal")
     public String courseWithdrawal(HttpServletRequest request, String cno) {
         if (null != cno && request.getSession().getAttribute("userSession") != null && null != this.student) {

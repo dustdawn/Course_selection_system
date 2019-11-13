@@ -1,5 +1,10 @@
 package cn.njit.entity;
 
+/**
+ * @author dustdawn
+ * @date 2019/10/9 9:25
+ */
+
 public class Admin {
     private String no;
 

@@ -3,8 +3,10 @@ package cn.njit.entity;
 /**
  * @author dustdawn
  * @date 2019/10/28 9:25
+ *
+ * 多对多关联表
  */
-//多对多关联表
+
 public class CourseStudent {
     private String cno;
 

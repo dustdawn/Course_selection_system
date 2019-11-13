@@ -1,5 +1,10 @@
 package cn.njit.entity;
 
+/**
+ * @author dustdawn
+ * @date 2019/10/9 9:30
+ */
+
 import java.util.List;
 import java.util.Objects;
 

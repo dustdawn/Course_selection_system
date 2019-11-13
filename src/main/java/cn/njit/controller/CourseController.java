@@ -1,9 +1,6 @@
 package cn.njit.controller;
 
-/**
- * @author dustdawn
- * @date 2019/10/23 10:54
- */
+
 
 import cn.njit.entity.Course;
 import cn.njit.entity.Student;
@@ -18,8 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 查询选课学生列表
+ * @author dustdawn
+ * @date 2019/10/23 10:54
  */
+
 @Controller
 @RequestMapping("/course")
 public class CourseController {
@@ -29,7 +28,12 @@ public class CourseController {
     @Autowired
     private StudentService studentService;
 
-    //获取课程的学生名单
+    /**
+     * 获取课程的学生名单
+     * @param cno
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "studentList")
     @ResponseBody
     public List<Student> studentList(String cno, HttpServletRequest request) {
@@ -47,7 +51,12 @@ public class CourseController {
         return listByEntity;
     }
 
-    //获取学生的课程名单
+    /**
+     * 获取学生的课程名单
+     * @param sno
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "courseList")
     @ResponseBody
     public List<Course> courseList(String sno, HttpServletRequest request) {
@@ -62,7 +71,12 @@ public class CourseController {
         return listByEntity;
     }
 
-    //获取教师的授课名单
+    /**
+     * 获取教师的授课名单
+     * @param tno
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/teacherCourseList")
     @ResponseBody
     public List<Course> teacherCourseList(String tno, HttpServletRequest request) {
