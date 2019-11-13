@@ -211,9 +211,7 @@
 
               </div>
             </div>
-            <div class="ajax-content" align="right">
-              <button type="button" class="btn btn-danger" onclick="deleteNotice('${item.id}')">删除</button>
-            </div>
+
           </div>
             <%--正文结束--%>
           <!-- /.box-body -->
