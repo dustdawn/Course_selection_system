@@ -262,6 +262,7 @@
 
                 <span>
                   <button type="submit" class="btn btn-info btn-flat">筛选</button>
+                  <button id="js-export" type="button" class="btn btn-primary">导出Excel</button>
                 </span>
 
               </div>
@@ -474,6 +475,11 @@
       //清空列表
       dom.html('');
     })
+
+    //导出excel事件
+    $('#js-export').click(function(){
+      window.location.href="<%=basePath%>/excel/export";
+    });
 
 
   })

@@ -266,6 +266,12 @@
       <artifactId>commons-codec</artifactId>
       <version>1.9</version>
     </dependency>
+    <!--poi-->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.11</version>
+    </dependency>
     <!-- mybatis分页插件依赖 -->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
