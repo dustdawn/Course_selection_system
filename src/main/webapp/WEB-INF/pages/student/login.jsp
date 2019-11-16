@@ -166,7 +166,7 @@
         validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
-        tno: {
+        sno: {
           message: '用户名验证失败',
           validators: {
             notEmpty: {

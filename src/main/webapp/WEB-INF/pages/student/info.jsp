@@ -158,8 +158,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/student/selectPublic"><i class="fa fa-circle-o"></i> 公选课录入</a></li>
-            <li><a href="<%=basePath%>/student/selectElective"><i class="fa fa-circle-o"></i> 选修课录入</a></li>
+            <li><a href="<%=basePath%>/student/selectPublic"><i class="fa fa-circle-o"></i> 公选课选修</a></li>
+            <li><a href="<%=basePath%>/student/selectElective"><i class="fa fa-circle-o"></i> 选修课选修</a></li>
           </ul>
         </li>
 
