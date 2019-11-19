@@ -9,7 +9,7 @@
           + path + "/";
   Student student = (Student) request.getAttribute("student");
   String birthday = "";
-  if (null != student) {
+  if (null != student && null != student.getBirthday()) {
     birthday = new SimpleDateFormat("yyyy-MM-dd").format(student.getBirthday());
   }
 %>
