@@ -104,7 +104,7 @@
               <li class="user-footer">
 
                 <div class="pull-right">
-                  <a href="<%=basePath%>/pages/teacher/logout" class="btn btn-default btn-flat">退出登录</a>
+                  <a href="<%=basePath%>/teacher/logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
