@@ -180,7 +180,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/studentForm"><i class="fa fa-circle-o"></i> 学生录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
+            <li><a href="<%=basePath%>/admin/studentList"><i class="fa fa-circle-o"></i> 学生列表</a></li>
           </ul>
         </li>
 
@@ -193,7 +193,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<%=basePath%>/pages/admin/courseForm"><i class="fa fa-circle-o"></i> 课程录入</a></li>
-            <li><a href="<%=basePath%>/pages/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
+            <li><a href="<%=basePath%>/admin/courseList"><i class="fa fa-circle-o"></i> 课程列表</a></li>
           </ul>
         </li>
 
