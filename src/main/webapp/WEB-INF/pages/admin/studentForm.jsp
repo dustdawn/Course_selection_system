@@ -471,7 +471,7 @@
         if (null != result && "" != result){
 
           for (let i = 0; i < result.length; i++) {
-            $("#studentDept").append("<option value='" + result[i].dno +  "' + >" + result[i].name + "</option>");
+            $("#studentDept").append("<option value='" + result[i].dno +  "'>" + result[i].name + "</option>");
           }
 
         }

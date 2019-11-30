@@ -159,14 +159,14 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-graduation-cap"></i> <span>院系管理</span>
+            <i class="fa fa-graduation-cap"></i> <span>教师管理</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 院系录入</a></li>
-            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 院系列表</a></li>
+            <li><a href="<%=basePath%>/pages/admin/teacherForm"><i class="fa fa-circle-o"></i> 教师录入</a></li>
+            <li><a href="<%=basePath%>/admin/teacherList"><i class="fa fa-circle-o"></i> 教师列表</a></li>
           </ul>
         </li>
 
@@ -390,7 +390,7 @@
               type: 'POST',
               data: function(validator) {
                 return {
-                  tno : $("input[name=dno]").val()
+                  dno : $("input[name=dno]").val()
                 };
               }
             }

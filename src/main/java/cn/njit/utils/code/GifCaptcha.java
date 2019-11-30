@@ -45,7 +45,8 @@ public class GifCaptcha extends Captcha
             gifEncoder.setQuality(180);
             gifEncoder.setDelay(100);
             gifEncoder.setRepeat(0);
-            BufferedImage frame;
+            BufferedImage frame;//java.awt.image.BufferedImage;
+            //Captcha中方法，该方法法中调用根据长度生成对应个数的随机数
             char[] rands =alphas();
             Color fontcolor[]=new Color[len];
             for(int i=0;i<len;i++)
@@ -54,6 +55,7 @@ public class GifCaptcha extends Captcha
             }
             for(int i=0;i<len;i++)
             {
+                //画出随机码图
                 frame=graphicsImage(fontcolor, rands, i);
                 gifEncoder.addFrame(frame);
                 frame.flush();

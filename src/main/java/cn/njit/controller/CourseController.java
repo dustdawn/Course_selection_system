@@ -1,14 +1,15 @@
 package cn.njit.controller;
 
-
-
 import cn.njit.entity.Course;
 import cn.njit.entity.Student;
 import cn.njit.service.CourseService;
 import cn.njit.service.StudentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author dustdawn
  * @date 2019/10/23 10:54
  */
-
+@Api(value = "课程管理接口", description = "课程管理接口，学生课程教师关联查询")
 @Controller
 @RequestMapping("/course")
 public class CourseController {
@@ -34,7 +35,8 @@ public class CourseController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "studentList")
+    @ApiOperation("根据课程号获取学生集合")
+    @RequestMapping(value = "studentList", method = RequestMethod.POST)
     @ResponseBody
     public List<Student> studentList(String cno, HttpServletRequest request) {
 
@@ -57,7 +59,8 @@ public class CourseController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "courseList")
+    @ApiOperation("根据学号获取课程集合")
+    @RequestMapping(value = "courseList", method = RequestMethod.POST)
     @ResponseBody
     public List<Course> courseList(String sno, HttpServletRequest request) {
         Student student = new Student();
@@ -77,7 +80,8 @@ public class CourseController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/teacherCourseList")
+    @ApiOperation("根据教师工号获取课程集合")
+    @RequestMapping(value = "/teacherCourseList", method = RequestMethod.POST)
     @ResponseBody
     public List<Course> teacherCourseList(String tno, HttpServletRequest request) {
         Course course =  new Course();

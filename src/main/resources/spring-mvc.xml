@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 1、配置映射器与适配器 -->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven/>
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
     <context:component-scan base-package="cn.njit.controller" />
 
@@ -75,6 +75,9 @@
     <mvc:resources location="/" mapping="/**/*.mp3"/>
     <mvc:resources location="/" mapping="/**/*.mp4"/>
     <mvc:resources location="/" mapping="/**/*.map"/>
+    <!--swagger ui-->
+    <mvc:resources location="/" mapping="swagger-ui.html"/>
+    <mvc:resources location="/" mapping="/webjars/**"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
@@ -82,9 +85,19 @@
             <!-- 与登录相关的请求 -->
             <mvc:exclude-mapping path="/**/toLogin" />
             <mvc:exclude-mapping path="/pages/**/login" />
+            <!-- 验证码相关请求 -->
             <mvc:exclude-mapping path="/verify/**" />
-            <!--测试接口-->
+            <!-- swagger相关 -->
+            <mvc:exclude-mapping path="/swagger*/**"/>
+            <mvc:exclude-mapping path="/v2/**"/>
+            <mvc:exclude-mapping path="/webjars/**"/>
+            <mvc:exclude-mapping path="/configuration/**"/>
+            <mvc:exclude-mapping path="/images/**"/>
+            <!-- 测试接口 -->
             <mvc:exclude-mapping path="/test/**" />
+            <!-- 课程接口 -->
+            <mvc:exclude-mapping path="/course/**" />
+            <mvc:exclude-mapping path="/dept/**" />
             <!-- 以下是静态资源 -->
             <mvc:exclude-mapping path="/bower_components/**" />
             <mvc:exclude-mapping path="/build/**" />
@@ -100,6 +113,7 @@
 
     <!--<mvc:default-servlet-handler/>-->
 
+    <bean class="cn.njit.config.Swagger2Configuration"/>
 
 
 

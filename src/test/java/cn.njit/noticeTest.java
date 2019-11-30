@@ -1,6 +1,8 @@
 package cn.njit;
 
 import cn.njit.dao.CourseStudentMapper;
+import cn.njit.dao.NoticeMapper;
+import cn.njit.service.TeacherService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,10 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath*:/*.xml"})
 public class noticeTest {
 
-    /*@Autowired
+    @Autowired
     private NoticeMapper noticeMapper;
     @Autowired
-    private TeacherService teacherService;*/
+    private TeacherService teacherService;
 
     @Autowired
     private CourseStudentMapper csMapper;
